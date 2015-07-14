@@ -68,7 +68,22 @@ module.exports = [
     recordsPath: path.resolve(__dirname, '../build/records/client.json'),
     module: {
       loaders: [
-        jsxLoader
+        jsxLoader,
+        {
+          test: /\.css$/,
+          loaders: [ 'style', 'css' ],
+          exclude: /node_modules/
+        },
+        {
+          test: /\.less$/,
+          loaders: [ 'style', 'css', 'less' ],
+          exclude: /node_modules/
+        },
+        {
+          test: /\.(png|jpg)$/,
+          loader: 'url-loader?limit=8192',
+          exclude: /node_modules/
+        }
       ]
     },
     plugins: [
@@ -105,7 +120,12 @@ module.exports = [
     recordsPath: path.resolve(__dirname, '../build/records/server.json'),
     module: {
       loaders: [
-        jsxLoader
+        jsxLoader,
+        {
+          test: /\.(png|jpg)$/,
+          loader: 'url-loader?limit=8192',
+          exclude: /node_modules/
+        }
       ]
     },
     plugins: [
@@ -113,12 +133,12 @@ module.exports = [
         'require("source-map-support").install();',
         { raw: true, entryOnly: false }
       ),
-      new webpack.IgnorePlugin(/\.(css|less)$/),
       new webpack.DefinePlugin({
         __DEV__: !isInProduction,
         __CLIENT__: false,
         __SERVER__: true
       }),
+      new webpack.IgnorePlugin(/\.(css|less)$/),
       new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }),
       new webpack.NoErrorsPlugin()//,
       // not watching components enables HMR on client,
