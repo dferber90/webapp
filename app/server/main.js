@@ -3,18 +3,36 @@ import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import rootRoute from '../common/routes/rootRoute'
 import Router from 'react-router'
-//import Location from 'react-router/lib/Location'
-const Location = require('react-router/lib/Location')
+import { minify } from 'html-minifier'
+import Location from 'react-router/lib/Location'
 
-/*
+
 const getEntryPointFromPath = function (pathname) {
-  if (/^\/dashboard[\/.*]$/.test(pathname)) {
-    return 'dashboard'
-  } else {
-    return 'landing'
+  if (pathname === '/') {
+    console.log('main file')
+    return 'landing-async'
+  } else if (/^\/dashboard[\/.*]$/.test(pathname)) {
+    console.log('dashboard file')
+    return 'dashboard-async'
   }
+  return false
 }
-*/
+const getEntryPointFile = function (pathname) {
+  const entryPoint = getEntryPointFromPath(pathname)
+  if (!entryPoint) return ''
+
+  return `<script src="/assets/${entryPoint}.chunk.js"></script>`
+}
+
+const shrinkPage = function (html) {
+  // all options can be seen here
+  // https://www.npmjs.com/package/html-minifier
+  return minify(html, {
+    removeAttributeQuotes: true,
+    collapseWhitespace: true,
+    removeRedundantAttributes: true
+  })
+}
 
 const app = express()
 app.use(express.static('public'))
@@ -38,27 +56,33 @@ app.get('*', (req, res) => {
     // can be seen here in 'fetchSomeData'
     // http://rackt.github.io/react-router/tags/v1.0.0-beta3.html
     const initialData = { count: 7 }
-    const html = ReactDOMServer.renderToString(<Router {...initialState}/>)
-    // const entryPoint = getEntryPointFromPath(location.pathname)
+    const appHtml = ReactDOMServer.renderToString(<Router {...initialState}/>)
+    const entryPointFile = getEntryPointFile(location.pathname)
 
-    res.end(`
+
+    const html = `
       <html>
         <head>
           <title>testing</title>
           <script>__INITIAL_DATA__ = ${JSON.stringify(initialData)};</script>
           <script src="/assets/commonsChunk.js"></script>
           <script src="/assets/app.entry.js"></script>
+          ${entryPointFile}
         </head>
         <body>
           <h2>hello</h2>
           <div
             id="react-app"
             style="border: 1px solid #ccc; margin: 10px; padding: 10px"
-          >${html}</div>
-          <textarea style="width: 100%; height: 50%">${html}</textarea>
+          >${appHtml}</div>
+          <textarea style="width: 100%; height: 50%">${appHtml}</textarea>
         </body>
       </html>
-    `)
+    `
+
+    // const page = __DEV__ ? html : shrinkPage(html)
+    const page = shrinkPage(html)
+    res.end(page)
   })
 })
 
