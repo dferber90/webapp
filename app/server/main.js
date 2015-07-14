@@ -63,3 +63,4 @@ app.get('*', (req, res) => {
 })
 
 app.listen(3000)
+if (__DEV__) console.log('server listening')
