@@ -29,3 +29,11 @@ Webpack handles async loading of these routes and their components using `requre
 
 Because the server already knows which entry point the client is using, it can send the appropriate file for the initial route.
 This happens in `app/common/server/main.js` with `getEntryPointFile()`.
+
+## ESLint
+Linting can be run with `npm run lint`.
+Rules for ESLint are defined in `.eslintrc`.
+Ignored files are set in `.eslintignore`.
+
+In case you have installed `eslint` globally, make sure to also install `eslint-plugin-react` globally.
+Otherwise, you will get an error saying `eslint-plugin-react` was not found.
