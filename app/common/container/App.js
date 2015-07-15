@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import Router from 'react-router'
+import { Provider } from 'react-redux'
 
 const serverPropsShape = PropTypes.shape({
   params: PropTypes.object,
@@ -17,15 +18,19 @@ const clientPropsShape = PropTypes.shape({
 export default class App extends Component {
   static propTypes = {
     server: serverPropsShape,
-    client: clientPropsShape
+    client: clientPropsShape,
+    store: PropTypes.object.isRequired
   }
 
   render () {
+    const routerProps = {
+      ...this.props.client,
+      ...this.props.server
+    }
     return (
-      <Router
-        {...this.props.client}
-        {...this.props.server}
-      />
+      <Provider store={this.props.store}>
+        {() => <Router {...routerProps}/>}
+      </Provider>
     )
   }
 }

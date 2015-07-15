@@ -16,8 +16,8 @@ var webpack = require('webpack')
 
 var rootPath = path.join(__dirname, '..')
 var outputPath = path.join(rootPath, 'build')
-var clientBaseEntryPath = path.join(rootPath, 'app', 'client', 'app.js')
-var serverEntryPath = path.join(rootPath, 'app', 'server', 'main.js')
+var clientBaseEntryPath = path.join(rootPath, 'app', 'client', 'client.js')
+var serverEntryPath = path.join(rootPath, 'app', 'server', 'server.js')
 
 var isInProduction = !!process.env.PRODUCTION
 
