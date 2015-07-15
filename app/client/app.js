@@ -4,8 +4,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Router from 'react-router'
 import { history } from 'react-router/lib/BrowserHistory'
-import AsyncProps from 'react-router/lib/experimental/AsyncProps'
 import rootRoute from '../common/routes/rootRoute'
+import AsyncProps from 'react-router/lib/experimental/AsyncProps'
+import App from '../common/container/App'
 
 // TODO use redux
 // get data sent from server
@@ -21,10 +22,12 @@ document.addEventListener('DOMContentLoaded', function () {
       return
     }
     ReactDOM.render(
-      <Router
-        history={history}
-        children={rootRoute}
-        createElement={AsyncProps.createElement}
+      <App
+        client={{
+          history,
+          children: rootRoute,
+          createElement: AsyncProps.createElement
+        }}
       />,
       document.getElementById('react-app')
     )

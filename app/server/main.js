@@ -5,7 +5,7 @@ import rootRoute from '../common/routes/rootRoute'
 import Router from 'react-router'
 import { minify } from 'html-minifier'
 import Location from 'react-router/lib/Location'
-
+import App from '../common/container/App'
 
 const getEntryPointFromPath = function (pathname) {
   if (pathname === '/') {
@@ -56,7 +56,9 @@ app.get('*', (req, res) => {
     // can be seen here in 'fetchSomeData'
     // http://rackt.github.io/react-router/tags/v1.0.0-beta3.html
     const initialData = { count: 7 }
-    const appHtml = ReactDOMServer.renderToString(<Router {...initialState}/>)
+    const appHtml = ReactDOMServer.renderToString(
+      <App server={initialState}/>
+    )
     const entryPointFile = getEntryPointFile(location.pathname)
 
 
