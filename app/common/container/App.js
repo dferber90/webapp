@@ -22,12 +22,6 @@ export default class App extends Component {
   }
 
   render () {
-    const routerProps = {
-      ...this.props.client,
-      ...this.props.server
-    }
-    return (
-      <Router {...routerProps}/>
-    )
+    return <Router {...this.props.client} {...this.props.server} />
   }
 }
