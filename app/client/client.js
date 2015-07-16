@@ -25,6 +25,13 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   const initialData = window[INITIAL_DATA]
   const store = createStore(initialData)
+  if (__DEV__) {
+    window.store = store
+    window.React = React
+    window.ReactDOM = ReactDOM
+    window.Router = Router
+    window.history = history
+  }
 
   Router.run([rootRoute], history.location, (error) => {
     if (error) return console.error(error)
