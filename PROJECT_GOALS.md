@@ -16,5 +16,6 @@ The goal of this project is to provide a base for building modern, huge web apps
   [ ] Components define their data needs
   [ ] Few mocks required for testing
 [ ] Good developer experience
+  [ ] Page Metadata can be set from components
   [ ] Universal Code (shared components, routes, methods)
   [ ] "UI is just a function" (UI can be rerendered anytime from one global store)
