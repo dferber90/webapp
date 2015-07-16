@@ -4,7 +4,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Router from 'react-router'
 import { history } from 'react-router/lib/BrowserHistory'
-import rootRoute from '../common/routes/rootRoute'
+import getRootRoute from '../common/routes/getRootRoute'
 import AsyncProps from 'react-router/lib/experimental/AsyncProps'
 import App from '../common/container/App'
 import createStore from '../common/util/createStore'
@@ -19,21 +19,15 @@ document.addEventListener('DOMContentLoaded', function () {
     history.setup()
   }
 
+  const initialData = window[INITIAL_DATA]
+  const store = createStore(initialData)
+  const rootRoute = getRootRoute(store)
+
   const clientOptions = {
     history,
     children: rootRoute,
     createElement: AsyncProps.createElement
   }
-  const initialData = window[INITIAL_DATA]
-  const store = createStore(initialData)
-  if (__DEV__) {
-    window.store = store
-    window.React = React
-    window.ReactDOM = ReactDOM
-    window.Router = Router
-    window.history = history
-  }
-
   Router.run([rootRoute], history.location, (error) => {
     if (error) return console.error(error)
 
@@ -55,4 +49,12 @@ document.addEventListener('DOMContentLoaded', function () {
       )
     }
   })
+
+  if (__DEV__) {
+    window.store = store
+    window.React = React
+    window.ReactDOM = ReactDOM
+    window.Router = Router
+    window.history = history
+  }
 })

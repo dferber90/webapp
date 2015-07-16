@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
-import rootRoute from '../common/routes/rootRoute'
+import getRootRoute from '../common/routes/getRootRoute'
 import Router from 'react-router'
 import Location from 'react-router/lib/Location'
 import App from '../common/container/App'
@@ -11,6 +11,11 @@ export default function (path, query) {
   return new Promise((resolve, reject) => {
     const location = new Location(path, query)
 
+
+    // get data: can be seen here in 'fetchSomeData'
+    // http://rackt.github.io/react-router/tags/v1.0.0-beta3.html
+    const store = createStore()
+    const rootRoute = getRootRoute(store)
     // const resolvedRoutes = rootRoute.childRoutes
     Router.run([rootRoute], location, (error, initialState/*, transition*/) => {
       if (error) return reject(error)
@@ -19,9 +24,6 @@ export default function (path, query) {
       // can get data needs from initial components using GraphQL
       // console.log(initialState.components)
 
-      // get data: can be seen here in 'fetchSomeData'
-      // http://rackt.github.io/react-router/tags/v1.0.0-beta3.html
-      const store = createStore()
       const appHtml = ReactDOMServer.renderToString(
         <App server={initialState} store={store}/>
       )

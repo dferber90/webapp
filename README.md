@@ -23,12 +23,23 @@ This way the client will never see code wrapped in a `if (__SERVER__)` block, an
 
 
 ## React Router
-React Router defines a root route containing all child routes in `app/common/routes/rootRoute.js`.
+React Router defines a root route containing all child routes in `app/common/routes/getRootRoute.js`.
+
+### Code Splitting
 It also defines split points for the application in `app/common/routes/<route>/index.js`.
 Webpack handles async loading of these routes and their components using `requre.ensure`.
 
 Because the server already knows which entry point the client is using, it can send the appropriate file for the initial route.
 This happens in `app/common/server/server.js` with `getEntryPointFile()`.
+
+### Redux Router
+A React Router component specifically for Redux is registered in `app/common/routes/getRootRouter`.
+This will register a `router` property in the store. All route changes also flow through redux.
+
+This component also exposes `store` in the context. That's why this App uses no Redux `<Provider />` component,
+because the Provider's job is already done (exposing the store in the context).
+
+Docs: https://github.com/acdlite/redux-react-router
 
 ## ESLint
 Linting can be run with `npm run lint`.
