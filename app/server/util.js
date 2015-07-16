@@ -1,5 +1,6 @@
 import { minify } from 'html-minifier'
 import { INITIAL_DATA } from '../common/constants/initial'
+import { APP_ID, DEBUG_ID } from '../common/constants/ids'
 
 export function getEntryPointFromPath (pathname) {
   if (pathname === '/') {
@@ -30,7 +31,7 @@ export function shrinkPage (html) {
 }
 
 export function generateHTML ({ initialData, html, entryPoint }) {
-  const debugPanel = __DEV__ ? '<div id="react-debug"></div>' : ''
+  const debugPanel = __DEV__ ? `<div id="${DEBUG_ID}"></div>` : ''
   return `
     <html>
       <head>
@@ -43,7 +44,7 @@ export function generateHTML ({ initialData, html, entryPoint }) {
       <body>
         <h2>hello</h2>
         <div
-          id="react-app"
+          id="${APP_ID}"
           style="border: 1px solid #ccc; margin: 10px; padding: 10px"
         >${html}</div>
         ${debugPanel}

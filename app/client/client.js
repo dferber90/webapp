@@ -9,6 +9,7 @@ import AsyncProps from 'react-router/lib/experimental/AsyncProps'
 import App from '../common/container/App'
 import createStore from '../common/util/createStore'
 import { INITIAL_DATA } from '../common/constants/initial'
+import { APP_ID, DEBUG_ID } from '../common/constants/ids'
 
 // TODO add async middleware (aka promiseMiddleware via applyMiddleware())
 // https://github.com/gaearon/redux/blob/improve-docs/docs/middleware.md
@@ -38,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     ReactDOM.render(
       <App client={clientOptions} store={store}/>,
-      document.getElementById('react-app')
+      document.getElementById(APP_ID)
     )
     if (__DEV__) {
       const {
@@ -50,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <DebugPanel top right bottom>
           <DevTools store={store} monitor={LogMonitor}/>
         </DebugPanel>,
-        document.getElementById('react-debug')
+        document.getElementById(DEBUG_ID)
       )
     }
   })
