@@ -40,3 +40,8 @@ Otherwise, you will get an error saying `eslint-plugin-react` was not found.
 
 ## Redux
 Action Creator -> Action -> Dispatch(Action) -> Provider -> Connect -> React Component.
+
+## Redux DevTools
+Redux has got devtools that enable time traveling. The devtools are rendered on the client only, into a separate div called `react-debug`.
+The server does not render the devtools. This way the client does not reuse the markup from the server for the devtools.
+But it reuses it for the normal application rendered into `react-app`.

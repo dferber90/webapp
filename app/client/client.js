@@ -7,16 +7,11 @@ import { history } from 'react-router/lib/BrowserHistory'
 import rootRoute from '../common/routes/rootRoute'
 import AsyncProps from 'react-router/lib/experimental/AsyncProps'
 import App from '../common/container/App'
-
-import { createStore, combineReducers } from 'redux'
-import todoReducer from '../common/reducers/todos'
+import createStore from '../common/util/createStore'
 import { INITIAL_DATA } from '../common/constants/initial'
 
 // TODO add async middleware (aka promiseMiddleware via applyMiddleware())
 // https://github.com/gaearon/redux/blob/improve-docs/docs/middleware.md
-const reducer = combineReducers({
-  todos: todoReducer
-})
 
 document.addEventListener('DOMContentLoaded', function () {
   if (typeof history.setup === 'function') {
@@ -29,8 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
     createElement: AsyncProps.createElement
   }
   const initialData = window[INITIAL_DATA]
-  const store = createStore(reducer, initialData)
-  window.store = store
+  const store = createStore(initialData)
 
   Router.run([rootRoute], history.location, (error) => {
     if (error) return console.error(error)
@@ -39,5 +33,18 @@ document.addEventListener('DOMContentLoaded', function () {
       <App client={clientOptions} store={store}/>,
       document.getElementById('react-app')
     )
+    if (__DEV__) {
+      const {
+        DevTools,
+        DebugPanel,
+        LogMonitor
+      } = require('redux-devtools/lib/react')
+      ReactDOM.render(
+        <DebugPanel top right bottom>
+          <DevTools store={store} monitor={LogMonitor}/>
+        </DebugPanel>,
+        document.getElementById('react-debug')
+      )
+    }
   })
 })

@@ -30,6 +30,7 @@ export function shrinkPage (html) {
 }
 
 export function generateHTML ({ initialData, html, entryPoint }) {
+  const debugPanel = __DEV__ ? '<div id="react-debug"></div>' : ''
   return `
     <html>
       <head>
@@ -45,6 +46,7 @@ export function generateHTML ({ initialData, html, entryPoint }) {
           id="react-app"
           style="border: 1px solid #ccc; margin: 10px; padding: 10px"
         >${html}</div>
+        ${debugPanel}
         <textarea style="width: 100%; height: 30%">${html}</textarea>
         <textarea
           style="width: 100%; height: 10%"

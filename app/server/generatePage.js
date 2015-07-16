@@ -5,8 +5,7 @@ import Router from 'react-router'
 import Location from 'react-router/lib/Location'
 import App from '../common/container/App'
 import { getEntryPointFile, shrinkPage, generateHTML } from './util'
-import { createStore, combineReducers } from 'redux'
-import todoReducer from '../common/reducers/todos'
+import createStore from '../common/util/createStore'
 
 export default function (path, query) {
   return new Promise((resolve, reject) => {
@@ -22,10 +21,7 @@ export default function (path, query) {
 
       // get data: can be seen here in 'fetchSomeData'
       // http://rackt.github.io/react-router/tags/v1.0.0-beta3.html
-      const reducer = combineReducers({
-        todos: todoReducer
-      })
-      const store = createStore(reducer)
+      const store = createStore()
       const appHtml = ReactDOMServer.renderToString(
         <App server={initialState} store={store}/>
       )
