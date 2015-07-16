@@ -45,3 +45,9 @@ Action Creator -> Action -> Dispatch(Action) -> Provider -> Connect -> React Com
 Redux has got devtools that enable time traveling. The devtools are rendered on the client only, into a separate div called `react-debug`.
 The server does not render the devtools. This way the client does not reuse the markup from the server for the devtools.
 But it reuses it for the normal application rendered into `react-app`.
+
+As Redux DevTools uses React 0.13 and this project uses React 0.14, there is a deprecation warning:
+
+```
+  Warning: `require("react").findDOMNode` is deprecated. Please use `require("react-dom").findDOMNode` instead.
+```
