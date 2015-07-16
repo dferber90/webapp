@@ -30,11 +30,11 @@ export default function (path, query) {
         <App server={initialState} store={store}/>
       )
 
-      const html = generateHTML(
-        store.getState(),
-        appHtml,
-        getEntryPointFile(initialState.location.pathname)
-      )
+      const html = generateHTML({
+        initialData: store.getState(),
+        html: appHtml,
+        entryPoint: getEntryPointFile(initialState.location.pathname)
+      })
 
       resolve(__DEV__ ? html : shrinkPage(html))
     })

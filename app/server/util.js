@@ -3,10 +3,10 @@ import { INITIAL_DATA } from '../common/constants/initial'
 
 export function getEntryPointFromPath (pathname) {
   if (pathname === '/') {
-    console.log('main file')
+    if (__DEV__) console.log('main file')
     return 'landing-async'
   } else if (/^\/dashboard[\/.*]$/.test(pathname)) {
-    console.log('dashboard file')
+    if (__DEV__) console.log('dashboard file')
     return 'dashboard-async'
   }
   return false
@@ -29,7 +29,7 @@ export function shrinkPage (html) {
   })
 }
 
-export function generateHTML (initialData, appHtml, entryPoint) {
+export function generateHTML ({ initialData, html, entryPoint }) {
   return `
     <html>
       <head>
@@ -44,8 +44,8 @@ export function generateHTML (initialData, appHtml, entryPoint) {
         <div
           id="react-app"
           style="border: 1px solid #ccc; margin: 10px; padding: 10px"
-        >${appHtml}</div>
-        <textarea style="width: 100%; height: 30%">${appHtml}</textarea>
+        >${html}</div>
+        <textarea style="width: 100%; height: 30%">${html}</textarea>
         <textarea
           style="width: 100%; height: 10%"
         >${JSON.stringify(initialData)}
