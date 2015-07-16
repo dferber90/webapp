@@ -37,3 +37,6 @@ Ignored files are set in `.eslintignore`.
 
 In case you have installed `eslint` globally, make sure to also install `eslint-plugin-react` globally.
 Otherwise, you will get an error saying `eslint-plugin-react` was not found.
+
+## Redux
+Action Creator -> Action -> Dispatch(Action) -> Provider -> Connect -> React Component.
