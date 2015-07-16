@@ -35,6 +35,7 @@ export function generateHTML ({ initialData, html, entryPoint }) {
   return `
     <html>
       <head>
+        <meta charset="utf-8">
         <title>testing</title>
         <script>${INITIAL_DATA} = ${JSON.stringify(initialData)};</script>
         <script src="/assets/commonsChunk.js"></script>
