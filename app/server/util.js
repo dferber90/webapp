@@ -43,17 +43,8 @@ export function generateHTML ({ initialData, html, entryPoint }) {
         ${entryPoint}
       </head>
       <body>
-        <h2>hello</h2>
-        <div
-          id="${APP_ID}"
-          style="border: 1px solid #ccc; margin: 10px; padding: 10px"
-        >${html}</div>
+        <div id="${APP_ID}">${html}</div>
         ${debugPanel}
-        <textarea style="width: 100%; height: 30%">${html}</textarea>
-        <textarea
-          style="width: 100%; height: 10%"
-        >${JSON.stringify(initialData)}
-        </textarea>
       </body>
     </html>
   `
