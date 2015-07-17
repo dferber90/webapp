@@ -17,8 +17,7 @@ const clientPropsShape = PropTypes.shape({
 export default class App extends Component {
   static propTypes = {
     server: serverPropsShape,
-    client: clientPropsShape,
-    store: PropTypes.object.isRequired
+    client: clientPropsShape
   }
 
   render () {

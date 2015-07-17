@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (error) return console.error(error)
 
     ReactDOM.render(
-      <App client={clientOptions} store={store}/>,
+      <App client={clientOptions}/>,
       document.getElementById(APP_ID)
     )
     if (__DEV__) {

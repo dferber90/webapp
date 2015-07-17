@@ -25,7 +25,7 @@ export default function (path, query) {
       // console.log(initialState.components)
 
       const appHtml = ReactDOMServer.renderToString(
-        <App server={initialState} store={store}/>
+        <App server={initialState}/>
       )
 
       const html = generateHTML({
