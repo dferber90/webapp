@@ -38,6 +38,7 @@ This will register a `router` property in the store. All route changes also flow
 
 This component also exposes `store` in the context. That's why this App uses no Redux `<Provider />` component,
 because the Provider's job is already done (exposing the store in the context).
+The React Router gets the current store passed to it in `getRootRoutes(store)` in `app/common/routes/getRootRoute.js`.
 
 Docs: https://github.com/acdlite/redux-react-router
 
