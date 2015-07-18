@@ -1,5 +1,6 @@
 /* eslint
-  no-var: [0]
+  no-var: [0],
+  vars-on-top: [0]
 */
 
 // webpack for building server-side code taken from
@@ -46,6 +47,15 @@ fs.readdirSync('node_modules')
   .forEach(function (mod) {
     nodeModules[mod] = 'commonjs ' + mod
   })
+
+
+var serverPlugins = []
+if (!isInProduction) {
+  serverPlugins.push(new webpack.BannerPlugin(
+    'require("source-map-support").install();',
+    { raw: true, entryOnly: false }
+  ))
+}
 
 
 module.exports = [
@@ -104,7 +114,7 @@ module.exports = [
     name: 'server',
     target: 'node',
     entry: serverEntryPath,
-    devtool: '#eval-source-map',
+    devtool: isInProduction ? false : '#eval-source-map',
     output: {
       path: outputPath,
       filename: 'backend.js'
@@ -128,11 +138,7 @@ module.exports = [
         }
       ]
     },
-    plugins: [
-      new webpack.BannerPlugin(
-        'require("source-map-support").install();',
-        { raw: true, entryOnly: false }
-      ),
+    plugins: serverPlugins.concat([
       new webpack.DefinePlugin({
         __DEV__: !isInProduction,
         __CLIENT__: false,
@@ -148,6 +154,6 @@ module.exports = [
       // new webpack.WatchIgnorePlugin([
       //   path.resolve(__dirname, '../app/common/components')
       // ])
-    ]
+    ])
   }
 ]
