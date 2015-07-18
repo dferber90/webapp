@@ -114,7 +114,7 @@ module.exports = [
     name: 'server',
     target: 'node',
     entry: serverEntryPath,
-    devtool: isInProduction ? false : '#eval-source-map',
+    devtool: isInProduction ? false : '#source-map',
     output: {
       path: outputPath,
       filename: 'backend.js'
