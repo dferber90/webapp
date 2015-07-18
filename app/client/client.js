@@ -4,10 +4,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Router from 'react-router'
 import { history } from 'react-router/lib/BrowserHistory'
-import getRootRoute from '../common/routes/getRootRoute'
+import getRootRoute from '../common/routes/rootRoute'
 import AsyncProps from 'react-router/lib/experimental/AsyncProps'
 import App from '../common/container/App'
-import createStore from '../common/util/createStore'
+import createMainStore from '../common/util/createMainStore'
 import { INITIAL_DATA } from '../common/constants/initial'
 import { APP_ID, DEBUG_ID } from '../common/constants/ids'
 
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   const initialData = window[INITIAL_DATA]
-  const store = createStore(initialData)
+  const store = createMainStore(initialData)
   const rootRoute = getRootRoute(store)
 
   const clientOptions = {

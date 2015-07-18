@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
-import getRootRoute from '../common/routes/getRootRoute'
+import getRootRoute from '../common/routes/rootRoute'
 import Router from 'react-router'
 import Location from 'react-router/lib/Location'
 import App from '../common/container/App'
 import { getEntryPointFile, shrinkPage, generateHTML } from './util'
-import createStore from '../common/util/createStore'
+import createMainStore from '../common/util/createMainStore'
 
 export default function (path, query) {
   return new Promise((resolve, reject) => {
@@ -14,7 +14,7 @@ export default function (path, query) {
 
     // get data: can be seen here in 'fetchSomeData'
     // http://rackt.github.io/react-router/tags/v1.0.0-beta3.html
-    const store = createStore()
+    const store = createMainStore()
     const rootRoute = getRootRoute(store)
     // const resolvedRoutes = rootRoute.childRoutes
     Router.run([rootRoute], location, (error, initialState/*, transition*/) => {
