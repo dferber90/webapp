@@ -1,8 +1,9 @@
 import { reduxRouteComponent } from 'redux-react-router'
 
-export default function getRootRoute (initialState) {
+export default function getRootRoute (store) {
+  console.log(store)
   return {
-    component: reduxRouteComponent(initialState),
+    component: reduxRouteComponent(store),
     childRoutes: [{
       childRoutes: [
         require('./landing/index'),
