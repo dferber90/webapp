@@ -1,3 +1,7 @@
+/**
+ * Enables lazy registration of reducers.
+ */
+
 import { combineReducers } from 'redux'
 import finalCreateStore from '../util/finalCreateStore'
 
