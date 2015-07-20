@@ -30,7 +30,7 @@
     "eslint-plugin-react": "^2.6.4",
     "piping": "^0.2.0",
     "react-hot-loader": "^1.2.8",
-    "redux-devtools": "^0.1.1",
+    "redux-devtools": "^0.1.2",
     "source-map-support": "^0.3.2",
     "webpack-dev-server": "^1.10.1"
   },
