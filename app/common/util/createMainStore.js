@@ -53,7 +53,7 @@ const reducer = combineReducers({
 export default function (data) {
   // const middleware = createMiddleware(client)
   let finalCreateStore
-  if (__DEV__) {
+  if (__DEV__ && __DEVTOOLS__) {
     const { devTools } = require('redux-devtools')
     finalCreateStore = compose(
       devTools(),

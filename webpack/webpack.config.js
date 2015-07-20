@@ -101,7 +101,8 @@ module.exports = [
       new webpack.DefinePlugin({
         __DEV__: !isInProduction,
         __CLIENT__: true,
-        __SERVER__: false
+        __SERVER__: false,
+        __DEVTOOLS__: false
       }),
       new webpack.NoErrorsPlugin(),
       new webpack.optimize.CommonsChunkPlugin({
@@ -142,7 +143,8 @@ module.exports = [
       new webpack.DefinePlugin({
         __DEV__: !isInProduction,
         __CLIENT__: false,
-        __SERVER__: true
+        __SERVER__: true,
+        __DEVTOOLS__: false
       }),
       new webpack.IgnorePlugin(/\.(css|less)$/),
       new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }),

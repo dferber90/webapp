@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
       <App client={clientOptions}/>,
       document.getElementById(APP_ID)
     )
-    if (__DEV__) {
+    if (__DEV__ && __DEVTOOLS__) {
       const {
         DevTools,
         DebugPanel,
