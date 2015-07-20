@@ -5,7 +5,8 @@ import Router from 'react-router'
 import Location from 'react-router/lib/Location'
 import App from '../common/container/App'
 import { getEntryPointFile, shrinkPage, generateHTML } from './util'
-import createMainStore from '../common/util/createMainStore'
+import * as StoresRegistry from '../common/util/StoresRegistry'
+import { routerStateReducer } from 'redux-react-router'
 
 export default function (path, query) {
   return new Promise((resolve, reject) => {
@@ -14,12 +15,18 @@ export default function (path, query) {
 
     // get data: can be seen here in 'fetchSomeData'
     // http://rackt.github.io/react-router/tags/v1.0.0-beta3.html
-    const store = createMainStore()
+    const store = StoresRegistry.init({
+      router: routerStateReducer
+    })
     const rootRoute = getRootRoute(store)
-    // const resolvedRoutes = rootRoute.childRoutes
-    Router.run([rootRoute], location, (error, initialState/*, transition*/) => {
+
+    Router.run(rootRoute, location, (error, initialState/*, transition*/) => {
       if (error) return reject(error)
-      if (!initialState) return reject(new Error('initialState was falsy'))
+      if (!initialState) {
+        return reject(
+          new Error(`initialState was falsy for ${location.pathname}`)
+        )
+      }
 
       // can get data needs from initial components using GraphQL
       // console.log(initialState.components)

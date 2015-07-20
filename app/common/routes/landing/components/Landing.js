@@ -2,6 +2,10 @@ import React, { PropTypes, Component } from 'react'
 import { Link } from 'react-router'
 import { Connector } from 'react-redux'
 import { addTodo } from '../../../actionCreators/todos'
+import * as StoresRegistry from '../../../util/StoresRegistry'
+import todosReducer from '../../../reducers/todos'
+
+StoresRegistry.addReducers({ todos: todosReducer })
 
 function select (state) {
   return { todos: state.todos }
