@@ -5,7 +5,7 @@ import Router from 'react-router'
 import Location from 'react-router/lib/Location'
 import App from '../common/container/App'
 import { getEntryPointFile, shrinkPage, generateHTML } from './util'
-import * as StoresRegistry from '../common/util/StoresRegistry'
+import StoresRegistry from '../common/util/StoresRegistry'
 import { routerStateReducer } from 'redux-react-router'
 
 export default function (path, query) {
@@ -15,10 +15,13 @@ export default function (path, query) {
 
     // get data: can be seen here in 'fetchSomeData'
     // http://rackt.github.io/react-router/tags/v1.0.0-beta3.html
-    const store = StoresRegistry.init({
+    const storesRegistry = new StoresRegistry({
       router: routerStateReducer
     })
-    const rootRoute = getRootRoute(store)
+    const store = storesRegistry.store
+    const rootRoute = getRootRoute(store, {
+      storesRegistry: storesRegistry
+    })
 
     Router.run(rootRoute, location, (error, initialState/*, transition*/) => {
       if (error) return reject(error)

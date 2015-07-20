@@ -1,11 +1,11 @@
 import { reduxRouteComponent } from 'redux-react-router'
 
-export default function getRootRoute (store) {
+export default function getRootRoute (store, userContext = {}) {
   return {
     component: reduxRouteComponent(store),
     childRoutes: [
-      require('./landing/index'),
-      require('./dashboard/index')
+      require('./landing/index')(userContext),
+      require('./dashboard/index')(userContext)
 
       // require('./routes/Course'),
       // require('./routes/Grades'),

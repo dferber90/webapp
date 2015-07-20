@@ -2,16 +2,27 @@ import React, { PropTypes, Component } from 'react'
 import { Link } from 'react-router'
 import { Connector } from 'react-redux'
 import { addTodo } from '../../../actionCreators/todos'
-import * as StoresRegistry from '../../../util/StoresRegistry'
 import todosReducer from '../../../reducers/todos'
 
-StoresRegistry.addReducers({ todos: todosReducer })
 
 function select (state) {
   return { todos: state.todos }
 }
 
 export default class Landing extends Component {
+
+  static propTypes = {
+    route: PropTypes.object.isRequired
+  }
+
+  componentWillMount () {
+    // TODO only register reducer on first mount?
+    // probably impossible as route.userContext is needed from props
+    // TODO use decorator to register reducer?
+    const { storesRegistry } = this.props.route.userContext
+    storesRegistry.addReducers({ todos: todosReducer })
+  }
+
   render () {
     return (
       <Connector select={select}>

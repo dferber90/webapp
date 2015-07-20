@@ -9,11 +9,8 @@ import AsyncProps from 'react-router/lib/experimental/AsyncProps'
 import App from '../common/container/App'
 import { INITIAL_DATA } from '../common/constants/initial'
 import { APP_ID, DEBUG_ID } from '../common/constants/ids'
-import * as StoresRegistry from '../common/util/StoresRegistry'
+import StoresRegistry from '../common/util/StoresRegistry'
 import { routerStateReducer } from 'redux-react-router'
-
-// TODO add async middleware (aka promiseMiddleware via applyMiddleware())
-// https://github.com/gaearon/redux/blob/improve-docs/docs/middleware.md
 
 document.addEventListener('DOMContentLoaded', function () {
   if (typeof history.setup === 'function') {
@@ -21,11 +18,14 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   const initialData = window[INITIAL_DATA]
-  const store = StoresRegistry.init(
+  const storesRegistry = new StoresRegistry(
     { router: routerStateReducer },
     initialData
   )
-  const rootRoute = getRootRoute(store)
+  const store = storesRegistry.store
+  const rootRoute = getRootRoute(store, {
+    storesRegistry: storesRegistry
+  })
 
   const clientOptions = {
     history,

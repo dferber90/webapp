@@ -1,39 +1,27 @@
-import { combineReducers, compose, createStore } from 'redux'
+import { combineReducers } from 'redux'
+import finalCreateStore from '../util/finalCreateStore'
 
-let store
-let reducers = {}
+export default class StoresRegistry {
 
-
-const defaultOptions = { refresh: true }
-export function addReducers (newReducers, { refresh } = defaultOptions) {
-  reducers = {
-    ...reducers,
-    ...newReducers
+  constructor (initialReducers = {}, initialState = {}) {
+    this.store = undefined
+    this.reducers = initialReducers
+    this.store = finalCreateStore(combineReducers(this.reducers), initialState)
   }
-  if (refresh) refreshReducers()
-}
 
-export function refreshReducers () {
-  if (store) {
-    store.replaceReducer(combineReducers(reducers))
-  } else {
-    throw new Error('no store yet')
+  addReducers (newReducers, { refresh } = { refresh: true }) {
+    this.reducers = {
+      ...this.reducers,
+      ...newReducers
+    }
+    if (refresh) this.refreshReducers()
   }
-}
 
-
-let finalCreateStore
-if (__DEV__ && __DEVTOOLS__) {
-  const { devTools } = require('redux-devtools')
-  finalCreateStore = compose(
-    devTools(),
-    createStore
-  )
-} else {
-  finalCreateStore = createStore
-}
-export function init (initialReducers = {}, initialState = {}) {
-  addReducers(initialReducers, { refresh: false })
-  store = finalCreateStore(combineReducers(reducers), initialState)
-  return store
+  refreshReducers () {
+    if (this.store) {
+      this.store.replaceReducer(combineReducers(this.reducers))
+    } else {
+      throw new Error('no store yet')
+    }
+  }
 }
