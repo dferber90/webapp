@@ -8,7 +8,6 @@ import finalCreateStore from '../util/finalCreateStore'
 export default class StoresRegistry {
 
   constructor (initialReducers = {}, initialState = {}) {
-    this.store = undefined
     this.reducers = initialReducers
     this.store = finalCreateStore(combineReducers(this.reducers), initialState)
   }
