@@ -31,7 +31,8 @@ export function shrinkPage (html) {
 }
 
 export function generateHTML ({ initialData, html, entryPoint }) {
-  const debugPanel = __DEV__ && __DEVTOOLS__ ? `<div id="${DEBUG_ID}"></div>` : ''
+  const debugPanel = __DEV__ && __DEVTOOLS__ ?
+    `<div id="${DEBUG_ID}"></div>` : ''
   return `
     <html>
       <head>
