@@ -10,7 +10,7 @@ The goal of this project is to provide a base for building modern, huge web apps
   * On first load, server provides everything client needs (only 1 Round Trip)
 * Realtime
   * RPC
-  [ ] Publish/Subscribe: Live updates for subscribed data
+  * Publish/Subscribe: Live updates for subscribed data
   * Optimistic UI (UI updates before server answers requests)
 * Modular architecture
   * Components define their data needs
