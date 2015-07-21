@@ -9,6 +9,11 @@ if (__CLIENT__) {
 }
 
 
+// TODO
+// this could also be one decorator of the form
+// @registerAndConnect({ counter: counterReducer })
+// The decorator could auto-generate the select-function for @connect
+// by using the keys of the object passed to it: { counter: counterReducer }
 @registerReducers({ counter: counterReducer })
 @connect(state => ({ counter: state.counter }))
 export default class Dashboard extends Component {
