@@ -1,26 +1,34 @@
 import React, { Component, PropTypes } from 'react'
 import Router from 'react-router'
 
-const serverPropsShape = PropTypes.shape({
-  params: PropTypes.object,
-  branch: PropTypes.array,
-  location: PropTypes.object,
-  components: PropTypes.array
-})
+// generate proptypes based on environment
+const propTypes = {}
+if (__SERVER__) {
+  propTypes.server = PropTypes.shape({
+    params: PropTypes.object.isRequired,
+    branch: PropTypes.array.isRequired,
+    location: PropTypes.object.isRequired,
+    components: PropTypes.array.isRequired
+  })
+}
 
-const clientPropsShape = PropTypes.shape({
-  history: PropTypes.object,
-  children: PropTypes.object,
-  createElement: PropTypes.func
-})
+if (__CLIENT__) {
+  propTypes.client = PropTypes.shape({
+    history: PropTypes.object.isRequired,
+    children: PropTypes.object.isRequired,
+    createElement: PropTypes.func.isRequired
+  })
+}
 
 export default class App extends Component {
-  static propTypes = {
-    server: serverPropsShape,
-    client: clientPropsShape
-  }
+  static propTypes = propTypes
 
   render () {
-    return <Router {...this.props.client} {...this.props.server} />
+
+    // include props based on environment
+    let props = {}
+    if (__CLIENT__) props = this.props.client
+    else if (__SERVER__) props = this.props.server
+    return <Router {...props}/>
   }
 }
