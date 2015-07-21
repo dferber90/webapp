@@ -63,3 +63,21 @@ As Redux DevTools uses React 0.13 and this project uses React 0.14, there is a d
 ```
   Warning: `require("react").findDOMNode` is deprecated. Please use `require("react-dom").findDOMNode` instead.
 ```
+
+
+## Testing
+To run the tests, simply do `$ npm test`. This will generate files for testing with webpack using `webpack/test.js`.
+The tests are then build into `/build/tests/client.js` and `/build/tests/server.js`.
+There are two separate test files because there are two environments to consider: 1) client and 2) server.
+The two entry points are `tests/server-env/run.js` and `tests/client-env/run.js`. These files import their tests. The tests themselves import parts of the app to test.
+
+A helper file called `webpack/run-bundled-tests.js` is used to combine the test output from client and server by requiring both. This way only a single TAP protocol is generated, including the server and the client.
+The file `webpack/run-bundled-tests.js` is used for `npm test` and for `npm run test-dev`.
+This also helps with piping the file (watching for changes) as only one file needs to be watched, instead of watching `build/tests/client.js` and `build/tests/server.js`.
+
+To develop tests run `$ npm run test-dev`. This will continuously watch the tests for changes and rerun them.
+
+Each test file has to be registered either in `tests/client-env/run.js` or `tests/server-env/run.js`.
+
+To get the pure TAP output, use `$ npm -s test`.
+This will activate npm's silent mode, where additional information from npm is not printed to the console.

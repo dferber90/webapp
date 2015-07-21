@@ -31,14 +31,21 @@
     "piping": "^0.2.0",
     "react-hot-loader": "^1.2.8",
     "redux-devtools": "^0.1.2",
+    "rimraf": "^2.4.2",
     "source-map-support": "^0.3.2",
+    "tape": "^4.0.1",
     "webpack-dev-server": "^1.10.1"
   },
   "scripts": {
     "start": "npm run clean && node webpack/dev.js",
-    "clean": "rm -rf build/*",
+    "clean": "rimraf build/*",
     "build": "npm run clean && PRODUCTION=true webpack -p --config webpack/webpack.config.js",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test-dev": "TEST_WATCHER=true node webpack/test.js",
+    "cleantests": "rimraf build/tests/*",
+    "pretest": "npm run cleantests && node webpack/test.js",
+    "test": "node ./webpack/run-bundled-tests.js",
+    "posttest": "npm run cleantests"
   },
   "author": "",
   "license": "ISC"
