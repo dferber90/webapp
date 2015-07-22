@@ -1,5 +1,14 @@
-// this is the entry point
-
+/**
+ * Entry point for webpack when generating the client bundles.
+ *
+ * It
+ *   - rehydrates the state sent from the server.
+ *   - renders the app
+ *   - sets up redux (registers initial reducers)
+ *   - when in development
+ *     - adds devtools
+ *     - exposes variables to the browser
+ */
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Router from 'react-router'
@@ -17,7 +26,10 @@ document.addEventListener('DOMContentLoaded', function () {
     history.setup()
   }
 
+  // rehydrate state sent from server
   const initialData = window[INITIAL_DATA]
+
+  // initialize redux store with state from server
   const storesRegistry = new StoresRegistry(
     { router: routerStateReducer },
     initialData
@@ -39,6 +51,8 @@ document.addEventListener('DOMContentLoaded', function () {
       <App client={clientOptions}/>,
       document.getElementById(APP_ID)
     )
+
+    // render devtools in development
     if (__DEV__ && __DEVTOOLS__) {
       const {
         DevTools,
@@ -54,6 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   })
 
+  // expose variables to browser
   if (__DEV__) {
     window.store = store
     window.React = React

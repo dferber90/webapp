@@ -1,3 +1,10 @@
+/**
+ * Runs an express server.
+ *
+ * During development, a webpack-dev-server running on localhost:8080
+ * forwards all requests it cannot fulfill itself to this express server.
+ * The webpack-dev-server will serve the client bundles.
+ */
 import express from 'express'
 import generatePage from './generatePage'
 

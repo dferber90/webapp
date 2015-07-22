@@ -1,4 +1,45 @@
-# CRS
+# Webapp Starter Pack
+The goal of this project is to provide a base for building modern, huge web apps.
+
+**This includes**: Code-Splitting with Server-side Rendering and Multiple Entry Points. Also offers Hot Reloading in Development.
+
+**With this setup your app..**
+- can build for production
+- can run tests once for CI (with TAP report)
+- can be developed using hot reloading
+- can be linted
+- is universal
+- uses webpack for the server bundle
+- uses webpack for the client bundle and chunks
+- has code splitting
+- has gradual loading (with appropriately splitted stylesheets)
+- has server-side rendering
+- enables multiple entry points
+- sends correct entry point chunk in initial HTML
+- can be tested in server- and client-environments
+- uses
+  - React
+  - Redux (RC1)
+  - React Router (Beta3)
+  - Redux DevTools
+  - ES6/7
+  - ESLint
+
+**This setup misses:**
+- data fetching
+- database
+- rpc
+- auth
+- optimistic UI
+
+## npm commands
+
+`npm start` to start developing. Visit localhost:8080.
+`npm test` runs tests and reports with TAP and correct exit code.
+`npm run test-dev` continuously runs tests for development.
+`npm run build` builds for production.
+`npm run clean` cleans up build folder.
+`npm run lint` lints app code.
 
 ## Webpack
 Running `npm start` starts `webpack/dev.js`. This file loads two Webpack configurations from `webpack/webpack.config.js`.

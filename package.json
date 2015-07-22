@@ -1,5 +1,5 @@
 {
-  "name": "peerpal-webpack",
+  "name": "webapp-starter-pack",
   "version": "1.0.0",
   "description": "",
   "main": "app/main.js",
@@ -47,6 +47,6 @@
     "test": "node ./webpack/run-bundled-tests.js",
     "posttest": "npm run cleantests"
   },
-  "author": "",
+  "author": "Dominik Ferber",
   "license": "ISC"
 }
