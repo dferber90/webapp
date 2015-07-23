@@ -9,11 +9,11 @@ The goal of this project is to provide a base for building modern, huge web apps
 - can be developed using hot reloading
 - can be linted
 - is universal
+- has code splitting
+- has server-side rendering
+- has gradual loading (with appropriately splitted stylesheets)
 - uses webpack for the server bundle
 - uses webpack for the client bundle and chunks
-- has code splitting
-- has gradual loading (with appropriately splitted stylesheets)
-- has server-side rendering
 - enables multiple entry points
 - sends correct entry point chunk in initial HTML
 - can be tested in server- and client-environments
@@ -31,14 +31,21 @@ The goal of this project is to provide a base for building modern, huge web apps
 - rpc
 - auth
 - optimistic UI
+- i18n
+- ...
 
 ## npm commands
 
 `npm start` to start developing. Visit localhost:8080.
+
 `npm test` runs tests and reports with TAP and correct exit code.
+
 `npm run test-dev` continuously runs tests for development.
+
 `npm run build` builds for production.
+
 `npm run clean` cleans up build folder.
+
 `npm run lint` lints app code.
 
 ## Webpack

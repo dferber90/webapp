@@ -1,4 +1,4 @@
-# CRS-Webpack
+# Webapp Starter Pack
 The goal of this project is to provide a base for building modern, huge web apps.
 
 ## Goals
