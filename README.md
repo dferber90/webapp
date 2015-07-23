@@ -16,12 +16,13 @@ The goal of this project is to provide a base for building modern, huge web apps
 - sends correct entry point chunk in initial HTML
 - can be tested in server- and client-environments
 - uses
-  - React
-  - Redux (RC1)
-  - React Router (Beta3)
-  - Redux DevTools
-  - ES6/7
-  - ESLint
+  - [React](https://facebook.github.io/react/)
+  - [Redux (RC1)](https://github.com/gaearon/redux/tree/v1.0.0-rc)
+  - [React Router (Beta3)](http://rackt.github.io/react-router/tags/v1.0.0-beta3.html)
+  - [Redux DevTools](https://github.com/gaearon/redux-devtools)
+  - ES6 with [Babel](https://babeljs.io/)
+  - [ESLint](http://eslint.org/)
+  - [webpack](https://github.com/webpack/webpack)
 
 **This setup misses:**
 - data fetching
@@ -36,7 +37,7 @@ The goal of this project is to provide a base for building modern, huge web apps
 
 `npm start` to start developing. Visit localhost:8080.
 
-`npm test` runs tests and reports with TAP and correct exit code.
+`npm test` runs tests once and reports with TAP and correct exit code.
 
 `npm run test-dev` continuously runs tests for development.
 
@@ -50,7 +51,7 @@ The goal of this project is to provide a base for building modern, huge web apps
 Running `npm start` starts `webpack/dev.js`. This file loads two Webpack configurations from `webpack/webpack.config.js`.
 The first configuration is for the client. The second configuration is for the server.
 
-Next, `dev.js` generates `build/backend.js using Webpack. It is generated from `app/server/server.js`, using Webpack.
+Next, `dev.js` generates `build/backend.js` using Webpack. It is generated from `app/server/server.js`, using Webpack.
 The generated file `build/backend.js` is watched for changes using `piping`. This way the server restarts when something is changed.
 
 `dev.js` also builds the files served to the client, using the first Webpack configuration.
@@ -69,7 +70,7 @@ This way the client will never see code wrapped in a `if (__SERVER__)` block, an
 
 
 ## React Router
-React Router defines a root route containing all child routes in `app/common/routes/getRootRoute.js`.
+React Router defines a root route containing all child routes in `app/common/routes/rootRoute.js`.
 
 ### Code Splitting
 It also defines split points for the application in `app/common/routes/<route>/index.js`.
@@ -79,12 +80,12 @@ Because the server already knows which entry point the client is using, it can s
 This happens in `app/common/server/server.js` with `getEntryPointFile()`.
 
 ### Redux Router
-A React Router component specifically for Redux is registered in `app/common/routes/getRootRouter`.
+A React Router component specifically for Redux is registered in `app/common/routes/rootRouter`.
 This will register a `router` property in the store. All route changes also flow through redux.
 
 This component also exposes `store` in the context. That's why this App uses no Redux `<Provider />` component,
 because the Provider's job is already done (exposing the store in the context).
-The React Router gets the current store passed to it in `getRootRoutes(store)` in `app/common/routes/getRootRoute.js`.
+The React Router gets the current store passed to it in `getRootRoutes(store)` in `app/common/routes/rootRoute.js`.
 
 Docs: https://github.com/acdlite/redux-react-router
 
