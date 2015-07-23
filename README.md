@@ -1,8 +1,6 @@
 # Webapp Starter Pack
 The goal of this project is to provide a base for building modern, huge web apps.
 
-**This includes**: Code-Splitting with Server-side Rendering and Multiple Entry Points. Also offers Hot Reloading in Development.
-
 **With this setup your app..**
 - can build for production
 - can run tests once for CI (with TAP report)
