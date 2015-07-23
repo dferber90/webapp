@@ -70,10 +70,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // expose variables to browser
   if (__DEV__) {
-    window.store = store
-    window.React = React
-    window.ReactDOM = ReactDOM
-    window.Router = Router
-    window.history = history
+    window.playground = { history, store, React, ReactDOM, Router };
   }
 })
