@@ -23,6 +23,7 @@ The goal of this project is to provide a base for building modern, huge web apps
   - ES6 with [Babel](https://babeljs.io/)
   - [ESLint](http://eslint.org/)
   - [webpack](https://github.com/webpack/webpack)
+  - [Flux Standard Actions](https://github.com/acdlite/flux-standard-action)
 
 **This setup misses:**
 - data fetching

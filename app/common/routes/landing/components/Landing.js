@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 import { Link } from 'react-router'
 import { Connector } from 'react-redux'
-import { addTodo } from '../../../actionCreators/todos'
+import { addTodo, removeTodo } from '../../../actionCreators/todos'
 import todosReducer from '../../../reducers/todos'
 
 
@@ -24,6 +24,7 @@ export default class Landing extends Component {
   }
 
   render () {
+    const self = this
     return (
       <Connector select={select}>
         {({ todos, dispatch }) =>
@@ -32,7 +33,15 @@ export default class Landing extends Component {
             <ul>
               {todos.todoList.map(
                 function (todo) {
-                  return <TodoItem key={todo.id} text={todo.text}/>
+                  return (
+                    <TodoItem
+                      key={todo.id}
+                      text={todo.text}
+                      onClickHandler={
+                        self.removeTodo.bind(self, todo.id, dispatch)
+                      }
+                    />
+                  )
                 }
               )}
             </ul>
@@ -51,6 +60,10 @@ export default class Landing extends Component {
     dispatch(addTodo(name))
   }
 
+  removeTodo (todoId, dispatch) {
+    dispatch(removeTodo(todoId))
+  }
+
   renderTodo (todo) {
     return <li>{todo.text}</li>
   }
@@ -58,9 +71,15 @@ export default class Landing extends Component {
 
 class TodoItem extends Component {
   static propTypes = {
-    text: PropTypes.string.isRequired
+    text: PropTypes.string.isRequired,
+    onClickHandler: PropTypes.func.isRequired
   }
   render () {
-    return <li>{this.props.text}</li>
+    return (
+      <li>
+        {this.props.text}
+        <button onClick={this.props.onClickHandler}>remove</button>
+      </li>
+    )
   }
 }

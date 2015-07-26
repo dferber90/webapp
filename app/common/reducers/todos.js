@@ -13,14 +13,14 @@ export default function todoReducer (state = initialState, action) {
         ...state,
         todoList: [
           ...state.todoList,
-          { text: action.payload, id: state.idCounter + 1 }
+          { text: action.payload.text, id: state.idCounter + 1 }
         ],
         idCounter: state.idCounter + 1
       }
     case REMOVE_TODO:
       return {
         ...state,
-        todoList: state.todoList.filter(todo => todo.id !== action.payload)
+        todoList: state.todoList.filter(todo => todo.id !== action.payload.id)
       }
     default:
       return state
