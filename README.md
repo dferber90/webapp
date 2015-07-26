@@ -34,6 +34,10 @@ The goal of this project is to provide a base for building modern, huge web apps
 - i18n
 - ...
 
+## Docs
+The docs are not very elaborate. Please open an issue if you have got a question,
+need help or in case there is room for improvement.
+
 ## npm commands
 
 `npm start` to start developing. Visit localhost:8080.
@@ -69,6 +73,8 @@ The values of these constants are set in `webpack/webpack.config.js`.
 For production releases, Webpack replaces the constants with their actual values and then uses dead-code-elimination to remove dead code blocks.
 This way the client will never see code wrapped in a `if (__SERVER__)` block, and vice versa.
 
+One example for this is that during development, some variables are exposed to the browser in the playground namespace.
+For example you can use type `playground.React` in the browser console to access React.
 
 ## React Router
 React Router defines a root route containing all child routes in `app/common/routes/rootRoute.js`.
