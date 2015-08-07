@@ -47,6 +47,15 @@ If you are looking for a more mature alternative, you should check out [react-is
 - i18n
 - ...
 
+## Installation
+
+```
+git clone https://github.com/dferber90/webapp-starter-pack.git
+cd webapp-starter-pack
+
+npm install
+npm start # starts server and client. visit localhost:8080
+```
 
 ## npm commands
 
@@ -78,7 +87,7 @@ The generated file `build/backend.js` is watched for changes using `piping`. Thi
 The files are generated to `build/assets`. During development, the files are not written to disk. Instead they are served from the WebpackDevServer which is also started in `dev.js`.
 The WebpackDevServer watches the used files for changes and recompiles in case a file is edited.
 The WebpackDevServer also proxies all requests it cannot fulfill on its own to `localhost:3000`, where
-the express-server started in `app/server/server.js` answers them. Therefor, the WebpackDevServer only serves the files Webpack generates for the client.
+the express-server started in `app/server/server.js` answers them. Therefore, the WebpackDevServer only serves the files Webpack generates for the client.
 
 
 ## Constants
