@@ -49,7 +49,7 @@ If you are looking for a more mature alternative, you should check out [react-is
 
 ## Installation
 
-```
+```bash
 git clone https://github.com/dferber90/webapp-starter-pack.git
 cd webapp-starter-pack
 
