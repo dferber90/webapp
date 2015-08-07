@@ -10,7 +10,9 @@ I published my attempt now so other people building redux examples can borrow id
 I am also not going to continue work on this starter-pack in the near time, as I have discovered the current disadvantages of this approach to building web apps.
 But I hope to come back to Redux, Webpack and maybe GraphQL when patterns have settled and stuff has actually hit 1.0 :-)
 
+If you are looking for a more mature alternative, you should check out [react-isomorphic-starter-kit](https://github.com/RickWong/react-isomorphic-starterkit) by @Rygu.
 
+## Features
 **With this setup your app..**
 - can [build for production](https://github.com/dferber90/webapp-starter-pack/issues/4#issuecomment-128451373)
 - can run tests once for CI (with TAP report)
@@ -35,6 +37,7 @@ But I hope to come back to Redux, Webpack and maybe GraphQL when patterns have s
   - [webpack](https://github.com/webpack/webpack)
   - [Flux Standard Actions](https://github.com/acdlite/flux-standard-action)
 
+## Wishlist
 **This setup misses:**
 - data fetching
 - database
@@ -44,9 +47,6 @@ But I hope to come back to Redux, Webpack and maybe GraphQL when patterns have s
 - i18n
 - ...
 
-## Docs
-The docs are not very elaborate. Please open an issue if you have got a question,
-need help or in case there is room for improvement.
 
 ## npm commands
 
@@ -62,11 +62,16 @@ need help or in case there is room for improvement.
 
 `npm run lint` lints app code.
 
+
+## Docs
+The docs are not very elaborate. Please open an issue if you have got a question,
+need help or in case there is room for improvement.
+
 ## Webpack
 Running `npm start` starts `webpack/dev.js`. This file loads two Webpack configurations from `webpack/webpack.config.js`.
 The first configuration is for the client. The second configuration is for the server.
 
-Next, `dev.js` generates `build/backend.js` using Webpack. It is generated from `app/server/server.js`, using Webpack.
+Next, `dev.js` generates `build/backend.js` from `app/server/server.js` using Webpack.
 The generated file `build/backend.js` is watched for changes using `piping`. This way the server restarts when something is changed.
 
 `dev.js` also builds the files served to the client, using the first Webpack configuration.
@@ -95,6 +100,7 @@ Webpack handles async loading of these routes and their components using `requre
 
 Because the server already knows which entry point the client is using, it can send the appropriate file for the initial route.
 This happens in `app/common/server/server.js` with `getEntryPointFile()`.
+To benefit from this, have to associate new routes with their chunk in this method manually (for now).
 
 ### Redux Router
 A React Router component specifically for Redux is registered in `app/common/routes/rootRouter`.
