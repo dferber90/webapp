@@ -47,6 +47,6 @@
     "posttest": "npm run cleantests"
   },
   "author": "Dominik Ferber",
-  "license": "ISC",
+  "license": "MIT",
   "private": true
 }
