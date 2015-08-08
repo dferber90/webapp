@@ -37,14 +37,18 @@
   },
   "scripts": {
     "start": "npm run clean && node webpack/dev.js",
+
     "clean": "rimraf build/*",
-    "build": "npm run clean && PRODUCTION=true webpack -p --config webpack/webpack.config.js",
-    "lint": "eslint .",
-    "test-dev": "TEST_WATCHER=true node webpack/test.js",
-    "cleantests": "rimraf build/tests/*",
-    "pretest": "npm run cleantests && node webpack/test.js",
+    "clean:tests": "rimraf build/tests/*",
+
+    "pretest": "npm run clean:tests && node webpack/test.js",
     "test": "node ./webpack/run-bundled-tests.js",
-    "posttest": "npm run cleantests"
+    "posttest": "npm run clean:tests",
+    "test:dev": "TEST_WATCHER=true node webpack/test.js",
+
+    "build": "npm run clean && PRODUCTION=true webpack -p --config webpack/webpack.config.js",
+
+    "lint": "eslint ."
   },
   "author": "Dominik Ferber",
   "license": "MIT",
