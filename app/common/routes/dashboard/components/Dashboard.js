@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { increment } from '../../../actionCreators/counter'
 import counterReducer from '../../../reducers/counter'
 import registerReducers from '../../../util/registerReducers'
+import mewtwoPokemon from '../../../../../public/poke.png'
 if (__CLIENT__) {
   require('./Dashboard.less')
 }
@@ -33,6 +34,8 @@ export default class Dashboard extends Component {
         <button onClick={this.incrementCounter.bind(this, dispatch)}>
           inc
         </button>
+        <hr/>
+        <img src={mewtwoPokemon} alt="pokemon"/>
         <hr/>
         <Link to="/">home</Link>
       </div>

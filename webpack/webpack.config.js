@@ -16,7 +16,7 @@ var fs = require('fs')
 var webpack = require('webpack')
 
 var rootPath = path.join(__dirname, '..')
-var outputPath = path.join(rootPath, 'build')
+var outputPath = path.join(rootPath, 'build', 'public', 'assets')
 var clientBaseEntryPath = path.join(rootPath, 'app', 'client', 'client.js')
 var serverEntryPath = path.join(rootPath, 'app', 'server', 'server.js')
 
@@ -58,6 +58,12 @@ if (!isInProduction) {
   ))
 }
 
+var imageLoader = {
+  test: /\.(png|jpg)$/,
+  loader: 'url-loader?limit=8192',
+  exclude: /node_modules/
+}
+
 
 module.exports = [
   {
@@ -68,7 +74,7 @@ module.exports = [
     },
     output: {
       // The output directory as absolute path (required).
-      path: path.join(outputPath, 'public', 'assets'),
+      path: outputPath,
       // The output.path from the view of the Javascript / HTML page.
       publicPath: '/assets/', // eg localhost:8080/assets/bundle.js
       // The filename of the entry chunk as relative path inside the output.path
@@ -90,11 +96,7 @@ module.exports = [
           loaders: [ 'style', 'css', 'less' ],
           exclude: /node_modules/
         },
-        {
-          test: /\.(png|jpg)$/,
-          loader: 'url-loader?limit=8192',
-          exclude: /node_modules/
-        }
+        imageLoader
       ]
     },
     plugins: [
@@ -118,8 +120,9 @@ module.exports = [
     entry: serverEntryPath,
     devtool: isInProduction ? false : '#source-map',
     output: {
-      path: outputPath,
-      filename: 'backend.js'
+      path: outputPath, // put images into build/public/assets
+      filename: '../../backend.js', // put backend.js into 'build/backend.js'
+      publicPath: '/assets/'
     },
     externals: nodeModules,
     node: {
@@ -133,11 +136,7 @@ module.exports = [
     module: {
       loaders: [
         jsxLoader,
-        {
-          test: /\.(png|jpg)$/,
-          loader: 'url-loader?limit=8192',
-          exclude: /node_modules/
-        }
+        imageLoader
       ]
     },
     plugins: serverPlugins.concat([
