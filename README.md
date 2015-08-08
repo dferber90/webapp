@@ -104,12 +104,21 @@ For example you can use type `playground.React` in the browser console to access
 React Router defines a root route containing all child routes in `app/common/routes/rootRoute.js`.
 
 ### Code Splitting
-It also defines split points for the application in `app/common/routes/<route>/index.js`.
+It also defines named split points for the application in `app/common/routes/<route>/index.js`.
 Webpack handles async loading of these routes and their components using `requre.ensure`.
 
-Because the server already knows which entry point the client is using, it can send the appropriate file for the initial route.
-This happens in `app/common/server/server.js` with `getEntryPointFile()`.
-To benefit from this, have to associate new routes with their chunk in this method manually (for now).
+Because the server already knows which path the client is requesting, it can send the appropriate chunk for the initial route.
+This happens in `app/common/server/server.js` with `getChunkFile()`.
+To benefit from this, you have to associate new routes with their chunk in this method manually (for now).
+
+**Important:** Webpack defines *Entry Points* and *Chunks*.
+
+    There is only one Entry Point right now. It is `app.entry.js`. Entry Points are not used for code splitting in this setup.
+    You do not have to add new ones.
+
+    The splitting of the app into different parts for different routes happens through chunks.
+    These chunks are generated as described above (using the route definitions).
+    Chunks are also used to split out common functionality, so not every chunks serves routes (eg `commonsChunk.js`).
 
 ### Redux Router
 A React Router component specifically for Redux is registered in `app/common/routes/rootRouter`.

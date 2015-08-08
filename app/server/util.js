@@ -2,7 +2,23 @@ import { minify } from 'html-minifier'
 import { INITIAL_DATA } from '../common/constants/initial'
 import { APP_ID, DEBUG_ID } from '../common/constants/ids'
 
-export function getEntryPointFromPath (pathname) {
+/**
+ * Gets the appropriate chunk based on the request path.
+ *
+ * It is okay to return false. In this case webpack will request the
+ * chunk when the app is loading on the client.
+ * This just results in a slightly delayed request, as the request can only
+ * happen after the app logic is fully loaded and executing.
+ * If a string is returned, the file will be loaded instantly along with the
+ * apps logic.
+ *
+ * Names for chunk files have to be specified in
+ * `app/common/routes/<route>/index.js`.
+ *
+ * @param  {String} pathname Request path.
+ * @return {String}          Name of corresponding chunk.
+ */
+export function getChunkFromPath (pathname) {
   if (pathname === '/') {
     if (__DEV__) console.log('main file')
     return 'landing-async'
@@ -13,11 +29,11 @@ export function getEntryPointFromPath (pathname) {
   return false
 }
 
-export function getEntryPointFile (pathname) {
-  const entryPoint = getEntryPointFromPath(pathname)
-  if (!entryPoint) return ''
+export function getChunkFile (pathname) {
+  const initialChunk = getChunkFromPath(pathname)
+  if (!initialChunk) return ''
 
-  return `<script src="/assets/${entryPoint}.chunk.js"></script>`
+  return `<script src="/assets/${initialChunk}.chunk.js"></script>`
 }
 
 export function shrinkPage (html) {

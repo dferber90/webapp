@@ -4,7 +4,7 @@ import getRootRoute from '../common/routes/rootRoute'
 import Router from 'react-router'
 import Location from 'react-router/lib/Location'
 import App from '../common/container/App'
-import { getEntryPointFile, shrinkPage, generateHTML } from './util'
+import { getChunkFile, shrinkPage, generateHTML } from './util'
 import StoresRegistry from '../common/util/StoresRegistry'
 import { routerStateReducer } from 'redux-react-router'
 
@@ -41,7 +41,7 @@ export default function (path, query) {
       const html = generateHTML({
         initialData: store.getState(),
         html: appHtml,
-        entryPoint: getEntryPointFile(initialState.location.pathname)
+        entryPoint: getChunkFile(initialState.location.pathname)
       })
 
       resolve(__DEV__ ? html : shrinkPage(html))
