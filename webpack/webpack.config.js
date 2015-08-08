@@ -76,7 +76,7 @@ module.exports = [
       filename: '[name].entry.js',
       chunkFilename: '[name].chunk.js'
     },
-    recordsPath: path.resolve(__dirname, '../build/records/client.json'),
+    recordsPath: path.resolve(__dirname, '../records/client.json'),
     module: {
       loaders: [
         jsxLoader,
@@ -129,7 +129,7 @@ module.exports = [
       __dirname: true,
       __filename: true
     },
-    recordsPath: path.resolve(__dirname, '../build/records/server.json'),
+    recordsPath: path.resolve(__dirname, '../records/server.json'),
     module: {
       loaders: [
         jsxLoader,

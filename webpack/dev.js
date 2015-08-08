@@ -39,7 +39,7 @@ var handleWarnings = function (warnings) {
 var successfullyCompiled = function (stats, what) {
   // console.log(stats)
   fs.writeFile(
-    path.join(__dirname, '..', 'build', 'records', what + '-manually.json'),
+    path.join(__dirname, '..', 'records', what + '-manually.json'),
     JSON.stringify(stats, null, 4)
   )
   console.log('compiled ' + what)
