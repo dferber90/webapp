@@ -4,7 +4,7 @@
 */
 var path = require('path')
 var webpack = require('webpack')
-var commonConfiguration = require('./commonConfiguration')
+var commonConfiguration = require('./common-configuration')
 
 var runMultiple = !!process.env.TEST_WATCHER
 // set up environments for tests

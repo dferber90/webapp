@@ -13,7 +13,7 @@
 
 var path = require('path')
 var webpack = require('webpack')
-var commonConfiguration = require('./commonConfiguration')
+var commonConfiguration = require('./common-configuration')
 
 var rootPath = path.join(__dirname, '..')
 var outputPath = path.join(rootPath, 'build', 'public', 'assets')
