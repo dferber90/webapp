@@ -46,5 +46,3 @@ export default class Dashboard extends Component {
     dispatch(increment())
   }
 }
-
-export const breakApp = 2
