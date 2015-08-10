@@ -12,7 +12,9 @@ I published my attempt now so other people building redux examples can borrow id
 I am also not going to continue work on this starter-pack in the near time, as I have discovered the current disadvantages of this approach to building web apps.
 But I hope to come back to Redux, Webpack and maybe GraphQL when patterns have settled and stuff has actually hit 1.0 :-)
 
-If you are looking for a more mature alternative, you should check out [react-isomorphic-starter-kit](https://github.com/RickWong/react-isomorphic-starterkit) by @Rygu.
+If you are looking for a more mature alternative, you can check out
+- [react-redux-starter-kit](https://github.com/davezuko/react-redux-starter-kit)
+- [react-isomorphic-starter-kit](https://github.com/RickWong/react-isomorphic-starterkit)
 
 ## Features
 **With this setup your app..**
