@@ -1,4 +1,6 @@
 # Webapp Starter Pack
+
+[![Join the chat at https://gitter.im/dferber90/webapp-starter-pack](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/dferber90/webapp-starter-pack?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 The goal of this project is to provide a base for building modern, huge web apps.
 
 ## Disclaimer
