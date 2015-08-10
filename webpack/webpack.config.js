@@ -12,7 +12,6 @@
 // then piping in devServer.js watches for changes and restarts
 
 var path = require('path')
-var fs = require('fs')
 var webpack = require('webpack')
 var commonConfiguration = require('./commonConfiguration')
 
@@ -41,14 +40,7 @@ var hotReload = isInProduction ? [] : [
 // We don't want to bundle in anything from node_modules
 // on the server
 // http://jlongster.com/Backend-Apps-with-Webpack--Part-I
-var nodeModules = {}
-fs.readdirSync('node_modules')
-  .filter(function (x) {
-    return ['.bin'].indexOf(x) === -1
-  })
-  .forEach(function (mod) {
-    nodeModules[mod] = 'commonjs ' + mod
-  })
+var nodeModules = commonConfiguration.getNodeModules()
 
 
 var serverPlugins = []

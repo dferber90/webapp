@@ -8,6 +8,7 @@
  * - webpack/test.js
  */
 
+var fs = require('fs')
 var path = require('path')
 
 var resolve = {
@@ -19,6 +20,19 @@ var resolve = {
   ]
 }
 
+var getNodeModules = function () {
+  var nodeModules = {}
+  fs.readdirSync('node_modules')
+    .filter(function (x) {
+      return ['.bin'].indexOf(x) === -1
+    })
+    .forEach(function (mod) {
+      nodeModules[mod] = 'commonjs ' + mod
+    })
+  return nodeModules
+}
+
 module.exports = {
-  resolve: resolve
+  resolve: resolve,
+  getNodeModules: getNodeModules
 }

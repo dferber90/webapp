@@ -3,7 +3,6 @@
   vars-on-top: [0]
 */
 var path = require('path')
-var fs = require('fs')
 var webpack = require('webpack')
 var commonConfiguration = require('./commonConfiguration')
 
@@ -20,14 +19,7 @@ var watchOptions = {
   poll: false
 }
 
-var nodeModules = {}
-fs.readdirSync('node_modules')
-  .filter(function (x) {
-    return ['.bin'].indexOf(x) === -1
-  })
-  .forEach(function (mod) {
-    nodeModules[mod] = 'commonjs ' + mod
-  })
+var nodeModules = commonConfiguration.getNodeModules()
 
 // 1) client env
 var clientCompiler = webpack({
