@@ -1,6 +1,6 @@
 import { minify } from 'html-minifier'
-import { INITIAL_DATA } from '../common/constants/initial'
-import { APP_ID, DEBUG_ID } from '../common/constants/ids'
+import { INITIAL_DATA } from 'common/constants/initial'
+import { APP_ID, DEBUG_ID } from 'common/constants/ids'
 
 /**
  * Gets the appropriate chunk based on the request path.

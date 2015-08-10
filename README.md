@@ -89,6 +89,29 @@ The WebpackDevServer watches the used files for changes and recompiles in case a
 The WebpackDevServer also proxies all requests it cannot fulfill on its own to `localhost:3000`, where
 the express-server started in `app/server/server.js` answers them. Therefore, the WebpackDevServer only serves the files Webpack generates for the client.
 
+### Webpack Aliases
+Webpack is configured with some aliases for often used folders,
+so you don't have to provide long relative paths.
+
+See object `aliases` in `webpack/webpack.config.js`. There, the following folders are defined:
+
+```js
+var aliases = {
+  app: path.join(__dirname, '..', 'app'),
+  client: path.join(__dirname, '..', 'app', 'client'),
+  common: path.join(__dirname, '..', 'app', 'common'),
+  server: path.join(__dirname, '..', 'app', 'server'),
+  public: path.join(__dirname, '..', 'public')
+}
+```
+
+For example, you can now just `import * from 'common/<some path>'` anywhere in your app.
+`common` will be resolved to `app/common`.
+
+This allows you to import starting with these paths instead of having long relative paths.
+This should make refactoring easier as well, because you don't have to mess with relative paths as much.
+You can read more about aliases in webpack [here](https://github.com/webpack/webpack/issues/109).
+
 
 ## Constants
 Webpack defines `__DEV__`, `__DEVTOOLS__`, `__CLIENT__` and `__SERVER__`.

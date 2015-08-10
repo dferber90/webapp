@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
-import { increment } from '../../../actionCreators/counter'
-import counterReducer from '../../../reducers/counter'
-import registerReducers from '../../../util/registerReducers'
-import mewtwoPokemon from '../../../../../public/poke.png'
+import { increment } from 'common/actionCreators/counter'
+import counterReducer from 'common/reducers/counter'
+import registerReducers from 'common/util/registerReducers'
+import mewtwoPokemon from 'public/poke.png'
 if (__CLIENT__) {
   require('./Dashboard.less')
 }

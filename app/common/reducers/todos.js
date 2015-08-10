@@ -1,4 +1,4 @@
-import { ADD_TODO, REMOVE_TODO } from '../actionTypes/todos'
+import { ADD_TODO, REMOVE_TODO } from 'common/actionTypes/todos'
 
 const initialTodos = [
   { id: 0, text: 'TODO #0' },

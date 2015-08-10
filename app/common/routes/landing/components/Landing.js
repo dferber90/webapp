@@ -1,8 +1,8 @@
 import React, { PropTypes, Component } from 'react'
 import { Link } from 'react-router'
 import { Connector } from 'react-redux'
-import { addTodo, removeTodo } from '../../../actionCreators/todos'
-import todosReducer from '../../../reducers/todos'
+import { addTodo, removeTodo } from 'common/actionCreators/todos'
+import todosReducer from 'common/reducers/todos'
 
 
 function select (state) {

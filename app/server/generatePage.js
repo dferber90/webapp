@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
-import getRootRoute from '../common/routes/rootRoute'
+import getRootRoute from 'common/routes/rootRoute'
 import Router from 'react-router'
 import Location from 'react-router/lib/Location'
-import App from '../common/container/App'
+import App from 'common/container/App'
 import { getChunkFile, shrinkPage, generateHTML } from './util'
-import StoresRegistry from '../common/util/StoresRegistry'
+import StoresRegistry from 'common/util/StoresRegistry'
 import { routerStateReducer } from 'redux-react-router'
 
 export default function (path, query) {

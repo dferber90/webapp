@@ -1,5 +1,5 @@
 import test from 'tape'
-import forTest from '../../app/common/util/forTests.js'
+import forTest from 'common/util/forTests.js'
 
 test('A passing test', (assert) => {
   assert.equal(forTest(), 'client')

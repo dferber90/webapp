@@ -3,7 +3,7 @@
  */
 
 import { combineReducers } from 'redux'
-import finalCreateStore from '../util/finalCreateStore'
+import finalCreateStore from 'common/util/finalCreateStore'
 
 export default class StoresRegistry {
 

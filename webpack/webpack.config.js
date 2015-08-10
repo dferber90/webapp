@@ -64,6 +64,14 @@ var imageLoader = {
   exclude: /node_modules/
 }
 
+var aliases = {
+  app: path.join(__dirname, '..', 'app'),
+  client: path.join(__dirname, '..', 'app', 'client'),
+  common: path.join(__dirname, '..', 'app', 'common'),
+  server: path.join(__dirname, '..', 'app', 'server'),
+  public: path.join(__dirname, '..', 'public')
+}
+
 
 module.exports = [
   {
@@ -83,6 +91,9 @@ module.exports = [
       chunkFilename: '[name].chunk.js'
     },
     recordsPath: path.resolve(__dirname, '../records/client.json'),
+    resolve: {
+      alias: aliases
+    },
     module: {
       loaders: [
         jsxLoader,
@@ -133,6 +144,9 @@ module.exports = [
       __filename: true
     },
     recordsPath: path.resolve(__dirname, '../records/server.json'),
+    resolve: {
+      alias: aliases
+    },
     module: {
       loaders: [
         jsxLoader,
