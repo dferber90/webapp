@@ -1,6 +1,8 @@
 # Webapp Starter Pack
 The goal of this project is to provide a base for building modern, huge web apps.
 
+[![Join the chat at https://gitter.im/dferber90/webapp-starter-pack](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/dferber90/webapp-starter-pack?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ## Disclaimer
 Please note that this starter-pack was the result of my two-month dive into React, Redux and Webpack.
 It is my attempt to combine all of these technologies, but I am not quite there yet.
