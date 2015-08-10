@@ -14,6 +14,7 @@
 var path = require('path')
 var fs = require('fs')
 var webpack = require('webpack')
+var commonConfiguration = require('./commonConfiguration')
 
 var rootPath = path.join(__dirname, '..')
 var outputPath = path.join(rootPath, 'build', 'public', 'assets')
@@ -64,15 +65,6 @@ var imageLoader = {
   exclude: /node_modules/
 }
 
-var aliases = {
-  app: path.join(__dirname, '..', 'app'),
-  client: path.join(__dirname, '..', 'app', 'client'),
-  common: path.join(__dirname, '..', 'app', 'common'),
-  server: path.join(__dirname, '..', 'app', 'server'),
-  public: path.join(__dirname, '..', 'public')
-}
-
-
 module.exports = [
   {
     name: 'client',
@@ -91,9 +83,7 @@ module.exports = [
       chunkFilename: '[name].chunk.js'
     },
     recordsPath: path.resolve(__dirname, '../records/client.json'),
-    resolve: {
-      alias: aliases
-    },
+    resolve: commonConfiguration.resolve,
     module: {
       loaders: [
         jsxLoader,
@@ -144,9 +134,7 @@ module.exports = [
       __filename: true
     },
     recordsPath: path.resolve(__dirname, '../records/server.json'),
-    resolve: {
-      alias: aliases
-    },
+    resolve: commonConfiguration.resolve,
     module: {
       loaders: [
         jsxLoader,

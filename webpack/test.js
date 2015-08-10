@@ -5,6 +5,7 @@
 var path = require('path')
 var fs = require('fs')
 var webpack = require('webpack')
+var commonConfiguration = require('./commonConfiguration')
 
 var runMultiple = !!process.env.TEST_WATCHER
 // set up environments for tests
@@ -63,7 +64,8 @@ var clientCompiler = webpack({
       __SERVER__: false,
       __DEVTOOLS__: false
     })
-  ]
+  ],
+  resolve: commonConfiguration.resolve
 })
 
 // 2) server env
@@ -108,7 +110,8 @@ var serverCompiler = webpack({
       __SERVER__: true,
       __DEVTOOLS__: false
     })
-  ]
+  ],
+  resolve: commonConfiguration.resolve
 })
 
 // run generated test files

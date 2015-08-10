@@ -92,28 +92,35 @@ the express-server started in `app/server/server.js` answers them. Therefore, th
 ### Webpack Aliases
 Webpack is configured with some aliases for often used folders,
 so you don't have to provide long relative paths.
+You can refer to anything in `app` directly. Instead of `import * from '../app/common'`,
+you can do `import * from 'common'`.
 
-See object `aliases` in `webpack/webpack.config.js`. There, the following folders are defined:
+See object `resolve` in `webpack/webpack.config.js`. There, the following folders are defined:
 
 ```js
-var aliases = {
-  app: path.join(__dirname, '..', 'app'),
-  client: path.join(__dirname, '..', 'app', 'client'),
-  common: path.join(__dirname, '..', 'app', 'common'),
-  server: path.join(__dirname, '..', 'app', 'server'),
-  public: path.join(__dirname, '..', 'public')
+var resolve = {
+  alias: {
+    public: path.join(__dirname, '..', 'public')
+  },
+  root: [
+    path.join(__dirname, '..', 'app')
+  ]
 }
 ```
 
-For example, you can now just `import * from 'common/<some path>'` anywhere in your app.
-`common` will be resolved to `app/common`.
+Folders with aliases (alias ⇔ resolved folder):
+
+* common ⇔ app/common
+* server ⇔ app/server
+* client ⇔ app/client
+* public ⇔ public
 
 This allows you to import starting with these paths instead of having long relative paths.
 This should make refactoring easier as well, because you don't have to mess with relative paths as much.
-You can read more about aliases in webpack [here](https://github.com/webpack/webpack/issues/109).
+You can read more about aliases in webpack [in this issue](https://github.com/webpack/webpack/issues/109) and [in the docs](http://webpack.github.io/docs/configuration.html#resolve).
 
 
-## Constants
+### Constants
 Webpack defines `__DEV__`, `__DEVTOOLS__`, `__CLIENT__` and `__SERVER__`.
 If the environment variable `PRODUCTION` is not defined, then `__DEV__` is `true`.
 The values of these constants are set in `webpack/webpack.config.js`.
@@ -177,8 +184,13 @@ As Redux DevTools uses React 0.13 and this project uses React 0.14, there is a d
 
 
 ## Testing
+
+### Unit Testing
 To run the tests, simply do `$ npm test`. This will generate files for testing with webpack using `webpack/test.js`.
 The tests are then build into `/build/tests/client.js` and `/build/tests/server.js`.
+
+**Attention** Tests run with a separate webpack configuration. It is defined in `webpack/test.js`.
+
 There are two separate test files because there are two environments to consider: 1) client and 2) server.
 The two entry points are `tests/server-env/run.js` and `tests/client-env/run.js`. These files import their tests. The tests themselves import parts of the app to test.
 
