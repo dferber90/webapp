@@ -150,6 +150,13 @@ To benefit from this, you have to associate new routes with their chunk in this 
     These chunks are generated as described above (using the route definitions).
     Chunks are also used to split out common functionality, so not every chunks serves routes (eg `commonsChunk.js`).
 
+**Important:** Only one default export, no other exports in routes.
+
+    You specify which component should load for a specific route in `app/common/routes/index.js` using `cb(null, require('./components/<Component>'))`.
+    Here `<Component>` is loaded with require, but the file `<Component>.js` defines its exports with ES6 module syntax.
+    Therefore, the file `<Component>.js` must have one default export only and no other named exports.
+    Otherwise your app will break with `Error: Invariant Violation: ReduxRoute.render(): A valid ReactComponent must be returned. You may have returned undefined, an array or some other invalid object.`.
+
 ### Redux Router
 A React Router component specifically for Redux is registered in `app/common/routes/rootRouter`.
 This will register a `router` property in the store. All route changes also flow through redux.

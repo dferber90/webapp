@@ -19,12 +19,16 @@ export default function (path, query) {
       router: routerStateReducer
     })
     const store = storesRegistry.store
-    const rootRoute = getRootRoute(store, {
+    const userContext = {
       storesRegistry: storesRegistry
-    })
+    }
+    const rootRoute = getRootRoute(store, userContext)
 
     Router.run(rootRoute, location, (error, initialState/*, transition*/) => {
-      if (error) return reject(error)
+      if (error) {
+        console.log('error occured while trying to run router')
+        return reject(error)
+      }
       if (!initialState) {
         return reject(
           new Error(`initialState was falsy for ${location.pathname}`)
@@ -33,10 +37,15 @@ export default function (path, query) {
 
       // can get data needs from initial components using GraphQL
       // console.log(initialState.components)
-
-      const appHtml = ReactDOMServer.renderToString(
-        <App server={initialState}/>
-      )
+      let appHtml
+      try {
+        appHtml = ReactDOMServer.renderToString(
+          <App server={initialState}/>
+        )
+      } catch (e) {
+        console.error(e)
+        return reject(e)
+      }
 
       const html = generateHTML({
         initialData: store.getState(),
@@ -44,7 +53,7 @@ export default function (path, query) {
         entryPoint: getChunkFile(initialState.location.pathname)
       })
 
-      resolve(__DEV__ ? html : shrinkPage(html))
+      return resolve(__DEV__ ? html : shrinkPage(html))
     })
   })
 }

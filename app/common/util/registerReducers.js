@@ -7,10 +7,10 @@ function getDisplayName (component) {
 }
 
 export default function registerReducers (reducers) {
-  return DecoratedComponent => (
+  return WrappedComponent => (
     class RegisterReducersDecorator extends Component {
-      static displayName = `Reducers(${getDisplayName(DecoratedComponent)})`
-      static DecoratedComponent = DecoratedComponent;
+      static displayName = `Reducers(${getDisplayName(WrappedComponent)})`
+      static WrappedComponent = WrappedComponent;
 
       componentWillMount () {
         const { storesRegistry } = this.props.route.userContext
@@ -18,7 +18,7 @@ export default function registerReducers (reducers) {
       }
 
       render () {
-        return <DecoratedComponent {...this.props} />
+        return <WrappedComponent {...this.props} />
       }
     }
   )

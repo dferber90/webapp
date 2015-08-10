@@ -23,6 +23,7 @@ if (__DEV__) console.log('server listening')
 
 function printError (error) {
   return `
+    <h1>error during generatePage</h1>
     <p><b>${error.toString()}</b></p>
     <code>${error.stack}</code>
   `
