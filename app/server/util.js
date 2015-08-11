@@ -20,10 +20,8 @@ import { APP_ID, DEBUG_ID } from 'common/constants/ids'
  */
 export function getChunkFromPath (pathname) {
   if (pathname === '/') {
-    if (__DEV__) console.log('main file')
     return 'landing-async'
   } else if (/^\/dashboard[\/.*]$/.test(pathname)) {
-    if (__DEV__) console.log('dashboard file')
     return 'dashboard-async'
   }
   return false
