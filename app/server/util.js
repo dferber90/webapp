@@ -49,11 +49,23 @@ export function shrinkPage (html) {
 export function generateHTML ({ initialData, html, entryPoint }) {
   const debugPanel = __DEV__ && __DEVTOOLS__ ?
     `<div id="${DEBUG_ID}"></div>` : ''
+
+  // ensure localhost:8080 is opened
+  const assertPort = __DEV__ ? `
+  <script>
+    console.assert(
+      location.port === '8080',
+      'Should use port 8080 in dev-mode. Visit http://localhost:8080/'
+    )
+  </script>
+  ` : ''
+
   return `
     <html>
       <head>
         <meta charset="utf-8">
         <title>testing</title>
+        ${assertPort}
         <script>${INITIAL_DATA} = ${JSON.stringify(initialData)};</script>
         <script src="/assets/commonsChunk.js"></script>
         <script src="/assets/app.entry.js"></script>
