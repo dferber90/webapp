@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
 import { reduxRouteComponent } from 'redux-react-router'
+import sessionComponentFactory from 'common/util/sessionComponentFactory'
 
 /**
  * Gets the root route.
@@ -13,16 +13,7 @@ import { reduxRouteComponent } from 'redux-react-router'
  */
 export default function getRootRoute (store, session = {}) {
 
-  /*
-   * Higher-order Component that adds session as prop
-   *
-   * This HoC is dynamically created for each user's session
-   */
-  const SessionComponent = ComposedComponent => class extends Component {
-    render () {
-      return <ComposedComponent {...this.props} session={session}/>
-    }
-  }
+  const SessionComponent = sessionComponentFactory(session)
 
   return {
     component: reduxRouteComponent(store),
