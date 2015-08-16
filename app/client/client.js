@@ -20,6 +20,7 @@ import { INITIAL_DATA } from 'common/constants/initial'
 import { APP_ID, DEBUG_ID } from 'common/constants/ids'
 import StoresRegistry from 'common/util/StoresRegistry'
 import { routerStateReducer } from 'redux-react-router'
+import { getReducers } from './util'
 
 document.addEventListener('DOMContentLoaded', function () {
   if (typeof history.setup === 'function') {
@@ -76,19 +77,3 @@ document.addEventListener('DOMContentLoaded', function () {
     window.playground = { history, store, React, ReactDOM, Router }
   }
 })
-
-/*
- * Transforms ['todos', 'counter']
- * into { todos: require(todosReducer), counter: require(counterReducer) }
- */
-function getReducers (reducerKeys) {
-  const reducers = {}
-
-  reducerKeys
-    .filter(reducerKey => reducerKey !== 'router')
-    .map(reducerKey => {
-      reducers[reducerKey] = require('common/reducers/' + reducerKey)
-    })
-
-  return reducers
-}
