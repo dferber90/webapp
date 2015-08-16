@@ -20,7 +20,6 @@ if (__CLIENT__) {
 export default class Dashboard extends Component {
 
   static propTypes = {
-    route: PropTypes.object.isRequired,
     counter: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired
   }
