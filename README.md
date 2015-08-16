@@ -180,6 +180,8 @@ In case you have installed `eslint` globally, make sure to also install `eslint-
 Otherwise, you will get an error saying `eslint-plugin-react` was not found.
 
 ## Redux
+[Docs](http://rackt.github.io/redux/index.html)
+
 Action Creator -> Action -> Dispatch(Action) -> Provider -> Connect -> React Component.
 
 ## Redux DevTools
