@@ -1,5 +1,5 @@
 import { reduxRouteComponent } from 'redux-react-router'
-import sessionComponentFactory from 'common/util/sessionComponentFactory'
+import propfulComponentFactory from 'common/util/propfulComponentFactory'
 
 /**
  * Gets the root route.
@@ -13,7 +13,7 @@ import sessionComponentFactory from 'common/util/sessionComponentFactory'
  */
 export default function getRootRoute (store, session = {}) {
 
-  const SessionComponent = sessionComponentFactory(session)
+  const SessionComponent = propfulComponentFactory({ session })
 
   return {
     component: reduxRouteComponent(store),
