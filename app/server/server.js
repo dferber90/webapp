@@ -22,6 +22,13 @@ app.get('*', (req, res) => {
   )
 })
 
+/*
+ * To send a GraphQL query or mutation, use a HTTP POST Request and
+ * set the header Content-Type: application/graphql
+ *
+ * An example query is: query RootQueryType { count }
+ * An example mutation is: mutation RootMutationType { updateCount }
+ */
 app.post('/graphql', (req, res) => {
   console.log(`executing graphql request: "${req.body}"`)
 
