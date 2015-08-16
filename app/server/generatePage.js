@@ -53,7 +53,7 @@ export default function (path, query) {
           store: store.getState()
         },
         html: appHtml,
-        entryChunkPath: util.getChunkFilePath(initialState.location.pathname)
+        entryChunksPaths: util.getChunkFilePaths(initialState.location.pathname)
       })
 
       return resolve(__DEV__ ? html : util.shrinkPage(html))

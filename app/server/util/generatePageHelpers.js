@@ -3,35 +3,42 @@ import { INITIAL_DATA } from 'common/constants/initial'
 import { APP_ID, DEBUG_ID } from 'common/constants/ids'
 
 /**
- * Gets the appropriate chunk based on the request path.
+ * Gets the appropriate chunks based on the request path.
  *
- * It is okay to return false. In this case webpack will request the
- * chunk when the app is loading on the client.
- * This just results in a slightly delayed request, as the request can only
- * happen after the app logic is fully loaded and executing.
- * If a string is returned, the file will be loaded instantly along with the
- * apps logic.
+ * It is okay to return an empty array. In this case webpack will request the
+ * chunks when the app is loaded on the client.
+ * Returning an empty array results in a slight increase in the time it takes
+ * the app to become responsive on the client (at least 300ms), as the request
+ * can only happen after the app logic is fully loaded and executing.
+ * If an array of strings is returned, the file will be loaded instantly along
+ * with the apps logic.
  *
  * Names for chunk files have to be specified in
- * `app/common/routes/<route>/index.js`.
+ * `app/common/routes/`.
+ * Webpack splits for components and child-routes of routes.
  *
  * @param  {String} pathname Request path.
- * @return {String}          Name of corresponding chunk.
+ * @return {[String]}          Names of corresponding chunks.
  */
-export function getChunkFromPath (pathname) {
+export function getChunksFromPath (pathname) {
   if (pathname === '/') {
-    return 'landing-async'
-  } else if (/^\/dashboard[\/.*]$/.test(pathname)) {
-    return 'dashboard-async'
+    return ['landing.components']
+  } else if (/^\/dashboard[\/]?$/.test(pathname)) {
+    return ['dashboard.components']
+  } else if (/^\/dashboard\/sub[\/]?$/.test(pathname)) {
+    return [
+      'dashboard-sub.routes',
+      'dashboard-sub.components'
+    ]
   }
-  return false
+  return []
 }
 
-export function getChunkFilePath (pathname) {
-  const initialChunk = getChunkFromPath(pathname)
-  if (!initialChunk) return false
+export function getChunkFilePaths (pathname) {
+  const initialChunks = getChunksFromPath(pathname)
+  if (!initialChunks) return []
 
-  return `/assets/${initialChunk}.chunk.js`
+  return initialChunks.map(chunkName => `/assets/${chunkName}.chunk.js`)
 }
 
 export function shrinkPage (html) {
@@ -40,11 +47,12 @@ export function shrinkPage (html) {
   return minify(html, {
     removeAttributeQuotes: true,
     collapseWhitespace: true,
-    removeRedundantAttributes: true
+    removeRedundantAttributes: true,
+    removeComments: true
   })
 }
 
-export function generateHTML ({ initialData, html, entryChunkPath }) {
+export function generateHTML ({ initialData, html, entryChunksPaths }) {
   const debugPanel = __DEV__ && __DEVTOOLS__ ?
     `<div id="${DEBUG_ID}"></div>` : ''
 
@@ -58,8 +66,7 @@ export function generateHTML ({ initialData, html, entryChunkPath }) {
   </script>
   ` : ''
 
-  const entryPoint = entryChunkPath ?
-    `<script defer src="${entryChunkPath}"></script>` : ''
+  let initialChunks = generateInitialChunksHTML(entryChunksPaths)
 
   return `
     <html>
@@ -69,7 +76,7 @@ export function generateHTML ({ initialData, html, entryChunkPath }) {
         ${assertPort}
         <script defer src="/assets/commonsChunk.js"></script>
         <script defer src="/assets/app.entry.js"></script>
-        ${entryPoint}
+        ${initialChunks}
       </head>
       <body>
         <div id="${APP_ID}">${html}</div>
@@ -78,4 +85,16 @@ export function generateHTML ({ initialData, html, entryChunkPath }) {
       </body>
     </html>
   `
+}
+
+export function generateInitialChunksHTML (chunkPaths) {
+
+  // comments will be removed by shrinkPage in production
+  const space = '        '
+  let html = '<!-- initial chunks -->\n'
+  chunkPaths.map(chunkPath => {
+    html += `${space}<script defer src="${chunkPath}"></script>\n`
+  })
+  html += `${space}<!-- end initial chunks -->\n`
+  return html
 }

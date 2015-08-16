@@ -141,9 +141,13 @@ React Router defines a root route containing all child routes in `app/common/rou
 It also defines named split points for the application in `app/common/routes/<route>/index.js`.
 Webpack handles async loading of these routes and their components using `requre.ensure`.
 
-Because the server already knows which path the client is requesting, it can send the appropriate chunk for the initial route.
-This happens in `app/common/server/server.js` with `getChunkFile()`.
+Because the server already knows which path the client is requesting, it can send the appropriate chunks for the initial route.
+This happens in `app/server/util/generatePageHelpers.js` with `getChunksFromPath()`.
 To benefit from this, you have to associate new routes with their chunk in this method manually (for now).
+The values of the strings in the array returned from `getChunksFromPath` correspond to chunks defined through `require.ensure([], ..fn.., '<chunk name>')`.
+Using this method decreases the time it takes for the client-side app to run by around 300ms, more if the RTT is higher on mobile networks.
+Even if this method is not used, the app will still be rendered immediately because of SSR.
+This is an opt-in performance improvement.
 
 **Important:** Webpack defines *Entry Points* and *Chunks*.
 
