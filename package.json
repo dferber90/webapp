@@ -29,7 +29,7 @@
     "eslint-plugin-react": "^3.2.2",
     "piping": "^0.2.0",
     "react-hot-loader": "^1.2.8",
-    "redux-devtools": "^1.0.0",
+    "redux-devtools": "^1.0.2",
     "rimraf": "^2.4.2",
     "source-map-support": "^0.3.2",
     "tape": "^4.1.0",
