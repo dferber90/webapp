@@ -5,6 +5,8 @@
 export function getReducers (reducerKeys) {
   const reducers = {}
 
+  // TODO currently reducers will be split into app.entry.js,
+  // instead of their appropriate bundles
   reducerKeys
     .filter(reducerKey => reducerKey !== 'router')
     .map(reducerKey => {

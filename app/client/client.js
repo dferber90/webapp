@@ -20,7 +20,7 @@ import { INITIAL_DATA } from 'common/constants/initial'
 import { APP_ID, DEBUG_ID } from 'common/constants/ids'
 import StoresRegistry from 'common/util/StoresRegistry'
 import { routerStateReducer } from 'redux-react-router'
-import { getReducers } from './util'
+import { getReducers } from 'client/util/getReducers'
 
 document.addEventListener('DOMContentLoaded', function () {
   if (typeof history.setup === 'function') {
