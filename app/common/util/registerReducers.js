@@ -13,8 +13,7 @@ export default function registerReducers (reducers) {
       static WrappedComponent = WrappedComponent;
 
       componentWillMount () {
-        const { storesRegistry } = this.props.route.userContext
-        storesRegistry.addReducers(reducers)
+        this.props.session.storesRegistry.addReducers(reducers)
       }
 
       render () {

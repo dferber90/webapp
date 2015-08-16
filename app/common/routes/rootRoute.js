@@ -1,24 +1,53 @@
 import { reduxRouteComponent } from 'redux-react-router'
+import propfulComponentFactory from 'common/util/propfulComponentFactory'
 
 /**
  * Gets the root route.
  *
- * Passes additional information for this client down to routes.
+ * Passes additional information for this client down to routes using
+ * SessionComponent.
+ *
  * @param  {Redux Store} store
- * @param  {Object} userContext
+ * @param  {Object} session
  * @return {Object} React-Router route definition
  */
-export default function getRootRoute (store, userContext = {}) {
+export default function getRootRoute (store, session = {}) {
+
+  const SessionComponent = propfulComponentFactory({ session })
+
   return {
     component: reduxRouteComponent(store),
-    childRoutes: [
-      require('./landing/index')(userContext),
-      require('./dashboard/index')(userContext)
 
-      // require('./routes/Course'),
-      // require('./routes/Grades'),
-      // require('./routes/Messages'),
-      // require('./routes/Profile')
+    childRoutes: [
+      {
+        path: '/',
+        getComponents (cb) {
+          require.ensure([], (require) => {
+            const Landing = require('common/components/landing/Landing')
+            cb(null, SessionComponent(Landing))
+          }, 'landing.components')
+        }
+      },
+      {
+        path: 'dashboard',
+        getComponents (cb) {
+          require.ensure([], (require) => {
+            const Dashboard = require('common/components/dashboard/Dashboard')
+            cb(null, SessionComponent(Dashboard))
+          }, 'dashboard.components')
+        }
+      },
+      {
+        getChildRoutes (state, cb) {
+          require.ensure([], (require) => {
+            cb(null, [
+              require('common/routes/dashboardSub.js')(SessionComponent),
+              // ... possibly more gradually matched (dynamically loaded)
+              // child routes
+            ])
+          }, 'dashboard-sub.routes')
+        }
+      }
     ]
   }
 }

@@ -3,8 +3,8 @@ import ReactDOMServer from 'react-dom/server'
 import getRootRoute from 'common/routes/rootRoute'
 import Router from 'react-router'
 import Location from 'react-router/lib/Location'
-import App from 'common/container/App'
-import { getChunkFile, shrinkPage, generateHTML } from './util'
+import App from 'common/components/App'
+import * as util from 'server/util/generatePageHelpers'
 import StoresRegistry from 'common/util/StoresRegistry'
 import { routerStateReducer } from 'redux-react-router'
 
@@ -19,10 +19,10 @@ export default function (path, query) {
       router: routerStateReducer
     })
     const store = storesRegistry.store
-    const userContext = {
+    const session = {
       storesRegistry: storesRegistry
     }
-    const rootRoute = getRootRoute(store, userContext)
+    const rootRoute = getRootRoute(store, session)
 
     Router.run(rootRoute, location, (error, initialState/*, transition*/) => {
       if (error) {
@@ -47,13 +47,16 @@ export default function (path, query) {
         return reject(e)
       }
 
-      const html = generateHTML({
-        initialData: store.getState(),
+      const html = util.generateHTML({
+        initialData: {
+          reducers: Object.keys(storesRegistry.reducers),
+          store: store.getState()
+        },
         html: appHtml,
-        entryPoint: getChunkFile(initialState.location.pathname)
+        entryChunksPaths: util.getChunkFilePaths(initialState.location.pathname)
       })
 
-      return resolve(__DEV__ ? html : shrinkPage(html))
+      return resolve(__DEV__ ? html : util.shrinkPage(html))
     })
   })
 }

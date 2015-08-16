@@ -15,11 +15,12 @@ import Router from 'react-router'
 import { history } from 'react-router/lib/BrowserHistory'
 import getRootRoute from 'common/routes/rootRoute'
 import AsyncProps from 'react-router/lib/experimental/AsyncProps'
-import App from 'common/container/App'
+import App from 'common/components/App'
 import { INITIAL_DATA } from 'common/constants/initial'
 import { APP_ID, DEBUG_ID } from 'common/constants/ids'
 import StoresRegistry from 'common/util/StoresRegistry'
 import { routerStateReducer } from 'redux-react-router'
+import { getReducers } from 'client/util/getReducers'
 
 document.addEventListener('DOMContentLoaded', function () {
   if (typeof history.setup === 'function') {
@@ -31,8 +32,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // initialize redux store with state from server
   const storesRegistry = new StoresRegistry(
-    { router: routerStateReducer },
-    initialData
+    {
+      router: routerStateReducer,
+      ...getReducers(initialData.reducers)
+    },
+    initialData.store
   )
   const store = storesRegistry.store
   const rootRoute = getRootRoute(store, {

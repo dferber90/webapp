@@ -11,30 +11,24 @@ import TodoItem from './TodoItem'
 export default class Landing extends Component {
 
   static propTypes = {
-    route: PropTypes.object.isRequired,
     todos: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired
   }
 
   render () {
-    const self = this
     const { todos, dispatch } = this.props
     return (
       <div>
         <h2>Landing</h2>
         <ul>
-          {todos.todoList.map(
-            function (todo) {
-              return (
-                <TodoItem
-                  key={todo.id}
-                  text={todo.text}
-                  onClickHandler={
-                    self.removeTodo.bind(self, todo.id, dispatch)
-                  }
-                />
-              )
-            }
+          {todos.todoList.map((todo) =>
+            <TodoItem
+              key={todo.id}
+              text={todo.text}
+              onClickHandler={
+                this.removeTodo.bind(this, todo.id, dispatch)
+              }
+            />
           )}
         </ul>
         <button onClick={this.addTodo.bind(this, dispatch)}>
