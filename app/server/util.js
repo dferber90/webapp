@@ -27,11 +27,11 @@ export function getChunkFromPath (pathname) {
   return false
 }
 
-export function getChunkFile (pathname) {
+export function getChunkFilePath (pathname) {
   const initialChunk = getChunkFromPath(pathname)
-  if (!initialChunk) return ''
+  if (!initialChunk) return false
 
-  return `<script src="/assets/${initialChunk}.chunk.js"></script>`
+  return `/assets/${initialChunk}.chunk.js`
 }
 
 export function shrinkPage (html) {
@@ -44,7 +44,7 @@ export function shrinkPage (html) {
   })
 }
 
-export function generateHTML ({ initialData, html, entryPoint }) {
+export function generateHTML ({ initialData, html, entryChunkPath }) {
   const debugPanel = __DEV__ && __DEVTOOLS__ ?
     `<div id="${DEBUG_ID}"></div>` : ''
 
@@ -58,20 +58,23 @@ export function generateHTML ({ initialData, html, entryPoint }) {
   </script>
   ` : ''
 
+  const entryPoint = entryChunkPath ?
+    `<script defer src="${entryChunkPath}"></script>` : ''
+
   return `
     <html>
       <head>
         <meta charset="utf-8">
         <title>testing</title>
         ${assertPort}
-        <script>${INITIAL_DATA} = ${JSON.stringify(initialData)};</script>
-        <script src="/assets/commonsChunk.js"></script>
-        <script src="/assets/app.entry.js"></script>
+        <script defer src="/assets/commonsChunk.js"></script>
+        <script defer src="/assets/app.entry.js"></script>
         ${entryPoint}
       </head>
       <body>
         <div id="${APP_ID}">${html}</div>
         ${debugPanel}
+        <script>${INITIAL_DATA} = ${JSON.stringify(initialData)};</script>
       </body>
     </html>
   `
