@@ -37,6 +37,8 @@ export default class Dashboard extends Component {
         <img src={mewtwoPokemon} alt="pokemon"/>
         <hr/>
         <Link to="/">home</Link>
+        {' | '}
+        <Link to="/dashboard/sub">Sub-Route of Dashboard</Link>
       </div>
     )
   }

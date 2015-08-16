@@ -17,6 +17,7 @@ export default function getRootRoute (store, session = {}) {
 
   return {
     component: reduxRouteComponent(store),
+
     childRoutes: [
       {
         path: '/',
@@ -24,7 +25,7 @@ export default function getRootRoute (store, session = {}) {
           require.ensure([], (require) => {
             const Landing = require('common/components/landing/Landing')
             cb(null, SessionComponent(Landing))
-          }, 'landing-async')
+          }, 'landing.components')
         }
       },
       {
@@ -33,7 +34,18 @@ export default function getRootRoute (store, session = {}) {
           require.ensure([], (require) => {
             const Dashboard = require('common/components/dashboard/Dashboard')
             cb(null, SessionComponent(Dashboard))
-          }, 'dashboard-async')
+          }, 'dashboard.components')
+        }
+      },
+      {
+        getChildRoutes (state, cb) {
+          require.ensure([], (require) => {
+            cb(null, [
+              require('common/routes/dashboardSub.js')(SessionComponent),
+              // ... possibly more gradually matched (dynamically loaded)
+              // child routes
+            ])
+          }, 'dashboard-sub.routes')
         }
       }
     ]
