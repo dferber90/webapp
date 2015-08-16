@@ -215,3 +215,8 @@ Each test file has to be registered either in `tests/client-env/run.js` or `test
 
 To get the pure TAP output, use `$ npm -s test`.
 This will activate npm's silent mode, where additional information from npm is not printed to the console.
+
+## GraphQL
+To understand GraphQL, I highly recommend going through these two tutorials in order:
+- [Your First GraphQL Server](https://medium.com/@clayallsopp/your-first-graphql-server-3c766ab4f0a2)
+- [GraphQL Overview - Getting Started with GraphQL and Node.js](https://blog.risingstack.com/graphql-overview-getting-started-with-graphql-and-nodejs/)
