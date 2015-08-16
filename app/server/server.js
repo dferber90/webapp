@@ -30,12 +30,12 @@ app.get('*', (req, res) => {
  * An example mutation is: mutation RootMutationType { updateCount }
  */
 app.post('/graphql', (req, res) => {
-  console.log(`executing graphql request: "${req.body}"`)
+  console.log(`executing graphql operation: "${req.body}"`)
 
   // TODO we could use the same thing with WebSockets, too
   graphql(schema, req.body).then((result) => {
     const stringifiedResult = JSON.stringify(result, null, __DEV__ ? 2 : 0)
-    console.log('graphql request result:', stringifiedResult)
+    console.log('graphql operation result:', stringifiedResult)
     res.send(stringifiedResult)
   })
 })
