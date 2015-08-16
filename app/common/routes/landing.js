@@ -4,7 +4,7 @@ module.exports = function (userContext) {
 
     getComponents (cb) {
       require.ensure([], (require) => {
-        cb(null, require('./components/Landing'))
+        cb(null, require('common/components/landing/Landing'))
       }, 'landing-async')
     },
     userContext: userContext

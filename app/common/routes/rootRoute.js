@@ -12,8 +12,8 @@ export default function getRootRoute (store, userContext = {}) {
   return {
     component: reduxRouteComponent(store),
     childRoutes: [
-      require('./landing/index')(userContext),
-      require('./dashboard/index')(userContext)
+      require('./landing')(userContext),
+      require('./dashboard')(userContext)
 
       // require('./routes/Course'),
       // require('./routes/Grades'),

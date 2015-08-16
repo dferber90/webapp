@@ -4,7 +4,7 @@ module.exports = function (userContext) {
 
     getComponents (cb) {
       require.ensure([], (require) => {
-        cb(null, require('./components/Dashboard'))
+        cb(null, require('common/components/dashboard/Dashboard'))
       }, 'dashboard-async')
     },
     userContext: userContext
