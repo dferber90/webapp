@@ -19,10 +19,10 @@ export default function (path, query) {
       router: routerStateReducer
     })
     const store = storesRegistry.store
-    const userContext = {
+    const session = {
       storesRegistry: storesRegistry
     }
-    const rootRoute = getRootRoute(store, userContext)
+    const rootRoute = getRootRoute(store, session)
 
     Router.run(rootRoute, location, (error, initialState/*, transition*/) => {
       if (error) {
