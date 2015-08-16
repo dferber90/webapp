@@ -31,8 +31,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // initialize redux store with state from server
   const storesRegistry = new StoresRegistry(
-    { router: routerStateReducer },
-    initialData
+    {
+      router: routerStateReducer,
+      ...getReducers(initialData.reducers)
+    },
+    initialData.store
   )
   const store = storesRegistry.store
   const rootRoute = getRootRoute(store, {
@@ -73,3 +76,19 @@ document.addEventListener('DOMContentLoaded', function () {
     window.playground = { history, store, React, ReactDOM, Router }
   }
 })
+
+/*
+ * Transforms ['todos', 'counter']
+ * into { todos: require(todosReducer), counter: require(counterReducer) }
+ */
+function getReducers (reducerKeys) {
+  const reducers = {}
+
+  reducerKeys
+    .filter(reducerKey => reducerKey !== 'router')
+    .map(reducerKey => {
+      reducers[reducerKey] = require('common/reducers/' + reducerKey)
+    })
+
+  return reducers
+}

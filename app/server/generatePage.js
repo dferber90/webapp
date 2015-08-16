@@ -48,7 +48,10 @@ export default function (path, query) {
       }
 
       const html = generateHTML({
-        initialData: store.getState(),
+        initialData: {
+          reducers: Object.keys(storesRegistry.reducers),
+          store: store.getState()
+        },
         html: appHtml,
         entryPoint: getChunkFile(initialState.location.pathname)
       })
