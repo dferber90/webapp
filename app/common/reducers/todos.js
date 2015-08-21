@@ -1,4 +1,5 @@
 import { ADD_TODO, REMOVE_TODO } from 'common/actionTypes/todos'
+import { REHYDRATE } from 'common/actionTypes/app'
 
 const initialTodos = [
   { id: 0, text: 'TODO #0' },
@@ -22,6 +23,11 @@ export default function todoReducer (state = initialState, action) {
         ...state,
         todoList: state.todoList.filter(todo => todo.id !== action.payload.id)
       }
+
+    // TODO there could be a higher-order reducer doing this,
+    // because right now the reducer has to know its key in the payload
+    case REHYDRATE:
+      return action.payload.todos || state
     default:
       return state
   }

@@ -5,11 +5,11 @@
 import { combineReducers } from 'redux'
 import finalCreateStore from 'common/util/finalCreateStore'
 
-export default class StoresRegistry {
+export default class ReducerRegistry {
 
-  constructor (initialReducers = {}, initialState = {}) {
+  constructor (initialReducers = {}) {
     this.reducers = initialReducers
-    this.store = finalCreateStore(combineReducers(this.reducers), initialState)
+    this.store = finalCreateStore(combineReducers(this.reducers))
   }
 
   addReducers (newReducers, { refresh } = { refresh: true }) {

@@ -18,9 +18,9 @@ import AsyncProps from 'react-router/lib/experimental/AsyncProps'
 import App from 'common/components/App'
 import { INITIAL_DATA } from 'common/constants/initial'
 import { APP_ID, DEBUG_ID } from 'common/constants/ids'
-import StoresRegistry from 'common/util/StoresRegistry'
+import ReducerRegistry from 'common/util/ReducerRegistry'
 import { routerStateReducer } from 'redux-react-router'
-import { getReducers } from 'client/util/getReducers'
+import { REHYDRATE } from 'common/actionTypes/app'
 
 document.addEventListener('DOMContentLoaded', function () {
   if (typeof history.setup === 'function') {
@@ -31,17 +31,11 @@ document.addEventListener('DOMContentLoaded', function () {
   const initialData = window[INITIAL_DATA]
 
   // initialize redux store with state from server
-  const storesRegistry = new StoresRegistry(
-    {
-      router: routerStateReducer,
-      ...getReducers(initialData.reducers)
-    },
-    initialData.store
-  )
-  const store = storesRegistry.store
-  const rootRoute = getRootRoute(store, {
-    storesRegistry: storesRegistry
+  const reducerRegistry = new ReducerRegistry({
+    router: routerStateReducer
   })
+  const store = reducerRegistry.store
+  const rootRoute = getRootRoute(store, { reducerRegistry })
 
   const clientOptions = {
     history,
@@ -50,6 +44,14 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   Router.run(rootRoute, history.location, (error) => {
     if (error) return console.error(error)
+
+    // TODO make this part of ReducerRegistry ?
+    // TODO use actionCreator ?
+    // rehydrate store after all required recuders have loaded
+    store.dispatch({
+      type: REHYDRATE,
+      payload: initialData
+    })
 
     ReactDOM.render(
       <App client={clientOptions}/>,

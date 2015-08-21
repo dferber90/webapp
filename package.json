@@ -10,6 +10,7 @@
     "html-minifier": "^0.7.2",
     "less": "^2.5.1",
     "less-loader": "^2.2.0",
+    "lodash": "^3.10.1",
     "node-libs-browser": "^0.5.2",
     "react": "^0.14.0-beta1",
     "react-dom": "^0.14.0-beta1",
@@ -37,17 +38,13 @@
   },
   "scripts": {
     "start": "npm run clean && node webpack/dev.js",
-
     "clean": "rimraf build/*",
     "clean:tests": "rimraf build/tests/*",
-
     "pretest": "npm run clean:tests && node webpack/test.js",
     "test": "node ./webpack/run-bundled-tests.js",
     "posttest": "npm run clean:tests",
     "test:dev": "TEST_WATCHER=true node webpack/test.js",
-
     "build": "npm run clean && PRODUCTION=true webpack -p --config webpack/webpack.config.js",
-
     "lint": "eslint ."
   },
   "author": "Dominik Ferber",
