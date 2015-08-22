@@ -17,7 +17,7 @@
     "react-redux": "^0.9.0",
     "react-router": "^1.0.0-beta3",
     "redux": "^1.0.1",
-    "redux-logger": "^1.0.3",
+    "redux-logger": "^1.0.4",
     "redux-react-router": "^0.4.0",
     "style-loader": "^0.12.3",
     "url-loader": "^0.5.6",
