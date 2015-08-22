@@ -21,7 +21,7 @@ var clientBaseEntryPath = path.join(rootPath, 'app', 'client', 'client.js')
 var serverEntryPath = path.join(rootPath, 'app', 'server', 'server.js')
 
 var isInProduction = !!process.env.PRODUCTION
-var includeDevTools = true
+var includeDevTools = false
 
 var babelStage0 = 'babel?stage=0'
 var jsxLoader = {
