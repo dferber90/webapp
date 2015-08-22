@@ -53,8 +53,7 @@ var clientCompiler = webpack({
     new webpack.DefinePlugin({
       __DEV__: false,
       __CLIENT__: true,
-      __SERVER__: false,
-      __DEVTOOLS__: false
+      __SERVER__: false
     })
   ],
   resolve: commonConfiguration.resolve
@@ -99,8 +98,7 @@ var serverCompiler = webpack({
     new webpack.DefinePlugin({
       __DEV__: false,
       __CLIENT__: false,
-      __SERVER__: true,
-      __DEVTOOLS__: false
+      __SERVER__: true
     })
   ],
   resolve: commonConfiguration.resolve
@@ -181,4 +179,3 @@ function handleSoftErrors (errors) {
 function handleWarnings (warnings) {
   console.warn(warnings)
 }
-

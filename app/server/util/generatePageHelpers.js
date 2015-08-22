@@ -1,6 +1,6 @@
 import { minify } from 'html-minifier'
 import { INITIAL_DATA } from 'common/constants/initial'
-import { APP_ID, DEBUG_ID } from 'common/constants/ids'
+import { APP_ID } from 'common/constants/ids'
 
 /**
  * Gets the appropriate chunks based on the request path.
@@ -53,8 +53,6 @@ export function shrinkPage (html) {
 }
 
 export function generateHTML ({ initialData, html, entryChunksPaths }) {
-  const debugPanel = __DEV__ && __DEVTOOLS__ ?
-    `<div id="${DEBUG_ID}"></div>` : ''
 
   // ensure localhost:8080 is opened
   const assertPort = __DEV__ ? `
@@ -80,7 +78,6 @@ export function generateHTML ({ initialData, html, entryChunksPaths }) {
       </head>
       <body>
         <div id="${APP_ID}">${html}</div>
-        ${debugPanel}
         <script>${INITIAL_DATA} = ${JSON.stringify(initialData)};</script>
       </body>
     </html>

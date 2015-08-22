@@ -71,7 +71,6 @@
   "globals": {
     "__DEV__": false,
     "__CLIENT__": false,
-    "__SERVER__": false,
-    "__DEVTOOLS__": false
+    "__SERVER__": false
   }
 }

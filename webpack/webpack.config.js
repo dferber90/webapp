@@ -21,7 +21,6 @@ var clientBaseEntryPath = path.join(rootPath, 'app', 'client', 'client.js')
 var serverEntryPath = path.join(rootPath, 'app', 'server', 'server.js')
 
 var isInProduction = !!process.env.PRODUCTION
-var includeDevTools = false
 
 var babelStage0 = 'babel?stage=0'
 var jsxLoader = {
@@ -97,8 +96,7 @@ module.exports = [
       new webpack.DefinePlugin({
         __DEV__: !isInProduction,
         __CLIENT__: true,
-        __SERVER__: false,
-        __DEVTOOLS__: includeDevTools
+        __SERVER__: false
       }),
       new webpack.NoErrorsPlugin(),
       new webpack.optimize.CommonsChunkPlugin({
@@ -137,8 +135,7 @@ module.exports = [
       new webpack.DefinePlugin({
         __DEV__: !isInProduction,
         __CLIENT__: false,
-        __SERVER__: true,
-        __DEVTOOLS__: includeDevTools
+        __SERVER__: true
       }),
       new webpack.IgnorePlugin(/\.(css|less)$/),
       new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }),

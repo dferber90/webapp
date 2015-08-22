@@ -17,7 +17,7 @@ import getRootRoute from 'common/routes/rootRoute'
 import AsyncProps from 'react-router/lib/experimental/AsyncProps'
 import App from 'common/components/App'
 import { INITIAL_DATA } from 'common/constants/initial'
-import { APP_ID, DEBUG_ID } from 'common/constants/ids'
+import { APP_ID } from 'common/constants/ids'
 import ReducerRegistry from 'common/util/ReducerRegistry'
 import { routerStateReducer } from 'redux-react-router'
 import { REHYDRATE } from 'common/actionTypes/app'
@@ -57,21 +57,6 @@ document.addEventListener('DOMContentLoaded', function () {
       <App client={clientOptions}/>,
       document.getElementById(APP_ID)
     )
-
-    // render devtools in development
-    if (__DEV__ && __DEVTOOLS__) {
-      const {
-        DevTools,
-        DebugPanel,
-        LogMonitor
-      } = require('redux-devtools/lib/react')
-      ReactDOM.render(
-        <DebugPanel top right bottom>
-          <DevTools store={store} monitor={LogMonitor}/>
-        </DebugPanel>,
-        document.getElementById(DEBUG_ID)
-      )
-    }
   })
 
   // expose variables to browser

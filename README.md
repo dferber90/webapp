@@ -125,7 +125,7 @@ You can read more about aliases in webpack [in this issue](https://github.com/we
 
 
 ### Constants
-Webpack defines `__DEV__`, `__DEVTOOLS__`, `__CLIENT__` and `__SERVER__`.
+Webpack defines `__DEV__`, `__CLIENT__` and `__SERVER__`.
 If the environment variable `PRODUCTION` is not defined, then `__DEV__` is `true`.
 The values of these constants are set in `webpack/webpack.config.js`.
 For production releases, Webpack replaces the constants with their actual values and then uses dead-code-elimination to remove dead code blocks.
