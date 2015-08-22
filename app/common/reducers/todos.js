@@ -7,6 +7,17 @@ const initialTodos = [
 const initialState = { todoList: initialTodos, idCounter: 1 }
 
 export default function todoReducer (state = initialState, action) {
+
+  // Example of how to have parts of the reducer specific to client or server:
+  //
+  // if (__SERVER__) {
+  //   const { ADD_TODO_SERVER } = require('common/actionTypes/todos')
+  //   switch (action.type) {
+  //     case ADD_TODO_SERVER:
+  //       return state
+  //   }
+  // }
+
   switch (action.type) {
     case ADD_TODO:
       return {
