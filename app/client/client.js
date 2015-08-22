@@ -20,7 +20,6 @@ import { INITIAL_DATA } from 'common/constants/initial'
 import { APP_ID } from 'common/constants/ids'
 import ReducerRegistry from 'common/util/ReducerRegistry'
 import { routerStateReducer } from 'redux-react-router'
-import { REHYDRATE } from 'common/actionTypes/app'
 
 document.addEventListener('DOMContentLoaded', function () {
   if (typeof history.setup === 'function') {
@@ -31,10 +30,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const initialData = window[INITIAL_DATA]
 
   // initialize redux store with state from server
-  const reducerRegistry = new ReducerRegistry({
-    router: routerStateReducer
-  })
-  const store = reducerRegistry.store
+  const reducerRegistry = new ReducerRegistry({ router: routerStateReducer })
+  const { store } = reducerRegistry
   const rootRoute = getRootRoute(store, { reducerRegistry })
 
   const clientOptions = {
@@ -45,14 +42,19 @@ document.addEventListener('DOMContentLoaded', function () {
   Router.run(rootRoute, history.location, (error) => {
     if (error) return console.error(error)
 
-    // TODO make this part of ReducerRegistry ?
-    // TODO use actionCreator ?
-    // rehydrate store after all required recuders have loaded
-    store.dispatch({
-      type: REHYDRATE,
-      payload: initialData
-    })
+    // have to render once for reducers to be picked up and registered,
+    // so the app is rendered to an element not attached to the DOM
+    ReactDOM.render(
+      <App client={clientOptions}/>,
+      document.createElement('div')
+    )
 
+    // rehydrate state sent from server
+    reducerRegistry.rehydrate(initialData)
+
+    // now that all reducers are registered, the app can render for real
+    // and will have the same DOM as on the server
+    // TODO there has to be a better way!
     ReactDOM.render(
       <App client={clientOptions}/>,
       document.getElementById(APP_ID)

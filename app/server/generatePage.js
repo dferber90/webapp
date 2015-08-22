@@ -13,15 +13,13 @@ export default function (path, query) {
   return new Promise((resolve, reject) => {
     const location = new Location(path, query)
 
-
     // get data: can be seen here in 'fetchSomeData'
     // http://rackt.github.io/react-router/tags/v1.0.0-beta3.html
-    const reducerRegistry = new ReducerRegistry({
-      router: routerStateReducer
-    })
+    const reducerRegistry = new ReducerRegistry({ router: routerStateReducer })
     const store = reducerRegistry.store
     const session = { reducerRegistry }
     const rootRoute = getRootRoute(store, session)
+
 
     Router.run(rootRoute, location, (error, initialRouterState) => {
       if (error) {
@@ -34,14 +32,27 @@ export default function (path, query) {
         )
       }
 
+      // can get data needs from initial components using GraphQL
+      // console.log(initialRouterState.components)
+      let appHtml
+      try {
+        appHtml = ReactDOMServer.renderToString(
+          <App server={initialRouterState}/>
+        )
+      } catch (e) {
+        console.error(e)
+        return reject(e)
+      }
+
+      // TODO remove this again
+      // Fake app dispatching something while rendering
+      // We can only dispatch after the app has registered the initial reducers
       store.dispatch({
         type: 'ADD_TODO',
         payload: { text: 'dynamic todo' }
       })
 
-      // can get data needs from initial components using GraphQL
-      // console.log(initialRouterState.components)
-      let appHtml
+      //
       try {
         appHtml = ReactDOMServer.renderToString(
           <App server={initialRouterState}/>
