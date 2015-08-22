@@ -29,6 +29,7 @@
     "babel-loader": "^5.3.1",
     "eslint": "^1.2.1",
     "eslint-plugin-react": "^3.2.3",
+    "node-inspector": "^0.12.2",
     "piping": "^0.2.0",
     "react-hot-loader": "^1.2.8",
     "rimraf": "^2.4.2",
@@ -38,6 +39,8 @@
   },
   "scripts": {
     "start": "npm run clean && node webpack/dev.js",
+    "debug:server": "npm run clean && node webpack/dev.js --nopiping",
+    "debug:inspector": "node-debug --web-port 3333 build/backend.js",
     "clean": "rimraf build/*",
     "clean:tests": "rimraf build/tests/*",
     "pretest": "npm run clean:tests && node webpack/test.js",

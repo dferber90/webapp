@@ -75,6 +75,10 @@ npm start # starts server and client. visit localhost:8080
 
 `npm run lint` lints app code.
 
+`npm run debug:server` Starts server for debugging
+
+`npm run debug:inspector` Opens node-inspector in Browser
+
 
 ## Docs
 The docs are not very elaborate. Please open an issue if you have got a question,
@@ -151,19 +155,19 @@ This is an opt-in performance improvement.
 
 **Important:** Webpack defines *Entry Points* and *Chunks*.
 
-    There is only one Entry Point right now. It is `app.entry.js`. Entry Points are not used for code splitting in this setup.
+> There is only one Entry Point right now. It is `app.entry.js`. Entry Points are not used for code splitting in this setup.
     You do not have to add new ones.
-
-    The splitting of the app into different parts for different routes happens through chunks.
-    These chunks are generated as described above (using the route definitions).
-    Chunks are also used to split out common functionality, so not every chunks serves routes (eg `commonsChunk.js`).
+>
+> The splitting of the app into different parts for different routes happens through chunks.
+> These chunks are generated as described above (using the route definitions).
+> Chunks are also used to split out common functionality, so not every chunks serves routes (eg `commonsChunk.js`).
 
 **Important:** Only one default export, no other exports in routes.
 
-    You specify which component should load for a specific route in `app/common/routes/index.js` using `cb(null, require('./components/<Component>'))`.
-    Here `<Component>` is loaded with require, but the file `<Component>.js` defines its exports with ES6 module syntax.
-    Therefore, the file `<Component>.js` must have one default export only and no other named exports.
-    Otherwise your app will break with `Error: Invariant Violation: ReduxRoute.render(): A valid ReactComponent must be returned. You may have returned undefined, an array or some other invalid object.`.
+> You specify which component should load for a specific route in `app/common/routes/index.js` using `cb(null, require('./components/<Component>'))`.
+> Here `<Component>` is loaded with require, but the file `<Component>.js` defines its exports with ES6 module syntax.
+> Therefore, the file `<Component>.js` must have one default export only and no other named exports.
+> Otherwise your app will break with `Error: Invariant Violation: ReduxRoute.render(): A valid ReactComponent must be returned. You may have returned undefined, an array or some other invalid object.`.
 
 ### Redux Router
 A React Router component specifically for Redux is registered in `app/common/routes/rootRouter`.
@@ -221,3 +225,12 @@ Each test file has to be registered either in `tests/client-env/run.js` or `test
 
 To get the pure TAP output, use `$ npm -s test`.
 This will activate npm's silent mode, where additional information from npm is not printed to the console.
+
+## Debugging
+
+First, run `npm run debug:server`. This will start the server.
+Next, run `npm run debug:inspector`. This will open the node inspector on `http://127.0.0.1:3333/?ws=127.0.0.1:3333&port=5858`.
+
+> Changes to the code will not be reflected while debugging, because piping is disabled during debugging.
+>
+> *Maybe this restriction can be resolved later on.*

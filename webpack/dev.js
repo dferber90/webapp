@@ -9,6 +9,7 @@ var webpack = require('webpack')
 var completeConfig = require('./webpack.config.js')
 var fs = require('fs')
 var path = require('path')
+var argv = require('minimist')(process.argv.slice(2))
 
 var webpackClientConfig = completeConfig[0]
 var webpackServerConfig = completeConfig[1]
@@ -145,7 +146,7 @@ serverCompiler.watch({
   }
   successfullyCompiled(jsonStats, 'server')
 
-  if (!startedPiping) {
+  if (!argv.nopiping && !startedPiping) {
     startedPiping = true
     if (require('piping')(pipingOptions)) {
       require('../build/backend.js')
