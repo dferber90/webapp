@@ -4,20 +4,20 @@ The goal of this project is to provide a base for building modern, huge web apps
 [![Join the chat at https://gitter.im/dferber90/webapp-starter-pack](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/dferber90/webapp-starter-pack?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## Disclaimer
-Please note that this starter-pack was the result of my two-month dive into React, Redux and Webpack.
-It is my attempt to combine all of these technologies, but I am not quite there yet.
-This starer-pack attempt is not suitable to be the base of any serious application - at least not yet.
-I published my attempt now so other people building redux examples can borrow ideas.
+Please note that this starter-pack is the result of my two-months-and-counting deep dive into React, Redux and Webpack.
+It is my attempt to combine all of these technologies, but I am not quite there yet. I published my attempt now so other people building redux examples can borrow ideas.
 
-I am also not going to continue work on this starter-pack in the near time, as I have discovered the current disadvantages of this approach to building web apps.
-But I hope to come back to Redux, Webpack and maybe GraphQL when patterns have settled and stuff has actually hit 1.0 :-)
+**This starer-pack attempt is not suitable to be the base of any serious application - at least not yet.**
+
+The `master` branch is changing often and I am committing code that has parts missing or errors from time to time. I will switch to a different strategy once the project is more advanced.
 
 If you are looking for a more mature alternative, you can check out
+- [react-redux-universal-hot-example](https://github.com/erikras/react-redux-universal-hot-example)
 - [react-redux-starter-kit](https://github.com/davezuko/react-redux-starter-kit)
 - [react-isomorphic-starter-kit](https://github.com/RickWong/react-isomorphic-starterkit)
 
 ## Features
-**With this setup your app..**
+**With this setup your app (hopefully)..**
 - can [build for production](https://github.com/dferber90/webapp-starter-pack/issues/4#issuecomment-128451373)
 - can run tests once for CI (with TAP report)
 - can be developed using hot reloading
@@ -25,7 +25,7 @@ If you are looking for a more mature alternative, you can check out
 - is universal
 - has code splitting
 - has server-side rendering
-- has gradual loading (with appropriately splitted stylesheets)
+- has gradual loading (with appropriately split stylesheets)
 - uses webpack for the server bundle
 - uses webpack for the client bundle and chunks
 - enables multiple entry points
