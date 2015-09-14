@@ -3,6 +3,12 @@ The goal of this project is to provide a base for building modern, huge web apps
 
 [![Join the chat at https://gitter.im/dferber90/webapp-starter-pack](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/dferber90/webapp-starter-pack?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+## Update
+The dependencies of this project are changing quite heavily right now, so keeping up with the ever-changing API's is hard.
+I'm waiting for the releases of React Router 1.0, React 0.14, Redux and Redux-React-Router before continuing development.
+
+This project will be adapted then. Lot's of stuff will change in this setup.
+
 ## Disclaimer
 Please note that this starter-pack is the result of my two-months-and-counting deep dive into React, Redux and Webpack.
 It is my attempt to combine all of these technologies, but I am not quite there yet. I published my attempt now so other people building redux examples can borrow ideas.
