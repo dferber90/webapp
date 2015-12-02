@@ -1,0 +1,7 @@
+extends: airbnb/legacy
+
+rules:
+  semi: [2, 'never']
+  no-console: [0]
+  vars-on-top: [0]
+  func-names: [0]

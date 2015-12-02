@@ -1,0 +1,14 @@
+extends: airbnb
+
+plugins:
+  - react
+
+rules:
+  semi: [2, 'never']
+
+globals:
+  STATS: false
+  DEVELOPMENT: false
+  API_SECRET: false
+  CLIENT: false
+  SERVER: false

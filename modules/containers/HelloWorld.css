@@ -1,0 +1,18 @@
+@font-face {
+    font-family: "calligraffiti";
+    src: url("../fonts/Calligraffiti-webfont.woff") format('woff');
+}
+
+/*
+Composes doesn't work right now because myLoader can't resolve the
+name of the composed file correctly.
+
+.heading {
+  composes: italic-style from '../styles/fonts.css';
+  color: blue;
+}*/
+
+.heading {
+  /*font-family: calligraffiti;*/
+  color: blue;
+}
