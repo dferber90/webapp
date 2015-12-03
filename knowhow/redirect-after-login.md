@@ -29,3 +29,12 @@ To prevent later login attempts from redirecting, the cookie is cleared whenever
 
 
 This technique enables minimal interruption of the user no matter where he logs in from.
+
+
+## relevant parts
+- Server setting and clearing cookies: https://github.com/dferber90/webapp/blob/428cadaacbb8b78ca50ca669bab6f3aef22409b2/modules/server.js#L103-L119
+- Reducer storing redirectLocation: https://github.com/dferber90/webapp/blob/428cadaacbb8b78ca50ca669bab6f3aef22409b2/modules/reducers/auth.js#L63-L67
+- Action Creator setting the *redirectLocation*: https://github.com/dferber90/webapp/blob/428cadaacbb8b78ca50ca669bab6f3aef22409b2/modules/action-creators/auth.js#L21
+- *requireAuthentication* function for onEnter: https://github.com/dferber90/webapp/blob/428cadaacbb8b78ca50ca669bab6f3aef22409b2/modules/routes/utils/requireAuthentication.js
+- Invocation of *requireAuthentication* on a Route: https://github.com/dferber90/webapp/blob/428cadaacbb8b78ca50ca669bab6f3aef22409b2/modules/routes/DashboardRoute.js#L5
+- Redirect after successful login: https://github.com/dferber90/webapp/blob/428cadaacbb8b78ca50ca669bab6f3aef22409b2/modules/action-creators/auth.js#L32-L36
