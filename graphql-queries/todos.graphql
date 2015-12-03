@@ -1,4 +1,0 @@
-mutation newTodo { addTodo(text: "use graphql") { text } }
-
-query allTodos { todos { text, _id, checked } }
-query oneTodo { todo(_id: "5658c0ecfd527be8189bf289") { text, _id, checked } }
