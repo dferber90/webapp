@@ -2,11 +2,9 @@
 
 List of known bugs
 
-## npm start keeps process open
-
-`npm start` runs `concurrent`. When quitting with `CTRL+C` one of the commands
-from `concurrent` does not actually stop. Not sure why and not sure what to do
-about it.
+## seamless authentication ignores queries
+Right now the seamless authentication ignores queries and uses the path only.
+This should be a simple thing to add.
 
 
 ## server complains about hot module replacement (react)
