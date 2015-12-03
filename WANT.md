@@ -1,5 +1,8 @@
 # want
 
+## testing with reagent
+https://github.com/airbnb/reagent
+
 ## rethinkDB
 
 Has live updates out of the box. Maybe that is awesome?
