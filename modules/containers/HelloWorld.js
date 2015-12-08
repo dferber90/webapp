@@ -15,4 +15,8 @@ const HelloWorld = React.createClass({
   },
 })
 
+if (SERVER) {
+  HelloWorld.styles = [cssStyles.raw]
+}
+
 module.exports = HelloWorld

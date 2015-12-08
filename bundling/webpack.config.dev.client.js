@@ -44,7 +44,7 @@ module.exports = {
         include: [ path.resolve(__dirname, '..', 'modules') ],
         loaders: ['react-hot', 'babel?cacheDirectory=true'],
       },
-      { test: /\.less$/, loader: 'style!css?modules!less' },
+      { test: /\.less$/, loader: 'style!css?modules&localIdentName=[name]__[local]!less' },
       { test: /\.css$/, loader: 'style!css?modules&localIdentName=[name]__[local]' },
       { test: /\.(woff)$/, loader: 'url?limit=100000' },
       { test: /\.(png|jpg|jpeg|svg)$/, loader: 'url?limit=25000' },

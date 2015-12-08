@@ -2,6 +2,8 @@ const React = require('react')
 const { connect } = require('react-redux')
 const reduceWithDefault = require('../utils/reduceWithDefault')
 const counterReducer = require('../reducers/counter')
+const AboutHeading = require('../components/AboutHeading')
+const IncrementButton = require('../components/IncrementButton')
 
 const About = React.createClass({
   propTypes: {
@@ -21,10 +23,12 @@ const About = React.createClass({
   render() {
     return (
       <div>
-        <h1>About</h1>
+        <AboutHeading/>
         <p>This is going to be awesome.</p>
         <p>Counter is at {this.props.counter}.</p>
-        <button onClick={this.increment}>Increment</button>
+        <IncrementButton handleClick={this.increment}>
+          Increment
+        </IncrementButton>
       </div>
     )
   },

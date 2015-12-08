@@ -25,6 +25,7 @@ const pretty = new PrettyError()
 const { loginSuccess, setRedirectLocation } = require('./action-creators/auth')
 const { tokenToAuth } = require('./utils/token')
 const findAndReplaceReducerFromComponents = require('./utils/findAndReplaceReducerFromComponents')
+const loadStylesFromComponents = require('./utils/loadStylesFromComponents')
 const { syncReduxAndRouter } = require('redux-simple-router')
 const { createMemoryHistory } = require('history')
 const { serialize } = require('cookie')
@@ -64,7 +65,8 @@ function renderApp(store, auth, props, token, res) {
       </Provider>
     )
 
-    const html = createPage(markup, store.getState())
+    const styles = loadStylesFromComponents(props.components)
+    const html = createPage(markup, store.getState(), styles)
     write(html, 'text/html', res)
   })
   .catch(error => {

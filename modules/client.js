@@ -62,6 +62,9 @@ match({ routes: rootRoute, location }, (/* error, redirectLocation, renderProps 
     </Provider>,
     document.getElementById('app')
   )
+
+  // remove server-generated css
+  document.getElementById('fast-css').remove()
 })
 
 // in case we had no cookie, but have the token in localStorage, we should try to

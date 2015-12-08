@@ -34,13 +34,14 @@ module.exports = {
     })
   },
 
-  createPage(html, state) {
+  createPage(html, state, styles) {
     return `
     <!doctype html>
     <html>
       <head>
         <meta charset="utf-8"/>
         <title>My Universal App!</title>
+      <style type="text/css" id="fast-css">${styles}</style>
         <script>APP_STATE=${JSON.stringify(state)}</script>
       </head>
       <body>
