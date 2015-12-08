@@ -39,7 +39,6 @@ module.exports = {
         include: [ path.resolve(__dirname, '..', 'modules') ],
         loaders: ['react-hot', 'monkey-hot', 'babel?cacheDirectory=true'],
       },
-      // { test: /\.css$/, loader: './myLoader.js?modules&localIdentName=[name]__[local]' },
       { test: /\.css$/, loader: './mySecondLoader.js!css?modules&localIdentName=[name]__[local]' },
       { test: /\.(png|woff)$/, loader: 'url?limit=1' },
     ],
