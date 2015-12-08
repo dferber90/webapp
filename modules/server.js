@@ -1,6 +1,7 @@
 // polyfill requrie.ensure
 if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require)
 
+const path = require('path')
 const React = require('react')
 const PrettyError = require('pretty-error')
 const { renderToString } = require('react-dom/server')
@@ -27,6 +28,7 @@ const findAndReplaceReducerFromComponents = require('./utils/findAndReplaceReduc
 const { syncReduxAndRouter } = require('redux-simple-router')
 const { createMemoryHistory } = require('history')
 const { serialize } = require('cookie')
+require('static!./images/favicon.ico?output=public/favicon.ico')
 
 const proxy = httpProxy.createProxyServer()
 const PORT = process.env.PORT || 3000
@@ -75,6 +77,7 @@ const app = express()
 
 app.use(compress()) // should be first middleware
 app.use(express.static(STATS.publicPath))
+app.use(express.static(path.join(__dirname, 'public')))
 app.use(cookieParser())
 
 if (DEVELOPMENT) {

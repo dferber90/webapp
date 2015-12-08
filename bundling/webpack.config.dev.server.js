@@ -19,8 +19,8 @@ module.exports = {
   node: {
     console: true,
     global: false,
-    __dirname: true,
-    __filename: true,
+    __dirname: false,
+    __filename: false,
   },
   recordsPath: path.join(__dirname, '..', buildFolder, 'records.json'),
   output: {
@@ -41,8 +41,7 @@ module.exports = {
       },
       { test: /\.css$/, loader: './myLoader.js?modules&localIdentName=[name]__[local]' },
       // { test: /\.css$/, loader: "./myLoader.js!css?modules" },
-      { test: /\.(png)$/, loader: 'url?limit=1' },
-      { test: /\.(woff)$/, loader: 'url?limit=1' },
+      { test: /\.(png|woff)$/, loader: 'url?limit=1' },
     ],
   },
   plugins: [
