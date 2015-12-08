@@ -1,7 +1,16 @@
 # want
 
+
+## service workers
+
+https://www.youtube.com/watch?v=jCKZDTtUA2A
+doesn't seem that hard :)
+
+
 ## testing with reagent
+
 https://github.com/airbnb/reagent
+
 
 ## rethinkDB
 
