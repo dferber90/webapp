@@ -105,13 +105,6 @@ during SSR or on client. So when creating the app, such a client would have to b
 passed in.
 
 
-## ✓ reuse json web token
-
-save JOSN web token in localStorage and reuse.
-save as cookie as well for SSR. client ---cookie---> server ---header---> api-server
-api-server only needs to accept from header.
-
-
 ## mongoose models
 
 Setting up mongoose in the api
@@ -122,10 +115,7 @@ Documentation on Joins, model methods etc
 https://github.com/Automattic/mongoose
 
 
-## css modules and files on server
-
-Right now the server struggles with the loader for css (using custom myLoader).
-Replace that loader with one that actually works.
+## files on server (copy static assets only once)
 
 Also, the server copies all files to get their urls using the `file-loader` or `url-loader` (not sure which is which).
 The client has already copied them, so we could simply use the urls.
@@ -168,3 +158,18 @@ Use `assetsByChunkName`. That solves it!
 -> Use hashing in production
 -> Always read from `assetsByChunkName`, no matter whether dev or prod.
 -> Always uses correct filename!
+
+
+# Done
+
+## ✓ css modules
+
+Right now the server struggles with the loader for css (using custom myLoader).
+Replace that loader with one that actually works.
+
+
+## ✓ reuse json web token
+
+save JOSN web token in localStorage and reuse.
+save as cookie as well for SSR. client ---cookie---> server ---header---> api-server
+api-server only needs to accept from header.
