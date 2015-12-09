@@ -67,7 +67,7 @@
     "jsonwebtoken": "5.4.1",
     "kerberos": "0.0.17",
     "moment": "2.10.6",
-    "mongoose": "4.2.10",
+    "mongoose": "4.3.0",
     "pretty-error": "1.2.0",
     "promised-mongo": "1.2.0",
     "react": "0.14.3",
