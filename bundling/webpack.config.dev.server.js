@@ -24,9 +24,9 @@ module.exports = {
   },
   recordsPath: path.join(__dirname, '..', buildFolder, 'records.json'),
   output: {
-    path: path.resolve(__dirname, '..', buildFolder),
+    path: path.resolve(__dirname, '..', buildFolder, 'assets'),
     pathinfo: true,
-    filename: 'server.js',
+    filename: path.join('..', 'server.js'),
     publicPath: '/assets/',
     libraryTarget: 'commonjs2',
   },

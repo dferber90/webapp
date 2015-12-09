@@ -26,7 +26,7 @@ const loadStylesFromComponents = require('./utils/loadStylesFromComponents')
 const { syncReduxAndRouter } = require('redux-simple-router')
 const { createMemoryHistory } = require('history')
 const { serialize } = require('cookie')
-require('static!./images/favicon.ico?output=public/favicon.ico')
+require('static!./images/favicon.ico?output=../public/favicon.ico')
 
 const proxy = httpProxy.createProxyServer()
 const PORT = process.env.PORT || 3000
