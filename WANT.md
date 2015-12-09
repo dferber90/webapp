@@ -1,6 +1,11 @@
 # want
 
 
+## plop
+
+Custom scaffolding for own routes, components, reducers, action creators..
+https://www.npmjs.com/package/plop
+
 ## service workers
 
 https://www.youtube.com/watch?v=jCKZDTtUA2A
