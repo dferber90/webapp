@@ -39,8 +39,10 @@ module.exports = {
         include: [path.resolve(__dirname, '..', 'modules')],
         loaders: ['babel?cacheDirectory=true'],
       },
+      { test: /\.less$/, loader: './mySecondLoader.js!css?modules&localIdentName=[name]__[local]!less' },
       { test: /\.css$/, loader: './mySecondLoader.js!css?modules&localIdentName=[name]__[local]' },
-      { test: /\.(png|woff)$/, loader: 'url?limit=1' },
+      { test: /\.(woff)$/, loader: 'url?limit=100000' },
+      { test: /\.(png|jpg|jpeg|svg)$/, loader: 'url?limit=25000' },
     ],
   },
   plugins: [
