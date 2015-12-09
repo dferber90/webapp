@@ -1,6 +1,3 @@
-// polyfill requrie.ensure
-if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require)
-
 const path = require('path')
 const React = require('react')
 const PrettyError = require('pretty-error')
