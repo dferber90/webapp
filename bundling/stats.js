@@ -12,9 +12,12 @@ module.exports = {
     return JSON.parse(fs.readFileSync(statsPath))
   },
   save: function (statsData, memoryOnly) {
+    var data = statsData.toJson({
+      modules: false,
+    })
     if (!memoryOnly) {
-      fs.writeFileSync(statsPath, JSON.stringify(statsData.toJson()))
+      fs.writeFileSync(statsPath, JSON.stringify(data))
     }
-    inMemoryStats = statsData.toJson()
+    inMemoryStats = statsData.toJson(data)
   },
 }
