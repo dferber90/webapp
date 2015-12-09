@@ -126,13 +126,6 @@ Documentation on Joins, model methods etc
 https://github.com/Automattic/mongoose
 
 
-## files on server (copy static assets only once)
-
-Also, the server copies all files to get their urls using the `file-loader` or `url-loader` (not sure which is which).
-The client has already copied them, so we could simply use the urls.
-No need to copy twice. Add custom loaders for these types that return the url without actually copying the file.
-
-
 ## realm
 
 React + Elm = realm
@@ -173,7 +166,7 @@ save as cookie as well for SSR. client ---cookie---> server ---header---> api-se
 api-server only needs to accept from header.
 
 
-## ✓  React Transform (not possible yet because Babel 6)
+## ✓ React Transform (not possible yet because Babel 6)
 
 https://github.com/gaearon/babel-plugin-react-transform/issues/46
 
@@ -183,3 +176,10 @@ api server. To disable it for production builds `.babelrc` can have
 different environments in it, reading from BABEL_ENV or NODE_ENV.
 These need to be specified before building and then it should be fine.
 -> https://babeljs.io/docs/usage/babelrc/
+
+
+## ✓ files on server (copy static assets only once)
+
+Also, the server copies all files to get their urls using the `file-loader` or `url-loader` (not sure which is which).
+The client has already copied them, so we could simply use the urls.
+No need to copy twice. Add custom loaders for these types that return the url without actually copying the file.

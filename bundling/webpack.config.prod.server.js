@@ -40,8 +40,8 @@ module.exports = {
       },
       { test: /\.less$/, loader: './mySecondLoader.js!css?modules&localIdentName=[hash:base64]!less' },
       { test: /\.css$/, loader: './mySecondLoader.js!css?modules&localIdentName=[hash:base64]' },
-      { test: /\.(woff)$/, loader: 'url?limit=100000' },
-      { test: /\.(png|jpg|jpeg|svg)$/, loader: 'url?limit=25000' },
+      { test: /\.(woff)$/, loader: 'fake-url?limit=100000' },
+      { test: /\.(png|jpg|jpeg|svg)$/, loader: 'fake-url?limit=25000' },
     ],
   },
   plugins: [
