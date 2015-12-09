@@ -10,6 +10,8 @@ doesn't seem that hard :)
 ## testing with reagent
 
 https://github.com/airbnb/reagent
+has been renamed to enzyme
+https://github.com/airbnb/enzyme
 
 
 ## rethinkDB
