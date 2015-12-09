@@ -141,19 +141,6 @@ atom managed by one component only, with own actions => no need to write reducer
 - https://github.com/acdlite/realm-redux
 
 
-## React Transform (not possible yet because Babel 6)
-
-https://github.com/gaearon/babel-plugin-react-transform/issues/46
-
-Until that is finished, we are using react-hot-loader.
-When enabling react-transform it needs to be disabled in production and for the
-api server. To disable it for production builds `.babelrc` can have
-different environments in it, reading from BABEL_ENV or NODE_ENV.
-These need to be specified before building and then it should be fine.
--> https://babeljs.io/docs/usage/babelrc/
-
-
-
 ## Hashing of individual chunks by adding `[chunkhash]` to filename
 
 Use http://webpack.github.io/docs/long-term-caching.html.
@@ -182,3 +169,15 @@ Replace that loader with one that actually works.
 save JOSN web token in localStorage and reuse.
 save as cookie as well for SSR. client ---cookie---> server ---header---> api-server
 api-server only needs to accept from header.
+
+
+## ✓  React Transform (not possible yet because Babel 6)
+
+https://github.com/gaearon/babel-plugin-react-transform/issues/46
+
+Until that is finished, we are using react-hot-loader.
+When enabling react-transform it needs to be disabled in production and for the
+api server. To disable it for production builds `.babelrc` can have
+different environments in it, reading from BABEL_ENV or NODE_ENV.
+These need to be specified before building and then it should be fine.
+-> https://babeljs.io/docs/usage/babelrc/

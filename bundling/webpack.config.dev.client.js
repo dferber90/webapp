@@ -42,7 +42,7 @@ module.exports = {
       {
         test: /\.js$/,
         include: [ path.resolve(__dirname, '..', 'modules') ],
-        loaders: ['react-hot', 'babel?cacheDirectory=true'],
+        loaders: ['babel?cacheDirectory=true'],
       },
       { test: /\.less$/, loader: 'style!css?modules&localIdentName=[name]__[local]!less' },
       { test: /\.css$/, loader: 'style!css?modules&localIdentName=[name]__[local]' },
@@ -52,6 +52,7 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
       CLIENT: true,
       SERVER: false,
