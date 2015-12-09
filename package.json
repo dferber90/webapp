@@ -30,6 +30,7 @@
     "eslint-config-airbnb": "2.0.0",
     "eslint-plugin-react": "3.11.3",
     "fake-file-loader": "1.0.0",
+    "fake-style-loader": "1.0.0",
     "fake-url-loader": "1.0.0",
     "file-loader": "0.8.5",
     "http-proxy": "1.12.0",
