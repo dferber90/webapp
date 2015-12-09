@@ -33,7 +33,6 @@ module.exports = {
     publicPath: '/assets/',
   },
   module: {
-    noParse: ['react', 'react-dom', 'moment'],
     loaders: [
       {
         test: /\.js$/,
@@ -47,7 +46,11 @@ module.exports = {
     ],
   },
   plugins: [
-    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+      },
+    }),
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
       CLIENT: true,
