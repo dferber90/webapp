@@ -12,6 +12,6 @@ module.exports.pitch = function (remainingRequest) {
     'if (typeof content === "string") content = [[module.id, content, ""]];',
     '',
     'module.exports = content.locals || {}',
-    'module.exports.raw = content',
+    'module.exports.source = content',
   ].join('\n')
 }
