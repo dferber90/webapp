@@ -22,9 +22,8 @@ They're available by using the css-loader with `css?modules`:
 ```
 
 Using the css-loader and the style-loader will result in the styles being added to the DOM automatically.
-On the server, we only care for the mapping of keys to actual class names, so we don't need style-loader and css-loader.
-Instead we parse the css file directly and generate the mappings object from it.
-*This fails right now for anything that uses `composes`.*
+On the server, we only care for the mapping of keys to actual class names, so we extract them from css-loader using a custom loader.
+The underlying CSS can be accessed and inlined into the response on the server.
 
 
 ### flash of unstyled text
