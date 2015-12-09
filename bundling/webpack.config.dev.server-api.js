@@ -28,13 +28,13 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
-        include: [ path.resolve(__dirname, '..', 'modules') ],
-        loaders: [ 'babel?cacheDirectory=true'],
+        include: [path.resolve(__dirname, '..', 'modules')],
+        loaders: ['babel?cacheDirectory=true'],
       },
     ],
   },
   plugins: [
-    new webpack.optimize.LimitChunkCountPlugin({maxChunks: 1}),
+    new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }),
     new webpack.BannerPlugin('require("source-map-support").install();', { raw: true }),
     new webpack.DefinePlugin({
       CLIENT: false,

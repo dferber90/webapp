@@ -9,7 +9,7 @@ module.exports = rootValue => initialState => {
   // --------------------------------------------------------------------------
   // middleware
   // --------------------------------------------------------------------------
-  const middleware = [ thunk, /* pendingMiddleware, */promise ]
+  const middleware = [thunk, /* pendingMiddleware, */promise]
 
 
   const graphqlMiddleware = createGraphQLMiddleware({
@@ -36,7 +36,7 @@ module.exports = rootValue => initialState => {
   // --------------------------------------------------------------------------
   // store enhancers
   // --------------------------------------------------------------------------
-  const storeEnhancers = [ applyMiddleware(...middleware) ]
+  const storeEnhancers = [applyMiddleware(...middleware)]
   if (CLIENT) {
     if (DEVELOPMENT) {
       // const { createDevTools } = require('redux-devtools')

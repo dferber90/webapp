@@ -88,7 +88,7 @@ const Dashboard = React.createClass({
   },
 })
 
-const mapStateToProps = state => ({todos: state.todos})
+const mapStateToProps = state => ({ todos: state.todos })
 // binds addTodo to dispatch and adds it to props
 const mapDispatchToProps = dispatch => bindActionCreators(todoActionCreators, dispatch)
 module.exports = connect(mapStateToProps, mapDispatchToProps)(Dashboard)

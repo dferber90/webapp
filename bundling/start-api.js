@@ -8,13 +8,13 @@ log.level = 'warn'
 
 var apiCompiler = webpack(apiConfig)
 var bundleClientStart
-apiCompiler.plugin('compile', function() {
+apiCompiler.plugin('compile', function () {
   log.info('webpack', 'Bundling server-api...')
   bundleClientStart = Date.now()
 })
 
 var startedServer = false
-apiCompiler.plugin('done', function(stats) {
+apiCompiler.plugin('done', function (stats) {
   if (!canContinue('server-api', false, stats)) return
   log.info('webpack', 'Bundled server-api in ' + (Date.now() - bundleClientStart) + 'ms!')
 
@@ -44,14 +44,14 @@ apiCompiler.plugin('done', function(stats) {
 
 apiCompiler.watch(
   { aggregateTimeout: 300 },
-  function(err, stats) {
+  function (err, stats) {
     canContinue('server-api', err, stats)
   }
 )
 
 // work around a weird nodemon bug where something was logged to the console
 // even after the process exited
-process.on('SIGINT', function exitHandler(err) {
+process.on('SIGINT', function (err) {
   if (err) console.log(err.stack)
   process.exit()
 })

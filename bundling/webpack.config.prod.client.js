@@ -19,7 +19,7 @@ var config = {
     loaders: [
       {
         test: /\.js$/,
-        include: [ path.resolve(__dirname, '..', 'modules') ],
+        include: [path.resolve(__dirname, '..', 'modules')],
         loader: 'babel',
       },
       { test: /\.less$/, loader: 'style!css?modules!less' },

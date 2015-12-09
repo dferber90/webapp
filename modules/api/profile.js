@@ -18,22 +18,22 @@ module.exports = {
   },
   get: (req, res) => {
     switch (req.params.id) {
-    case '1':
-      return res.json({
-        status: 'ok',
-        data: {
-          firstName: 'Dominik',
-          lastName: 'F',
-          todos: [
-            'make this project awesome',
-            'unkown',
-            'profit',
-          ],
-        },
-      })
-    default:
-      res.status(404)
-      return res.json({ status: 'error' })
+      case '1':
+        return res.json({
+          status: 'ok',
+          data: {
+            firstName: 'Dominik',
+            lastName: 'F',
+            todos: [
+              'make this project awesome',
+              'unkown',
+              'profit',
+            ],
+          },
+        })
+      default:
+        res.status(404)
+        return res.json({ status: 'error' })
     }
   },
 }

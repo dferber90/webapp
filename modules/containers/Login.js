@@ -40,7 +40,7 @@ const Login = React.createClass({
 })
 
 module.exports = connect(
-  state => ({auth: state.auth}),
+  state => ({ auth: state.auth }),
 
   // binds addTodo to dispatch and adds it to props
   dispatch => bindActionCreators(authActionCreators, dispatch)

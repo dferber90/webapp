@@ -13,7 +13,7 @@ var keypress = require('keypress')
 
 function registerRefreshListener() {
   keypress(process.stdin)
-  process.stdin.on('keypress', function(ch, key) {
+  process.stdin.on('keypress', function (ch, key) {
     if (key && key.name === 'p') {
       process.stdout.write('\n')
       bundleServer()
@@ -51,12 +51,12 @@ function bundleServer() {
   var serverCompiler = webpack(serverConfig)
   var bundleStart
 
-  serverCompiler.plugin('compile', function() {
+  serverCompiler.plugin('compile', function () {
     log.info('webpack', 'Bundling server...')
     bundleStart = Date.now()
   })
 
-  serverCompiler.plugin('done', function() {
+  serverCompiler.plugin('done', function () {
     log.info('webpack', 'Bundled server in ' + (Date.now() - bundleStart) + 'ms!')
     if (startedServer) {
       nodemon.restart()
@@ -68,7 +68,7 @@ function bundleServer() {
     }
   })
 
-  serverCompiler.run(function(err, stats) {
+  serverCompiler.run(function (err, stats) {
     canContinue('server', err, stats)
   })
 }
@@ -78,12 +78,12 @@ function bundleServer() {
 // ----------------------------------------------------------------------------
 var clientCompiler = webpack(clientConfig)
 var bundleClientStart
-clientCompiler.plugin('compile', function() {
+clientCompiler.plugin('compile', function () {
   log.info('webpack', 'Bundling client...')
   bundleClientStart = Date.now()
 })
 
-clientCompiler.plugin('done', function(stats) {
+clientCompiler.plugin('done', function (stats) {
   if (!canContinue('server', false, stats)) return
   log.info('webpack', 'Bundled client in ' + (Date.now() - bundleClientStart) + 'ms!')
   bundleServer()
@@ -94,7 +94,7 @@ var devServer = new WebpackDevServer(clientCompiler, {
   historyApiFallback: false,
   contentBase: path.join('build', 'main'),
   publicPath: clientConfig.output.publicPath,
-  stats: {colors: true},
+  stats: { colors: true },
   quiet: false,
   noInfo: true,
   proxy: {
@@ -105,7 +105,7 @@ devServer.listen(8080)
 
 // work around a weird nodemon bug where something was logged to the console
 // even after the process exited
-process.on('SIGINT', function exitHandler(err) {
+process.on('SIGINT', function (err) {
   if (err) console.log(err.stack)
   process.exit()
 })

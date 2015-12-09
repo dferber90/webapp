@@ -41,7 +41,7 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
-        include: [ path.resolve(__dirname, '..', 'modules') ],
+        include: [path.resolve(__dirname, '..', 'modules')],
         loaders: ['babel?cacheDirectory=true'],
       },
       { test: /\.less$/, loader: 'style!css?modules&localIdentName=[name]__[local]!less' },
@@ -65,8 +65,8 @@ module.exports = {
       names: ['react', 'vendor'],
       minChunks: Infinity,
     }),
-    function() {
-      this.plugin('done', function(statsData) {
+    function () {
+      this.plugin('done', function (statsData) {
         stats.save(statsData, 'memoryOnly')
       })
     },

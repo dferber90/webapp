@@ -126,7 +126,7 @@ const Query = new GraphQLObjectType({
       type: GraphQLString,
       description: 'Echo what you enter',
       args: {
-        message: {type: new GraphQLNonNull(GraphQLString), description: 'What to echo'},
+        message: { type: new GraphQLNonNull(GraphQLString), description: 'What to echo' },
       },
       resolve: (source, { message }, { rootValue: { isAuthenticated, userId } }) => {
         return isAuthenticated ? `you are authentiacted as ${userId} (${message})` : `received: ${message}`

@@ -1,8 +1,8 @@
 /* eslint no-var: [0], vars-on-top: [0], func-names: [0] */
 var loaderUtils = require('loader-utils')
 
-module.exports = function() {}
-module.exports.pitch = function(remainingRequest) {
+module.exports = function () {}
+module.exports.pitch = function (remainingRequest) {
   if (this.cacheable) this.cacheable()
 
   return [

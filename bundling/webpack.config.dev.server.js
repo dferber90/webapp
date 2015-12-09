@@ -36,7 +36,7 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
-        include: [ path.resolve(__dirname, '..', 'modules') ],
+        include: [path.resolve(__dirname, '..', 'modules')],
         loaders: ['babel?cacheDirectory=true'],
       },
       { test: /\.css$/, loader: './mySecondLoader.js!css?modules&localIdentName=[name]__[local]' },
@@ -46,7 +46,7 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
-    new webpack.optimize.LimitChunkCountPlugin({maxChunks: 1}),
+    new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }),
     new webpack.BannerPlugin('require("source-map-support").install();', { raw: true }),
     new webpack.DefinePlugin({
       CLIENT: false,

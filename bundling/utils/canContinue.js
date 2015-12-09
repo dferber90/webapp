@@ -10,7 +10,7 @@ module.exports = function canContinue(where, err, stats) {
   var jsonStats = stats.toJson()
   if (jsonStats.errors.length > 0) {
     log.error('webpack', where + ' compiler had errors:')
-    jsonStats.errors.map(function(error) { console.log(pretty.render(error)) })
+    jsonStats.errors.map(function (error) { console.log(pretty.render(error)) })
     return false
   }
   if (jsonStats.warnings.length > 0) {

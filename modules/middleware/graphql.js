@@ -8,19 +8,19 @@ const Adapter = require('../api-client/adapter')
 const createGraphQLMiddleware = adapterConfig => () => next => action => {
   const adapter = new Adapter(adapterConfig)
   switch (action.type) {
-  case 'GRAPHQL':
-    // store.dispatch({
-    //   type: 'GRAPHQL_LOAD_START',
-    //   meta: { pending: 1 },
-    // })
-    return next(
-      adapter
-        .execute(action.payload.query, action.payload.variables)
-        .then(data => action.meta.onSuccess(data))
-        .catch(error => action.meta.onError(error))
-      )
-  default:
-    return next(action)
+    case 'GRAPHQL':
+      // store.dispatch({
+      //   type: 'GRAPHQL_LOAD_START',
+      //   meta: { pending: 1 },
+      // })
+      return next(
+        adapter
+          .execute(action.payload.query, action.payload.variables)
+          .then(data => action.meta.onSuccess(data))
+          .catch(error => action.meta.onError(error))
+        )
+    default:
+      return next(action)
   }
 }
 

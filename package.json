@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "postinstall": "mkdir -p data/db",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npm run lint",
     "build:prod": "rimraf build/*; node bundling/build-prod.js",
     "build:dev": "rimraf build/*; node bundling/build-dev.js",
     "build:server": "webpack -w --config bundling/webpack.config.dev.server.js",
@@ -11,7 +11,8 @@
     "start": "rimraf build/*; export NODE_ENV=development; node bundling/start-dev.js & node bundling/start-api.js & wait",
     "start:main": "rimraf build/main/*; export NODE_ENV=development; node bundling/start-dev.js",
     "start:api": "rimraf build/api/*; export NODE_ENV=development; node bundling/start-api.js & wait",
-    "mongo": "mongod --dbpath data/db"
+    "mongo": "mongod --dbpath data/db",
+    "lint": "eslint ."
   },
   "devDependencies": {
     "babel-core": "6.2.1",
