@@ -35,6 +35,7 @@ module.exports = {
   },
 
   createPage(html, state, styles) {
+    const devServer = DEVELOPMENT ? '<script src="http://localhost:8080/webpack-dev-server.js"></script>' : ''
     return `
     <!doctype html>
     <html>
@@ -49,7 +50,7 @@ module.exports = {
         <script src="/assets/vendor.js"></script>
         <script src="/assets/react.js"></script>
         <script src="/assets/app.js"></script>
-        <script src="http://localhost:8080/webpack-dev-server.js"></script>
+        ${devServer}
       </body>
     </html>
     `

@@ -76,9 +76,8 @@ function renderApp(store, auth, props, token, res) {
 }
 
 const app = express()
-
 app.use(compress()) // should be first middleware
-app.use(express.static(STATS.publicPath))
+
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(cookieParser())
 
@@ -88,6 +87,12 @@ if (DEVELOPMENT) {
 
   // eg /assets/*
   app.all(`${STATS.publicPath}*`, (req, res) => proxy.web(req, res, { target: 'http://localhost:8080' }))
+} else {
+  // STATS.publicPath -> /assets/
+  // /assets/ needs to be transformed for app.use as shown below
+  // app.use('/assets', express.static('assets'))
+  // path.resolve and path.basename do exactly this
+  app.use(path.resolve(STATS.publicPath), express.static(path.basename(STATS.publicPath)))
 }
 
 

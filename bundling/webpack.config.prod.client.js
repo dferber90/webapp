@@ -1,47 +1,71 @@
 var path = require('path')
 var webpack = require('webpack')
+var stats = require('./stats.js')
 
-var config = {
+var buildFolder = path.join('build', 'main')
+
+module.exports = {
   devtool: 'source-map',
   entry: {
-    vendor: ['moment'],
-    react: ['react', 'react-dom'],
-    app: path.resolve(__dirname, '..', 'modules', 'client.js'),
+    vendor: [
+      'moment',
+      'isomorphic-fetch',
+    ],
+    react: [
+      'react',
+      'react-dom',
+      'redux',
+      'react-redux',
+      'react-router',
+      'history',
+      'redux-simple-router',
+    ],
+    app: [
+      'babel-polyfill',
+      path.resolve(__dirname, '..', 'modules', 'client.js'),
+    ],
   },
   output: {
-    path: path.resolve(__dirname, '..', 'build-prod', 'assets'),
-    // filename: '[name].[chunkhash].js',
+    path: path.resolve(__dirname, '..', buildFolder, 'assets'),
+    pathinfo: true,
     filename: '[name].js',
     chunkFilename: '[id].chunk.js',
     publicPath: '/assets/',
   },
   module: {
+    noParse: ['react', 'react-dom', 'moment'],
     loaders: [
       {
         test: /\.js$/,
         include: [path.resolve(__dirname, '..', 'modules')],
-        loader: 'babel',
+        loaders: ['babel?cacheDirectory=true'],
       },
-      { test: /\.less$/, loader: 'style!css?modules!less' },
-      { test: /\.css$/, loader: 'style!css?modules' },
-      { test: /\.(png|jpg)$/, loader: 'url?limit=25000' },
-      { test: /\.(woff)$/, loader: 'url?limit=1' },
+      { test: /\.less$/, loader: 'style!css?modules&localIdentName=[hash:base64]!less' },
+      { test: /\.css$/, loader: 'style!css?modules&localIdentName=[hash:base64]' },
+      { test: /\.(woff)$/, loader: 'url?limit=100000' },
+      { test: /\.(png|jpg|jpeg|svg)$/, loader: 'url?limit=25000' },
     ],
   },
   plugins: [
+    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
       CLIENT: true,
       SERVER: false,
       DEVELOPMENT: false,
       PRODUCTION: true,
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production'),
+      'process.env.NODE_ENV': JSON.stringify('production'),
     }),
     new webpack.optimize.OccurenceOrderPlugin(/* preferEntry */true),
     new webpack.optimize.CommonsChunkPlugin({
       names: ['react', 'vendor'],
       minChunks: Infinity,
     }),
+    function () {
+      this.plugin('done', function (statsData) {
+        // stats.save(statsData, 'memoryOnly')
+        stats.save(statsData)
+      })
+    },
   ],
 }
-
-module.exports = config

@@ -4,9 +4,10 @@
   "scripts": {
     "postinstall": "mkdir -p data/db",
     "test": "npm run lint",
-    "build:prod": "rimraf build/*; node bundling/build-prod.js",
-    "build:dev": "rimraf build/*; node bundling/build-dev.js",
-    "build:server": "webpack -w --config bundling/webpack.config.dev.server.js",
+    "build": "rimraf build/*; export NODE_ENV=production; npm run build:api; npm run build:client; npm run build:server",
+    "build:client": "webpack --config bundling/webpack.config.prod.client.js",
+    "build:server": "webpack --config bundling/webpack.config.prod.server.js",
+    "build:api": "webpack --config bundling/webpack.config.prod.server-api.js",
     "start:concurrent": "rimraf build/*; concurrent \"node bundling/start-dev.js\" \"node bundling/start-api.js\"",
     "start": "rimraf build/*; export NODE_ENV=development; node bundling/start-dev.js & node bundling/start-api.js & wait",
     "start:main": "rimraf build/main/*; export NODE_ENV=development; node bundling/start-dev.js",
