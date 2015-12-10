@@ -3,7 +3,6 @@ const React = require('react')
 const PrettyError = require('pretty-error')
 const { renderToString } = require('react-dom/server')
 const { match, RoutingContext } = require('react-router')
-const httpProxy = require('http-proxy')
 const express = require('express')
 const compress = require('compression')
 const { Provider } = require('react-redux')
@@ -28,7 +27,6 @@ const { createMemoryHistory } = require('history')
 const { serialize } = require('cookie')
 require('static!./images/favicon.ico?output=../public/favicon.ico')
 
-const proxy = httpProxy.createProxyServer()
 const PORT = process.env.PORT || 3000
 
 // ----------------------------------------------------------------------------
@@ -79,6 +77,9 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(cookieParser())
 
 if (DEVELOPMENT) {
+  const httpProxy = require('http-proxy')
+  const proxy = httpProxy.createProxyServer()
+
   // add error handling to avoid https://github.com/nodejitsu/node-http-proxy/issues/527
   proxy.on('error', require('./utils/handleProxyError.js'))
 
