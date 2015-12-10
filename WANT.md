@@ -25,12 +25,6 @@ There is a library out there which seems similar to what we are doing with
 middleware. https://github.com/redux-effects/redux-effects
 
 
-## fsa redux-simple-router
-
-The FSA middleware currently makes an exception for redux-simple-router.
-Remove this again once redux-simple-router uses FSA-compliant actions.
-
-
 ## http codes
 
 use correct http codes in responses from server.
@@ -188,3 +182,9 @@ No need to copy twice. Add custom loaders for these types that return the url wi
 
 Custom scaffolding for own routes, components, reducers, action creators..
 https://www.npmjs.com/package/plop
+
+
+## ✓ fsa redux-simple-router
+
+The FSA middleware currently makes an exception for redux-simple-router.
+Remove this again once redux-simple-router uses FSA-compliant actions.
