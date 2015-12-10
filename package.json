@@ -65,7 +65,7 @@
     "express-graphql": "0.4.5",
     "flux-standard-action": "0.6.0",
     "graphql": "0.4.14",
-    "history": "1.13.0",
+    "history": "1.16.0",
     "hoist-non-react-statics": "1.0.3",
     "isomorphic-fetch": "2.2.0",
     "jsonwebtoken": "5.4.1",
