@@ -1,11 +1,5 @@
 # want
 
-
-## plop
-
-Custom scaffolding for own routes, components, reducers, action creators..
-https://www.npmjs.com/package/plop
-
 ## service workers
 
 https://www.youtube.com/watch?v=jCKZDTtUA2A
@@ -182,6 +176,12 @@ These need to be specified before building and then it should be fine.
 Also, the server copies all files to get their urls using the `file-loader` or `url-loader` (not sure which is which).
 The client has already copied them, so we could simply use the urls.
 No need to copy twice. Add custom loaders for these types that return the url without actually copying the file.
+
+
+## ✓ plop
+
+Custom scaffolding for own routes, components, reducers, action creators..
+https://www.npmjs.com/package/plop
 
 
 ## ✓ fsa redux-simple-router
