@@ -3,7 +3,7 @@ const { serialize } = require('cookie')
 const moment = require('moment')
 const fetch = require('isomorphic-fetch')
 const { checkHttpStatus, parseJSON } = require('../utils/fetch-utils.js')
-const { updatePath } = require('redux-simple-router')
+const { pushPath } = require('redux-simple-router')
 
 const API_URL = 'http://localhost:3001/api/v1'
 const localStorageTokenKey = 'token'
@@ -31,7 +31,7 @@ const loginSuccess = (token, redirectLocation) => dispatch => {
 
   if (redirectLocation) {
     dispatch(successfullLoginAction)
-    return dispatch(updatePath(redirectLocation))
+    return dispatch(pushPath(redirectLocation))
   }
   return dispatch(successfullLoginAction)
 }

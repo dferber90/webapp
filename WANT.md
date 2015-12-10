@@ -31,12 +31,6 @@ There is a library out there which seems similar to what we are doing with
 middleware. https://github.com/redux-effects/redux-effects
 
 
-## fsa redux-simple-router
-
-The FSA middleware currently makes an exception for redux-simple-router.
-Remove this again once redux-simple-router uses FSA-compliant actions.
-
-
 ## http codes
 
 use correct http codes in responses from server.
@@ -188,3 +182,9 @@ These need to be specified before building and then it should be fine.
 Also, the server copies all files to get their urls using the `file-loader` or `url-loader` (not sure which is which).
 The client has already copied them, so we could simply use the urls.
 No need to copy twice. Add custom loaders for these types that return the url without actually copying the file.
+
+
+## ✓ fsa redux-simple-router
+
+The FSA middleware currently makes an exception for redux-simple-router.
+Remove this again once redux-simple-router uses FSA-compliant actions.
