@@ -84,7 +84,7 @@
     "redux-node-logger": "0.0.3",
     "redux-promise": "0.5.0",
     "redux-simple-router": "1.0.0",
-    "redux-thunk": "1.0.0",
+    "redux-thunk": "1.0.1",
     "source-map-support": "0.4.0",
     "static-loader": "0.1.8"
   }
