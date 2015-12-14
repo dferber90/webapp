@@ -74,15 +74,3 @@ match({ routes: rootRoute, location }, (/* error, redirectLocation, renderProps 
 // if (token) {
 //   store.dispatch(loginSetToken(token))
 // }
-
-// re-enable when redux-devtools work with 0.14
-// and add middleware to createAppStore
-// if (DEVELOPMENT) {
-//   const devToolsContainer = document.createElement('div')
-//   devToolsContainer.id = 'redux-devtools-container'
-//   document.body.appendChild(devToolsContainer)
-//   render(
-//     <LogMonitor store={store.devToolsStore} />,
-//     document.getElementById('redux-devtools-container')
-//   )
-// }

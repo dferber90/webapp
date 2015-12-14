@@ -39,8 +39,6 @@ module.exports = rootValue => initialState => {
   const storeEnhancers = [applyMiddleware(...middleware)]
   if (CLIENT) {
     if (DEVELOPMENT) {
-      // const { createDevTools } = require('redux-devtools')
-      // storeEnhancers.push(createDevTools(React))
       if (window.devToolsExtension) {
         storeEnhancers.push(window.devToolsExtension())
       }
