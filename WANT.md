@@ -1,5 +1,8 @@
 # want
 
+## uglify static css
+loader which uglifies static css
+
 ## service workers
 
 https://www.youtube.com/watch?v=jCKZDTtUA2A

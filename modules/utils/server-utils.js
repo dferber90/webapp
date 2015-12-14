@@ -3,6 +3,7 @@ const zlib = require('zlib')
 // const API_URL = 'http://localhost:3001/api/v1'
 // const fetch = require('isomorphic-fetch')
 // const { checkHttpStatus, parseJSON } = require('./fetch-utils.js')
+const normalizeCSSUrl = require('!file!normalize.css/normalize.css')
 
 module.exports = {
   writeError(msg, res) {
@@ -42,8 +43,9 @@ module.exports = {
       <head>
         <meta charset="utf-8"/>
         <title>My Universal App!</title>
-      <style type="text/css" id="fast-css">${styles}</style>
+        <style type="text/css" id="fast-css">${styles}</style>
         <script>APP_STATE=${JSON.stringify(state)}</script>
+        <link rel="stylesheet" href="${normalizeCSSUrl}">
       </head>
       <body>
         <div id="app">${html}</div>

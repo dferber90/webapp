@@ -77,6 +77,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(cookieParser())
 
 if (DEVELOPMENT) {
+  const existsSync = require('exists-sync')
   const httpProxy = require('http-proxy')
   const proxy = httpProxy.createProxyServer()
 
@@ -84,7 +85,15 @@ if (DEVELOPMENT) {
   proxy.on('error', require('./utils/handleProxyError.js'))
 
   // eg /assets/*
-  app.all(`${STATS.publicPath}*`, (req, res) => proxy.web(req, res, { target: 'http://localhost:8080' }))
+  app.all(`${STATS.publicPath}*`, (req, res) => {
+    // try to send the file from assets/*
+    // if it doesn't exist, use the proxy instead
+    const filename = path.join(__dirname, 'assets', path.basename(req.url))
+    if (existsSync(filename)) {
+      return res.sendFile(filename)
+    }
+    return proxy.web(req, res, { target: 'http://localhost:8080' })
+  })
 } else {
   // STATS.publicPath -> /assets/
   // /assets/ needs to be transformed for app.use as shown below
