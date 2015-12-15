@@ -4,6 +4,7 @@ const { bindActionCreators } = require('redux')
 const LoginForm = require('../components/LoginForm')
 const authActionCreators = require('../action-creators/auth')
 const defaultReducer = require('../reducers/default')
+const Layout = require('../components/Layout')
 
 function hashPassword(password) {
   return password + '-hashed'
@@ -23,21 +24,36 @@ const Login = React.createClass({
     const hashedPassword = hashPassword(password)
     this.props.login(emailOrUsername, hashedPassword, this.props.auth.redirectLocation)
   },
-  render() {
+  renderLoggedIn() {
     const { userId } = this.props.auth
-    return userId ?
-      (
-        <div>
-          <p>Welcome {userId}</p>
-          <button onClick={this.props.logout}>Logout</button>
-        </div>
-      ) :
+    return (
+      <div>
+        <p>Welcome {userId}</p>
+        <button onClick={this.props.logout}>Logout</button>
+      </div>
+    )
+  },
+  renderLoginForm() {
+    return (
       <LoginForm
         handleSubmit={this.handleSubmit}
         isAuthenticating={this.props.auth.isAuthenticating}
       />
+    )
+  },
+  render() {
+    const { userId } = this.props.auth
+    return (
+      <Layout>
+        {userId ? this.renderLoggedIn() : this.renderLoginForm()}
+      </Layout>
+    )
   },
 })
+
+if (SERVER) {
+  Login.styles = [...Layout.styles]
+}
 
 module.exports = connect(
   state => ({ auth: state.auth }),

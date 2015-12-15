@@ -1,17 +1,21 @@
 const React = require('react')
-const { Link } = require('react-router')
+const Navbar = require('./Navbar.js')
+const Footer = require('./Footer.js')
+const styles = require('./Layout.css')
 
 const Layout = ({ children }) => (
   <div>
-    <h1>App</h1>
-    <ul>
-      <li><Link to="/" activeStyle={{ textDecoration: 'none' }}>Home</Link></li>
-      <li><Link to="/about">About (lazy loaded)</Link></li>
-      <li><Link to="/dashboard">Dashboard (lazy loaded)</Link></li>
-      <li><Link to="/account/login">Login (lazy loaded)</Link></li>
-    </ul>
-    {children}
+    <Navbar />
+    <div className={styles.container}>
+      {children}
+    </div>
+    <Footer />
   </div>
 )
+
+if (SERVER) {
+  Layout.styles = [styles.source, ...Navbar.styles]
+}
+Layout.fetchData = [Navbar.fetchData, Footer.fetchData]
 
 module.exports = Layout

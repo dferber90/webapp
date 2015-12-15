@@ -1,0 +1,53 @@
+.container {
+  height: 50px;
+  background-color: #4e555d;
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.logoContainer {
+  width: 50px;
+  flex-shrink: 0;
+  text-align: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  width: 25px;
+}
+
+.space {
+  flex: 1 1 auto;
+}
+
+.brand {
+  font-family: monospace;
+}
+
+.brandLink {
+  color: #fff;
+  text-decoration: none;
+}
+.brandLink:hover {
+  color: #eee;
+}
+
+.link {
+  composes: brandLink;
+  font-family: monospace;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+
+.right {
+  padding: 0 10px;
+  margin-left: auto;
+}

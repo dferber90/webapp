@@ -37,25 +37,24 @@ module.exports = {
 
   createPage(html, state, styles) {
     const devServer = DEVELOPMENT ? '<script src="http://localhost:8080/webpack-dev-server.js"></script>' : ''
-    return `
-    <!doctype html>
-    <html>
-      <head>
-        <meta charset="utf-8"/>
-        <title>My Universal App!</title>
-        <style type="text/css" id="fast-css">${styles}</style>
-        <script>APP_STATE=${JSON.stringify(state)}</script>
-        <link rel="stylesheet" href="${normalizeCSSUrl}">
-      </head>
-      <body>
-        <div id="app">${html}</div>
-        <script src="/assets/vendor.js"></script>
-        <script src="/assets/react.js"></script>
-        <script src="/assets/app.js"></script>
-        ${devServer}
-      </body>
-    </html>
-    `
+    return `<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>My Universal App!</title>
+    <link rel="stylesheet" href="${normalizeCSSUrl}">
+    <style type="text/css" id="fast-css">${styles}</style>
+  </head>
+  <body>
+    <div id="app">${html}</div>
+    <script>APP_STATE=${JSON.stringify(state)}</script>
+    <script src="/assets/vendor.js"></script>
+    <script src="/assets/react.js"></script>
+    <script src="/assets/app.js"></script>
+    ${devServer}
+  </body>
+</html>
+`
   },
 
   // unused, decoding directly on server to speed things up
