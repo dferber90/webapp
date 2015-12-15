@@ -39,7 +39,7 @@
     "less": "2.5.3",
     "less-loader": "2.2.2",
     "nodemon": "1.8.1",
-    "plop": "1.3.0",
+    "plop": "1.4.0",
     "react-transform-catch-errors": "1.0.0",
     "react-transform-hmr": "1.0.1",
     "redbox-react": "1.2.0",
