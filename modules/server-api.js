@@ -4,6 +4,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const accountsPassword = require('./api/accounts/password')
 const accountsToken = require('./api/accounts/token')
+const accountsCreate = require('./api/accounts/create')
 const home = require('./api/home')
 const profile = require('./api/profile')
 const auth = require('./api/middleware/auth.js')
@@ -17,6 +18,9 @@ const router = express.Router() // eslint-disable-line new-cap
 
 router.route('/')
   .get(home.get)
+
+router.route('/accounts/create')
+  .post(accountsCreate.post)
 
 router.route('/accounts/login/password')
   .post(accountsPassword.post)

@@ -1,10 +1,10 @@
 const React = require('react')
 const { connect } = require('react-redux')
 const { bindActionCreators } = require('redux')
-const LoginForm = require('../components/LoginForm')
-const authActionCreators = require('../action-creators/auth')
-const defaultReducer = require('../reducers/default')
-const Layout = require('../components/Layout')
+const LoginForm = require('../../components/LoginForm')
+const authActionCreators = require('../../action-creators/auth')
+const defaultReducer = require('../../reducers/default')
+const Layout = require('../../components/Layout')
 
 function hashPassword(password) {
   return password + '-hashed'

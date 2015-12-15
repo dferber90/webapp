@@ -1,12 +1,5 @@
-const mongo = require('promised-mongo')
-const { ObjectId } = mongo
-/* eslint-disable new-cap */
-
-const db = mongo('mongodb://localhost:27017/app')
-const todosCollection = db.collection('todos')
-const usersCollection = db.collection('users')
-const postsCollection = db.collection('posts')
-const commentsCollection = db.collection('comments')
+const { ObjectId: objectId } = require('promised-mongo')
+const { todosCollection, usersCollection } = require('../db/mongo')
 const normalizeId = doc => {
   doc.id = doc._id
   return doc
@@ -216,7 +209,7 @@ const Query = new GraphQLObjectType({
         id: { type: new GraphQLNonNull(GraphQLString) },
       },
       resolve: (_, args) => {
-        return todosCollection.findOne({ id: ObjectId(args.id) })
+        return todosCollection.findOne({ id: objectId(args.id) })
       },
     },
     users: {
@@ -237,7 +230,7 @@ const Query = new GraphQLObjectType({
       resolve: (_, args) => {
         // TODO omit some fields
         return usersCollection
-          .findOne({ _id: ObjectId(args.id) })
+          .findOne({ _id: objectId(args.id) })
           .then(normalizeId)
       },
     },
