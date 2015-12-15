@@ -25,7 +25,9 @@ module.exports = rootValue => initialState => {
 
   if (CLIENT) {
     const createLogger = require('redux-logger')
-    middleware.push(createLogger())
+    middleware.push(createLogger({
+      collapsed: () => true,
+    }))
   }
 
   if (SERVER) {
