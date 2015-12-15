@@ -153,7 +153,7 @@ const Mutation = new GraphQLObjectType({
       },
       resolve: (rootValues, args) => {
         const todo = { text: args.text, checked: false }
-        return todosCollection.insert(todo)
+        return todosCollection.insert(todo).then(normalizeId)
       },
     },
     createUser: {
@@ -172,7 +172,7 @@ const Mutation = new GraphQLObjectType({
           emailAddress: args.emailAddress,
           emailVerified: false,
           createdAt: new Date(),
-        })
+        }).then(normalizeId)
       },
     },
   }),

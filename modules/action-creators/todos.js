@@ -4,7 +4,7 @@ const adapter = new Adapter({ endpoint: 'http://localhost:3001/graphql/v1' })
 module.exports = {
   addTodo: function addTodo(text) {
     return adapter.execute(
-      `mutation newTodo($text: String!) { addTodo(text: $text) { _id, text } }`,
+      `mutation newTodo($text: String!) { addTodo(text: $text) { id, text } }`,
       { text }
     ).then(response => {
       return {
