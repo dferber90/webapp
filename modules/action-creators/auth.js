@@ -24,7 +24,7 @@ const loginSuccess = (token, redirectLocation) => dispatch => {
   const successfullLoginAction = {
     type: 'AUTH_LOGIN_SUCCESS',
     payload: {
-      token: token,
+      token,
       tokenContents: jwt.decode(token),
     },
   }

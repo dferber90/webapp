@@ -14,7 +14,7 @@ if (CLIENT) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          query: query,
+          query,
           ...(variables ? { variables } : {}),
         }),
       })

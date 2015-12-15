@@ -14,7 +14,7 @@ module.exports = rootValue => initialState => {
 
   const graphqlMiddleware = createGraphQLMiddleware({
     endpoint: 'http://localhost:3001/graphql/v1',
-    rootValue: rootValue,
+    rootValue,
   })
   middleware.unshift(graphqlMiddleware)
 

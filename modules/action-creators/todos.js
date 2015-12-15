@@ -5,7 +5,7 @@ module.exports = {
   addTodo: function addTodo(text) {
     return adapter.execute(
       `mutation newTodo($text: String!) { addTodo(text: $text) { _id, text } }`,
-      { text: text }
+      { text }
     ).then(response => {
       return {
         type: 'ADD_TODO',
