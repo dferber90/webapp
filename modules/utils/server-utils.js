@@ -56,23 +56,4 @@ module.exports = {
 </html>
 `
   },
-
-  // unused, decoding directly on server to speed things up
-  /*
-  verifyToken(token) {
-    return (
-      fetch(`${API_URL}/accounts/login/token`, {
-        method: 'post',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-      })
-      .then(checkHttpStatus)
-      .then(parseJSON)
-      .then(response => response.status === 'success' && response.payload.tokenValid)
-    )
-  },
-  */
 }
