@@ -15,7 +15,9 @@ const Frontpage = React.createClass({
     return (
       <Layout>
         <div className={styles.header}>
-          View: <b>Top</b>.
+          <div className={styles.innerHeader}>
+            View: <b>Top</b>.
+          </div>
         </div>
         <div className={styles.entries}>
           {entries.map((entry, index) => (

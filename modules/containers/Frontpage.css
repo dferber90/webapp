@@ -4,10 +4,19 @@
 }*/
 
 .header {
+  display: flex;
+  flex: 0 0 50px;
+  justify-content: center;
+  align-items: center;
+}
+
+.innerHeader {
+  width: 600px;
+  height: 35px;
   background: rgba(255,255,255,0.6);
   padding: 3px 10px;
   border-radius: 5px;
-  margin: 10px;
+  align-self: center;
 }
 
 .entries {
