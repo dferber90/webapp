@@ -3,15 +3,6 @@ const favicon = require('../images/favicon.png')
 const styles = require('./Navbar.css')
 const { Link } = require('react-router')
 
-/*
-<ul>
-  <li><Link to="/" activeStyle={{ textDecoration: 'none' }}>Home</Link></li>
-  <li><Link to="/about">About (lazy loaded)</Link></li>
-  <li><Link to="/dashboard">Dashboard (lazy loaded)</Link></li>
-  <li><Link to="/account/login">Login (lazy loaded)</Link></li>
-</ul>
- */
-
 const Navbar = () => (
   <div className={styles.container}>
     <div className={styles.logoContainer}>
@@ -26,6 +17,9 @@ const Navbar = () => (
     </div>
     <div className={styles.right}>
       <Link to="/account/signup" className={styles.link}>Sign up</Link>
+    </div>
+    <div className={styles.right}>
+      <Link to="/submit" className={styles.submit}>POST</Link>
     </div>
   </div>
 )

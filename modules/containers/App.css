@@ -9,3 +9,8 @@
 :global *, :global *:before, :global *:after {
   box-sizing: inherit;
 }
+
+:global #app {
+  width: 100%;
+  height: 100%;
+}

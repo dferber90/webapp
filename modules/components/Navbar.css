@@ -1,7 +1,7 @@
 .container {
-  height: 50px;
   background-color: #4e555d;
   color: #fff;
+  flex: 0 0 50px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -50,4 +50,12 @@
 .right {
   padding: 0 10px;
   margin-left: auto;
+}
+
+.submit {
+  composes: link;
+  background-color: #47A75D;
+  border-radius: 3px;
+  padding: 8px;
+  color: white;
 }

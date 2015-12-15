@@ -3,18 +3,18 @@ const Navbar = require('./Navbar.js')
 const Footer = require('./Footer.js')
 const styles = require('./Layout.css')
 
-const Layout = ({ children }) => (
-  <div>
+const Layout = ({ className, children }) => (
+  <div className={styles.layout + ' ' + className}>
     <Navbar />
     <div className={styles.container}>
       {children}
     </div>
-    <Footer />
+    <Footer className={styles.footer} />
   </div>
 )
 
 if (SERVER) {
-  Layout.styles = [styles.source, ...Navbar.styles]
+  Layout.styles = [styles.source, ...Navbar.styles, ...Footer.styles]
 }
 Layout.fetchData = [Navbar.fetchData, Footer.fetchData]
 
