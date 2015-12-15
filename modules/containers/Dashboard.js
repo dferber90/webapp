@@ -63,7 +63,7 @@ const Dashboard = React.createClass({
       return dispatch({
         type: 'GRAPHQL',
         payload: {
-          query: '{ todos { text, _id } }',
+          query: '{ todos { text, id } }',
           variables: {},
         },
         meta: {

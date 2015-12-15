@@ -204,7 +204,10 @@ const Query = new GraphQLObjectType({
     todos: {
       type: new GraphQLList(Todo),
       resolve: () => {
-        return todosCollection.find({}).toArray()
+        return todosCollection
+          .find({})
+          .toArray()
+          .then(res => res.map(normalizeId))
       },
     },
     todo: {
