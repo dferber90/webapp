@@ -55,7 +55,7 @@
   "dependencies": {
     "babel-plugin-transform-runtime": "6.1.18",
     "babel-polyfill": "6.2.0",
-    "body-parser": "1.14.1",
+    "body-parser": "1.14.2",
     "compression": "1.6.0",
     "cookie": "0.2.3",
     "cookie-parser": "1.4.0",
