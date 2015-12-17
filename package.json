@@ -56,7 +56,7 @@
   "dependencies": {
     "babel-plugin-transform-runtime": "6.1.18",
     "babel-polyfill": "6.2.0",
-    "body-parser": "1.14.1",
+    "body-parser": "1.14.2",
     "compression": "1.6.0",
     "cookie": "0.2.3",
     "cookie-parser": "1.4.0",
@@ -83,8 +83,9 @@
     "react-router": "1.0.2",
     "redux": "3.0.5",
     "redux-form": "4.0.0",
-    "redux-logger": "2.2.1",
-    "redux-node-logger": "0.0.3",
+    "redux-logger": "2.3.1",
+
+ "redux-node-logger": "0.0.3",
     "redux-promise": "0.5.0",
     "redux-simple-router": "1.0.0",
     "redux-thunk": "1.0.2",
