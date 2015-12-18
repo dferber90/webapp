@@ -1,9 +1,6 @@
 const apiClient = require('../../api-client')
 const { loginStoreToken } = require('../auth')
-
-function hashPassword(password) {
-  return password + '-hashed'
-}
+const hashPassword = require('../../utils/hashPassword')
 
 const createAccountSuccess = token => loginStoreToken(token, '/')
 const createAccountFailure = error => ({ type: 'SIGNUP/ERROR', error: true, payload: error })

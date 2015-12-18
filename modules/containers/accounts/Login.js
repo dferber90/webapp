@@ -5,10 +5,7 @@ const LoginForm = require('../../components/LoginForm')
 const authActionCreators = require('../../action-creators/auth')
 const defaultReducer = require('../../reducers/default')
 const Layout = require('../../components/Layout')
-
-function hashPassword(password) {
-  return password + '-hashed'
-}
+const hashPassword = require('../../utils/hashPassword')
 
 const Login = React.createClass({
   propTypes: {
