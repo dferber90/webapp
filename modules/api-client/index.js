@@ -2,7 +2,12 @@ const fetch = require('isomorphic-fetch')
 const API_URL = process.env.API_URL || 'http://localhost:3001/api/v1'
 const { checkHttpStatus, parseJSON } = require('../utils/fetch-utils.js')
 
-function apiClient({ endpoint, body, onSuccess, onError }) {
+const checkAPIErrors = result => {
+  if (result.error) throw result
+  return result
+}
+
+function apiClient({ endpoint, body }) {
   const content = typeof body === 'string' ? body : JSON.stringify(body)
   const normalizedEndpoint = endpoint.charAt(0) === '/' ? endpoint.substr(1) : endpoint
   return (
@@ -16,8 +21,7 @@ function apiClient({ endpoint, body, onSuccess, onError }) {
     })
     .then(checkHttpStatus)
     .then(parseJSON)
-    .then(onSuccess)
-    .catch(onError)
+    .then(checkAPIErrors)
   )
 }
 

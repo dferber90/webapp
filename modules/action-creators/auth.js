@@ -65,17 +65,19 @@ const logout = () => {
 const login = (emailAddress, hashedPassword, redirectLocation) => dispatch => {
   dispatch({ type: 'AUTH_LOGIN_ATTEMPT' })
 
-  apiClient({
+  return apiClient({
     endpoint: 'accounts/login/password',
     body: { emailAddress, hashedPassword },
-    onSuccess: response => {
-      if (response.reason) {
-        dispatch(loginError(response.reason))
-      } else if (response.token) {
-        dispatch(loginSuccess(response.token, redirectLocation))
+  })
+  .then(response => dispatch(loginSuccess(response.token, redirectLocation)))
+  .catch(error => {
+    dispatch(loginError(error))
+    if (error && error.reason === 'bad-credentials') {
+      throw {
+        _error: 'Login failed!',
+        password: 'Looks like you had the wrong password',
       }
-    },
-    onError: error => dispatch(loginError(error)),
+    }
   })
 }
 

@@ -1,7 +1,7 @@
 const React = require('react')
 const { connect } = require('react-redux')
 const { bindActionCreators } = require('redux')
-const LoginForm = require('../../components/LoginForm')
+const LoginForm = require('../../components/accounts/LoginForm')
 const authActionCreators = require('../../action-creators/auth')
 const defaultReducer = require('../../reducers/default')
 const Layout = require('../../components/Layout')
@@ -17,9 +17,9 @@ const Login = React.createClass({
   statics: {
     reducer: defaultReducer,
   },
-  handleSubmit(emailAddress, password) {
+  handleSubmit({ emailAddress, password }) {
     const hashedPassword = hashPassword(password)
-    this.props.login(emailAddress, hashedPassword, this.props.auth.redirectLocation)
+    return this.props.login(emailAddress, hashedPassword, this.props.auth.redirectLocation)
   },
   renderLoggedIn() {
     const { userId } = this.props.auth
@@ -33,7 +33,7 @@ const Login = React.createClass({
   renderLoginForm() {
     return (
       <LoginForm
-        handleSubmit={this.handleSubmit}
+        onSubmit={this.handleSubmit}
         isAuthenticating={this.props.auth.isAuthenticating}
       />
     )
