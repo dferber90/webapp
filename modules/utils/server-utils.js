@@ -1,8 +1,4 @@
 const zlib = require('zlib')
-
-// const API_URL = 'http://localhost:3001/api/v1'
-// const fetch = require('isomorphic-fetch')
-// const { checkHttpStatus, parseJSON } = require('./fetch-utils.js')
 const normalizeCSSUrl = 'https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css'
 
 module.exports = {

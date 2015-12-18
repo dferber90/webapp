@@ -3,12 +3,24 @@ const pendingReducer = require('./pending')
 const { routeReducer } = require('redux-simple-router')
 const { reducer: formReducer } = require('redux-form')
 
+// TODO actually use this
+function loginFormReducer(state, action) {
+  switch (action.type) {
+    case 'AUTH_LOGIN_FAIL':
+      return { ...state, password: {} }
+    default:
+      return state
+  }
+}
+
 module.exports = (state, action) => {
   return {
     ...state,
     routing: routeReducer(state.routing, action),
     auth: authReducer(state.auth, action),
     pending: pendingReducer(state.pending, action),
-    form: formReducer(state.form, action),
+    form: formReducer.plugin({
+      login: loginFormReducer,
+    })(state.form, action),
   }
 }

@@ -30,6 +30,14 @@ const CustomGraphQLDateType = require('graphql-custom-datetype')
 // Types
 // ----------------------------------------------------------------------------
 
+const roleType = new GraphQLEnumType({
+  name: 'ROLE',
+  values: {
+    USER: { value: 'user' },
+    ADMIN: { value: 'admin' },
+  },
+})
+
 const User = new GraphQLObjectType({
   name: 'User',
   description: 'The account of a user',
@@ -39,6 +47,7 @@ const User = new GraphQLObjectType({
     firstName: { type: GraphQLString },
     lastName: { type: GraphQLString },
     photo: { type: GraphQLString },
+    role: { type: roleType },
     createdAt: { type: CustomGraphQLDateType },
     emailAddress: { type: new GraphQLNonNull(GraphQLString) },
     emailVerified: { type: new GraphQLNonNull(GraphQLBoolean) },

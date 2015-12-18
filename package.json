@@ -2,7 +2,7 @@
   "name": "webapp",
   "private": true,
   "scripts": {
-    "postinstall": "mkdir -p data/db",
+    "postinstall": "mkdir -p data/db; mkdir -p data/rethinkdb",
     "test": "npm run lint",
     "build": "rimraf build/*; export NODE_ENV=production; npm run build:api; npm run build:client; npm run build:server; cp package.json build/main/; cp package.json build/api/;",
     "build:client": "webpack --config bundling/webpack.config.prod.client.js",
@@ -13,6 +13,7 @@
     "start:main": "rimraf build/main/*; export NODE_ENV=development; node bundling/start-dev.js",
     "start:api": "rimraf build/api/*; export NODE_ENV=development; node bundling/start-api.js & wait",
     "mongo": "mongod --dbpath data/db",
+    "rethinkdb": "rethinkdb -d data/rethinkdb --driver-port 28015 --http-port 3002",
     "lint": "eslint .",
     "plop": "plop"
   },
@@ -89,6 +90,7 @@
     "redux-promise": "0.5.0",
     "redux-simple-router": "1.0.0",
     "redux-thunk": "1.0.2",
+    "rethinkdb": "2.2.0",
     "source-map-support": "0.4.0",
     "static-loader": "0.1.8"
   }

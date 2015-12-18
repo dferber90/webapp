@@ -7,3 +7,4 @@ An incomplete list of things I read to understand, achieve and build this stack:
 - https://egghead.io/series/getting-started-with-redux
 - http://redux.js.org/
 - https://github.com/facebook/dataloader
+- https://www.rethinkdb.com/docs/cookbook/javascript/
