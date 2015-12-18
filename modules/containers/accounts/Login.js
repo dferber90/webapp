@@ -17,9 +17,9 @@ const Login = React.createClass({
   statics: {
     reducer: defaultReducer,
   },
-  handleSubmit(emailOrUsername, password) {
+  handleSubmit(emailAddress, password) {
     const hashedPassword = hashPassword(password)
-    this.props.login(emailOrUsername, hashedPassword, this.props.auth.redirectLocation)
+    this.props.login(emailAddress, hashedPassword, this.props.auth.redirectLocation)
   },
   renderLoggedIn() {
     const { userId } = this.props.auth

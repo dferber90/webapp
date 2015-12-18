@@ -62,17 +62,21 @@ const logout = () => {
 // ----------------------------------------------------------------------------
 // Action Creators: Async
 // ----------------------------------------------------------------------------
-const login = (emailOrUsername, hashedPassword, redirectLocation) => dispatch => {
+const login = (emailAddress, hashedPassword, redirectLocation) => dispatch => {
   dispatch({ type: 'AUTH_LOGIN_ATTEMPT' })
 
-  dispatch(
-    apiClient({
-      endpoint: 'accounts/login/password',
-      body: { emailOrUsername, hashedPassword },
-      onSuccess: response => dispatch(loginSuccess(response.token, redirectLocation)),
-      onError: error => dispatch(loginError(error)),
-    })
-  )
+  apiClient({
+    endpoint: 'accounts/login/password',
+    body: { emailAddress, hashedPassword },
+    onSuccess: response => {
+      if (response.reason) {
+        dispatch(loginError(response.reason))
+      } else if (response.token) {
+        dispatch(loginSuccess(response.token, redirectLocation))
+      }
+    },
+    onError: error => dispatch(loginError(error)),
+  })
 }
 
 

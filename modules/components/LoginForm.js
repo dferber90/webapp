@@ -7,19 +7,19 @@ const LoginForm = React.createClass({
     isAuthenticating: React.PropTypes.bool,
   },
   getInitialState() {
-    return { username: 'a', password: 'b' }
+    return { username: '', password: '' }
   },
   onSubmit(event) {
     event.preventDefault()
-    const { username, password } = this.state
-    if (username.length > 0 && password.length > 0) {
-      this.props.handleSubmit(username, password)
+    const { emailAddress, password } = this.state
+    if (emailAddress.length > 0 && password.length > 0) {
+      this.props.handleSubmit(emailAddress, password)
     }
-    this.setState({ username: '', password: '' })
-    ReactDOM.findDOMNode(this.username).focus()
+    this.setState({ emailAddress: '', password: '' })
+    ReactDOM.findDOMNode(this.emailAddress).focus()
   },
-  changeUsername() {
-    this.setState({ username: this.username.value.trim() })
+  changeEmailAddress() {
+    this.setState({ emailAddress: this.emailAddress.value.trim() })
   },
   changePassword() {
     this.setState({ password: this.password.value.trim() })
@@ -27,8 +27,8 @@ const LoginForm = React.createClass({
   render() {
     return (
       <form onSubmit={this.onSubmit}>
-        <label htmlFor="username">Username</label><br/>
-        <input id="username" type="text" ref={node => this.username = node} value={this.state.username} onChange={this.changeUsername}/><br/><br/>
+        <label htmlFor="emailAddress">Username</label><br/>
+      <input id="emailAddress" type="text" ref={node => this.emailAddress = node} value={this.state.emailAddress} onChange={this.changeEmailAddress}/><br/><br/>
         <label htmlFor="password">Password</label><br/>
         <input id="password" type="password" ref={node => this.password = node} value={this.state.password} onChange={this.changePassword}/><br/><br/>
         <input type="submit" value="login" disabled={this.props.isAuthenticating}/>

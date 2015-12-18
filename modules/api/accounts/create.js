@@ -43,6 +43,7 @@ module.exports = {
 
     const data = {
       userId: result.generated_keys[0],
+      emailAddress,
       role,
     }
 
