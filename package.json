@@ -17,7 +17,7 @@
     "plop": "plop"
   },
   "devDependencies": {
-    "babel-core": "6.3.17",
+    "babel-core": "6.3.21",
     "babel-eslint": "4.1.5",
     "babel-loader": "6.2.0",
     "babel-plugin-react-transform": "2.0.0-beta1",
@@ -84,8 +84,7 @@
     "redux": "3.0.5",
     "redux-form": "4.0.0",
     "redux-logger": "2.3.1",
-
- "redux-node-logger": "0.0.3",
+    "redux-node-logger": "0.0.3",
     "redux-promise": "0.5.0",
     "redux-simple-router": "1.0.0",
     "redux-thunk": "1.0.2",
