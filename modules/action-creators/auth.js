@@ -69,7 +69,7 @@ const login = (emailAddress, hashedPassword, redirectLocation) => dispatch => {
     endpoint: 'accounts/login/password',
     body: { emailAddress, hashedPassword },
   })
-  .then(response => dispatch(loginSuccess(response.token, redirectLocation)))
+  .then(response => dispatch(loginStoreToken(response.token, redirectLocation)))
   .catch(error => {
     dispatch(loginError(error))
     if (error && error.reason === 'bad-credentials') {

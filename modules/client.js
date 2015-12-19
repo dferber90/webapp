@@ -75,3 +75,7 @@ match({ routes: rootRoute, location }, (/* error, redirectLocation, renderProps 
 // if (token) {
 //   store.dispatch(loginSetToken(token))
 // }
+
+// in case we had cookie but no info in localStorage, set it in localStorage
+//
+// in both cases, delete the information if it is outdated
