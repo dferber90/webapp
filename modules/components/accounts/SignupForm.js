@@ -33,6 +33,11 @@ const validate = values => {
   } else if (!passwordValidator(values.password)) {
     errors.password = 'Must be 2 characters or more'
   }
+  if (!values.repeatPassword) {
+    errors.repeatPassword = 'Required'
+  } else if (values.password !== values.repeatPassword) {
+    errors.repeatPassword = 'Must match password'
+  }
   return errors
 }
 
@@ -45,7 +50,7 @@ const SignupForm = React.createClass({
   },
   render() {
     const {
-      fields: { emailAddress, password },
+      fields: { emailAddress, password, repeatPassword },
       submitting,
       asyncValidating,
     } = this.props
@@ -60,6 +65,10 @@ const SignupForm = React.createClass({
         <input id="password" type="password" {...password}/>
         {password.touched && password.error && <div>{password.error}</div>}
         <br/>
+        <label htmlFor="repeatPassword">Repeat Password</label><br/>
+        <input id="repeatPassword" type="password" {...repeatPassword}/>
+        {repeatPassword.touched && repeatPassword.error && <div>{repeatPassword.error}</div>}
+        <br/>
         <br/>
         <input type="submit" value="Register" disabled={submitting || asyncValidating}/>
       </form>
@@ -73,7 +82,7 @@ if (SERVER) {
 
 module.exports = reduxForm({
   form: 'signup',
-  fields: ['emailAddress', 'password'],
+  fields: ['emailAddress', 'password', 'repeatPassword'],
   validate,
   asyncValidate,
   asyncBlurFields: ['emailAddress'],
