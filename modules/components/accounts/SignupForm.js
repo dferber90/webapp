@@ -40,7 +40,6 @@ const SignupForm = React.createClass({
   propTypes: {
     fields: React.PropTypes.object.isRequired,
     handleSubmit: React.PropTypes.func.isRequired,
-    onSubmit: React.PropTypes.func, // passed in from reduxForm, can't be marked as `isRequired`
     submitting: React.PropTypes.bool.isRequired,
     asyncValidating: React.PropTypes.bool.isRequired,
   },

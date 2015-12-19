@@ -2,8 +2,7 @@ const React = require('react')
 const { connect } = require('react-redux')
 const defaultReducer = require('../../reducers/default')
 const Layout = require('../../components/Layout')
-const SignupForm = require('./SignupForm')
-const styles = require('./Signup.css')
+const SignupForm = require('../../components/accounts/SignupForm')
 const { createAccount } = require('../../action-creators/accounts/create')
 const { logout } = require('../../action-creators/auth')
 
@@ -40,7 +39,7 @@ const Signup = React.createClass({
 })
 
 if (SERVER) {
-  Signup.styles = [styles.source, ...Layout.styles, ...SignupForm.styles]
+  Signup.styles = [...Layout.styles, ...SignupForm.styles]
 }
 
 const mapStateToProps = state => ({ auth: state.auth })

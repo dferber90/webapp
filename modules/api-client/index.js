@@ -3,7 +3,7 @@ const API_URL = process.env.API_URL || 'http://localhost:3001/api/v1'
 const { checkHttpStatus, parseJSON } = require('../utils/fetch-utils.js')
 
 const checkAPIErrors = result => {
-  if (result.error) throw result
+  if (result.reason) throw result
   return result
 }
 

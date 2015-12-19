@@ -2,6 +2,7 @@ const React = require('react')
 const { reduxForm } = require('redux-form')
 const emailValidator = require('../../validation/email')
 const passwordValidator = require('../../validation/password')
+const styles = require('./LoginForm.css')
 
 const validate = values => {
   const errors = {}
@@ -35,7 +36,7 @@ const LoginForm = React.createClass({
       handleSubmit,
     } = this.props
     return (
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <label htmlFor="emailAddress">Email Address</label><br/>
         <input id="emailAddress" type="text" {...emailAddress}/><br/>
         {emailAddress.touched && emailAddress.error && <div>{emailAddress.error}</div>}
@@ -49,6 +50,10 @@ const LoginForm = React.createClass({
     )
   },
 })
+
+if (SERVER) {
+  LoginForm.styles = [styles.source]
+}
 
 module.exports = reduxForm({
   form: 'signup',

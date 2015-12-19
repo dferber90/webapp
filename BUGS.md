@@ -5,6 +5,8 @@ List of known bugs
 
 ## back button
 When navigating to `http://localhost:3000/account/login`, the back button has to be pressed twice to actually go back.
+When disabling redux-simple-router it works correctly. Seems to be an issue on their side.
+https://github.com/rackt/redux-simple-router/issues/45
 
 
 ## account creation

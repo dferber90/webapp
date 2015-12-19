@@ -49,7 +49,7 @@ const Login = React.createClass({
 })
 
 if (SERVER) {
-  Login.styles = [...Layout.styles]
+  Login.styles = [...Layout.styles, ...LoginForm.styles]
 }
 
 module.exports = connect(
