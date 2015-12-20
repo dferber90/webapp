@@ -1,6 +1,5 @@
 const React = require('react')
 const { connect } = require('react-redux')
-const { bindActionCreators } = require('redux')
 const LoginForm = require('../../components/accounts/LoginForm')
 const authActionCreators = require('../../action-creators/auth')
 const defaultReducer = require('../../reducers/default')
@@ -56,5 +55,5 @@ module.exports = connect(
   state => ({ auth: state.auth }),
 
   // binds addTodo to dispatch and adds it to props
-  dispatch => bindActionCreators(authActionCreators, dispatch)
+  authActionCreators // passing object directly binds action creators automatically
 )(Login)
