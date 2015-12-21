@@ -44,9 +44,10 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(auth)
 
-// TODO enable for /graphql/v1 as well?
 app.use('/api/v1', createRethinkDBConnection)
 app.use('/api/v1', router)
+
+app.use('/graphql/v1', createRethinkDBConnection)
 app.use(
   '/graphql/v1',
   graphqlHTTP(
@@ -56,6 +57,7 @@ app.use(
       pretty: DEVELOPMENT,
       rootValue: { // see https://github.com/graphql/express-graphql#advanced-options
         auth: request.auth,
+        rdb: request.rdb,
       },
     })
   )

@@ -8,6 +8,7 @@ const getCreateAppStore = require('./utils/getCreateAppStore')
 const { syncReduxAndRouter } = require('redux-simple-router')
 const createAppStore = getCreateAppStore({/* rootValues unused on client */})
 const store = createAppStore(window.APP_STATE)
+const resolveGraphQueries = require('./utils/resolveGraphQueries')
 
 if (DEVELOPMENT) {
   window.store = store
@@ -31,6 +32,12 @@ syncReduxAndRouter(history, store)
 const rootRoute = getRootRoute(store)
 
 history.listenBefore((location, callback) => {
+  console.log(location)
+  // TODO listenBefore runs twice somehow.
+  // this causes data to be fetched twice
+  // this may also be the reason the back button has to be pressed twice
+  // This has to do with redux-simple-router, because it causes the second listenBefore
+  console.log('listening before')
   new Promise((resolve) => {
     match({ routes: rootRoute, location }, (error, redirectLocation, renderProps) => {
       resolve(renderProps)
@@ -39,14 +46,20 @@ history.listenBefore((location, callback) => {
   .then(renderProps => {
     if (!renderProps) return []
 
-    return renderProps.components
+    const { components } = renderProps
+
+    const resolveDataPromises = components
       .filter(component => component && component.fetchData)
       .map(component => component.fetchData({
         dispatch: store.dispatch,
         getState: store.getState,
       }))
+
+    const graphQLPromise = resolveGraphQueries(components, store)
+
+    return Promise.all([...resolveDataPromises, graphQLPromise])
   })
-  .then(callback)
+  .then(() => callback())
   .catch(error => {
     console.log(error) // eslint-disable-line no-console
     callback()

@@ -9,6 +9,7 @@ const {
   createPage,
   write,
 } = require('./server-utils')
+const resolveGraphQueries = require('./resolveGraphQueries')
 
 function renderApp(store, auth, props, token, res) {
   // log user in
@@ -22,29 +23,33 @@ function renderApp(store, auth, props, token, res) {
   // --------------------------------------------------------------------------
   // Hybrid Approach (components return (dispatched) promises in fetchData)
   // --------------------------------------------------------------------------
-  const dataRequirements = props.components
+  const state = store.getState()
+  const fetchDataPromises = props.components
     .filter(component => component && component.fetchData)
     .map(component => component.fetchData({
       dispatch: store.dispatch,
-      getState: store.getState,
+      state,
     }))
 
-  Promise.all(dataRequirements)
-  .then(() => {
-    const markup = renderToString(
-      <Provider store={store}>
-        <RoutingContext {...props}/>
-      </Provider>
-    )
+  const graphQLPromise = resolveGraphQueries(props.components, store)
 
-    const styles = loadStylesFromComponents(props.components)
-    const html = createPage(markup, store.getState(), styles)
-    write(html, 'text/html', res)
-  })
-  .catch(error => {
-    console.log(error) // eslint-disable-line no-console
-    write(`<p>API server down.</p><pre>${JSON.stringify(error, null, 2)}</pre>`, 'text/html', res)
-  })
+  Promise
+    .all([...fetchDataPromises, graphQLPromise])
+    .then(() => {
+      const markup = renderToString(
+        <Provider store={store}>
+          <RoutingContext {...props}/>
+        </Provider>
+      )
+
+      const styles = loadStylesFromComponents(props.components)
+      const html = createPage(markup, store.getState(), styles)
+      write(html, 'text/html', res)
+    })
+    .catch(error => {
+      console.log(error) // eslint-disable-line no-console
+      write(`<p>API server down.</p><pre>${JSON.stringify(error, null, 2)}</pre>`, 'text/html', res)
+    })
 }
 
 module.exports = renderApp

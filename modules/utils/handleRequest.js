@@ -18,7 +18,7 @@ const pretty = new PrettyError()
 function handleRequest(req, res) {
   const token = req.cookies.token
   const auth = tokenToAuth(token)
-  const rootValue = { auth }
+  const rootValue = { auth, rdb: req.rdb }
   const createAppStore = getCreateAppStore(rootValue)
   const store = createAppStore({ counter: 3 })
   const history = createMemoryHistory()

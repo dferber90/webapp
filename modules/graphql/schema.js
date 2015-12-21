@@ -1,3 +1,4 @@
+const r = require('rethinkdb')
 const { ObjectId: objectId } = require('promised-mongo')
 const { todosCollection, usersCollection } = require('../db/mongo')
 const normalizeId = doc => {
@@ -218,7 +219,7 @@ const Query = new GraphQLObjectType({
         id: { type: new GraphQLNonNull(GraphQLString) },
       },
       resolve: (_, args) => {
-        return todosCollection.findOne({ id: objectId(args.id) })
+        return todosCollection.findOne({ _id: objectId(args.id) }).then(normalizeId)
       },
     },
     users: {
@@ -241,6 +242,16 @@ const Query = new GraphQLObjectType({
         return usersCollection
           .findOne({ _id: objectId(args.id) })
           .then(normalizeId)
+      },
+    },
+    me: {
+      type: User,
+      args: {},
+      resolve: (source, args, { rootValue: { auth: { userId, isAuthenticated }, rdb } }) => {
+        if (!isAuthenticated) {
+          throw new Error('not-authenticated')
+        }
+        return r.table('users').get(userId).run(rdb)
       },
     },
     posts: {

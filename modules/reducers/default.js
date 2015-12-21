@@ -2,6 +2,8 @@ const authReducer = require('./auth')
 const pendingReducer = require('./pending')
 const { routeReducer } = require('redux-simple-router')
 const { reducer: formReducer } = require('redux-form')
+const graphqlReducer = require('./graphql')
+const reduceReducers = require('../utils/reduceReducers')
 
 // TODO actually use this
 function loginFormReducer(state, action) {
@@ -13,7 +15,7 @@ function loginFormReducer(state, action) {
   }
 }
 
-module.exports = (state, action) => {
+const combinedReducers = (state, action) => {
   return {
     ...state,
     routing: routeReducer(state.routing, action),
@@ -24,3 +26,6 @@ module.exports = (state, action) => {
     })(state.form, action),
   }
 }
+
+const defaultReducer = reduceReducers(combinedReducers, graphqlReducer)
+module.exports = defaultReducer
