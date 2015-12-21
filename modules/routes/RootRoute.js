@@ -12,6 +12,7 @@ module.exports = store => ({
         require('./AboutRoute')(store),
         require('./DashboardRoute')(store),
         require('./AccountsRoute')(store),
+        require('./SubmitRoute')(store),
         {
           indexRoute: {
             component: Frontpage,
