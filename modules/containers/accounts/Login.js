@@ -3,7 +3,6 @@ const { connect } = require('react-redux')
 const LoginForm = require('../../components/accounts/LoginForm')
 const authActionCreators = require('../../action-creators/auth')
 const defaultReducer = require('../../reducers/default')
-const Layout = require('../../components/Layout')
 const hashPassword = require('../../utils/hashPassword')
 
 const Login = React.createClass({
@@ -44,7 +43,7 @@ const Login = React.createClass({
 })
 
 if (SERVER) {
-  Login.styles = [...Layout.styles, ...LoginForm.styles]
+  Login.styles = [...LoginForm.styles]
 }
 
 module.exports = connect(

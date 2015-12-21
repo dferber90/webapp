@@ -1,6 +1,5 @@
 const React = require('react')
 const styles = require('./Frontpage.css')
-const Layout = require('../components/Layout.js')
 const Entry = require('../components/Frontpage/Entry.js')
 const { connect } = require('react-redux')
 
@@ -52,7 +51,7 @@ const Frontpage = React.createClass({
 })
 
 if (SERVER) {
-  Frontpage.styles = [styles.source, ...Layout.styles, ...Entry.styles]
+  Frontpage.styles = [styles.source, ...Entry.styles]
 }
 
 const mapStateToProps = state => {
