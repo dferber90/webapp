@@ -31,7 +31,7 @@
     "css-loader": "0.23.0",
     "eslint": "1.10.3",
     "eslint-config-airbnb": "2.1.1",
-    "eslint-plugin-react": "3.11.3",
+    "eslint-plugin-react": "3.12.0",
     "exists-sync": "0.0.3",
     "fake-file-loader": "1.0.0",
     "fake-style-loader": "1.0.0",
@@ -90,7 +90,7 @@
     "redux-promise": "0.5.0",
     "redux-simple-router": "1.0.1",
     "redux-thunk": "1.0.2",
-    "rethinkdb": "2.2.0",
+    "rethinkdb": "2.2.1",
     "source-map-support": "0.4.0",
     "static-loader": "0.1.8"
   }
