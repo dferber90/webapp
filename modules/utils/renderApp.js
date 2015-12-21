@@ -4,30 +4,18 @@ const { RoutingContext } = require('react-router')
 const { renderToString } = require('react-dom/server')
 const findAndReplaceReducerFromComponents = require('./findAndReplaceReducerFromComponents')
 const loadStylesFromComponents = require('./loadStylesFromComponents')
+const satisfyDataRequirements = require('./satisfyDataRequirements.js')
 const {
   createPage,
   write,
 } = require('./server-utils')
-const resolveGraphQueries = require('./resolveGraphQueries')
 
 function renderApp(store, props, token, res) {
   // register correct reducer for this route
   findAndReplaceReducerFromComponents(props.components, store.replaceReducer)
 
-  // --------------------------------------------------------------------------
-  // Hybrid Approach (components return (dispatched) promises in fetchData)
-  // --------------------------------------------------------------------------
-  const fetchDataPromises = props.components
-    .filter(component => component && typeof component.fetchData === 'function')
-    .map(component => component.fetchData({
-      dispatch: store.dispatch,
-      state: store.getState(),
-    }))
-
-  const graphQLPromise = resolveGraphQueries(props.components, store)
-
   Promise
-    .all([...fetchDataPromises, graphQLPromise])
+    .all(satisfyDataRequirements(props.components, store))
     .then(() => {
       const markup = renderToString(
         <Provider store={store}>
