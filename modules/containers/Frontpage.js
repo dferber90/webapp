@@ -14,15 +14,6 @@ const Frontpage = React.createClass({
     isAuthenticated: React.PropTypes.bool.isRequired,
     me: React.PropTypes.object.isRequired,
   },
-  statics: {
-    graphQuery(state) {
-      if (state.auth.isAuthenticated) {
-        return `{
-          me { id, emailAddress },
-        }`
-      }
-    },
-  },
   render() {
     const entriesLength = entries.length
     return (

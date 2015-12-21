@@ -2,8 +2,9 @@ const React = require('react')
 const favicon = require('../images/favicon.png')
 const styles = require('./Navbar.css')
 const { Link } = require('react-router')
+const { connect } = require('react-redux')
 
-const Navbar = () => (
+const Navbar = ({ isAuthenticated, me }) => (
   <div className={styles.container}>
     <div className={styles.logoContainer}>
       <img className={styles.logo} src={favicon}/>
@@ -12,12 +13,19 @@ const Navbar = () => (
       <Link to="/" className={styles.brandLink}>Telescope</Link>
     </div>
     <div className={styles.space}></div>
-    <div className={styles.right}>
-      <Link to="/account/login" className={styles.link}>Login</Link>
-    </div>
-    <div className={styles.right}>
-      <Link to="/account/signup" className={styles.link}>Sign up</Link>
-    </div>
+    {isAuthenticated ? (
+      <div className={styles.right}>
+        <Link to="/account/login" className={styles.link}>
+          {me.emailAddress}
+        </Link>
+      </div>
+    ) : (
+      <div className={styles.right}>
+        <Link to="/account/login" className={styles.link}>{isAuthenticated ? me.emailAddress : 'Login'}</Link>
+        {' '}
+        <Link to="/account/signup" className={styles.link}>Register</Link>
+      </div>
+    )}
     <div className={styles.right}>
       <Link to="/submit" className={styles.submit}>POST</Link>
     </div>
@@ -28,4 +36,19 @@ if (SERVER) {
   Navbar.styles = [styles.source]
 }
 
-module.exports = Navbar
+Navbar.graphQuery = state => {
+  if (state.auth.isAuthenticated) {
+    return `{
+      me { id, emailAddress },
+    }`
+  }
+}
+
+const mapStateToProps = state => {
+  const { userId, isAuthenticated } = state.auth
+  return {
+    isAuthenticated,
+    me: isAuthenticated ? state.users[userId] : {},
+  }
+}
+module.exports = connect(mapStateToProps)(Navbar)
