@@ -2,7 +2,6 @@ const React = require('react')
 const { Provider } = require('react-redux')
 const { RoutingContext } = require('react-router')
 const { renderToString } = require('react-dom/server')
-const { loginSuccess } = require('../action-creators/auth')
 const findAndReplaceReducerFromComponents = require('./findAndReplaceReducerFromComponents')
 const loadStylesFromComponents = require('./loadStylesFromComponents')
 const {
@@ -11,24 +10,18 @@ const {
 } = require('./server-utils')
 const resolveGraphQueries = require('./resolveGraphQueries')
 
-function renderApp(store, auth, props, token, res) {
-  // log user in
-  if (auth.isAuthenticated) {
-    store.dispatch(loginSuccess(token))
-  }
-
+function renderApp(store, props, token, res) {
   // register correct reducer for this route
   findAndReplaceReducerFromComponents(props.components, store.replaceReducer)
 
   // --------------------------------------------------------------------------
   // Hybrid Approach (components return (dispatched) promises in fetchData)
   // --------------------------------------------------------------------------
-  const state = store.getState()
   const fetchDataPromises = props.components
     .filter(component => component && typeof component.fetchData === 'function')
     .map(component => component.fetchData({
       dispatch: store.dispatch,
-      state,
+      state: store.getState(),
     }))
 
   const graphQLPromise = resolveGraphQueries(props.components, store)
