@@ -39,11 +39,7 @@ const Login = React.createClass({
   },
   render() {
     const { userId } = this.props.auth
-    return (
-      <Layout>
-        {userId ? this.renderLoggedIn() : this.renderLoginForm()}
-      </Layout>
-    )
+    return userId ? this.renderLoggedIn() : this.renderLoginForm()
   },
 })
 

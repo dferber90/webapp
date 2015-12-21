@@ -30,11 +30,7 @@ const Signup = React.createClass({
     return <SignupForm onSubmit={this.handleSubmission}/>
   },
   render() {
-    return (
-      <Layout>
-        {this.props.auth.isAuthenticated ? this.renderAlreadyAuthenticated() : this.renderLoginForm()}
-      </Layout>
-    )
+    return this.props.auth.isAuthenticated ? this.renderAlreadyAuthenticated() : this.renderLoginForm()
   },
 })
 

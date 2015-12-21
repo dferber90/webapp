@@ -61,7 +61,7 @@ history.listenBefore((location, callback) => {
   })
   .then(() => callback())
   .catch(error => {
-    console.log(error) // eslint-disable-line no-console
+    console.error(error) // eslint-disable-line no-console
     callback()
     // TODO move client to 500 page or recover somehow
   })

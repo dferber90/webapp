@@ -27,7 +27,7 @@ const Frontpage = React.createClass({
   render() {
     const entriesLength = entries.length
     return (
-      <Layout>
+      <div className={styles.content}>
         <div className={styles.header}>
           <div className={styles.innerHeader}>
             {this.props.isAuthenticated ? (<span>Signed in as <i>{this.props.me.emailAddress}</i>.</span>) : ''} View: <b>Top</b>.
@@ -46,7 +46,7 @@ const Frontpage = React.createClass({
             />
           ))}
         </div>
-      </Layout>
+      </div>
     )
   },
 })

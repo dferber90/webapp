@@ -25,7 +25,7 @@ function renderApp(store, auth, props, token, res) {
   // --------------------------------------------------------------------------
   const state = store.getState()
   const fetchDataPromises = props.components
-    .filter(component => component && component.fetchData)
+    .filter(component => component && typeof component.fetchData === 'function')
     .map(component => component.fetchData({
       dispatch: store.dispatch,
       state,
@@ -47,7 +47,7 @@ function renderApp(store, auth, props, token, res) {
       write(html, 'text/html', res)
     })
     .catch(error => {
-      console.log(error) // eslint-disable-line no-console
+      console.error(error) // eslint-disable-line no-console
       write(`<p>API server down.</p><pre>${JSON.stringify(error, null, 2)}</pre>`, 'text/html', res)
     })
 }

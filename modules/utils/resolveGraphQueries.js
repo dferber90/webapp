@@ -96,8 +96,6 @@ function resolveGraphQueries(components, store) {
     }
     return result
   })
-  // .then(result => console.log(result)) // eslint-disable-line no-console
-  // .catch(error => console.log(error)) // eslint-disable-line no-console
 
   return graphQLPromise
 }
