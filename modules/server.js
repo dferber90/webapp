@@ -14,7 +14,6 @@ app.disable('x-powered-by')
 app.use(compress()) // should be first middleware
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(cookieParser())
-app.use(createRethinkDBConnection)
 
 if (DEVELOPMENT) {
   require('./utils/createDevelopmentProxy')(app)
@@ -24,5 +23,5 @@ if (DEVELOPMENT) {
   app.use(path.resolve(STATS.publicPath), express.static(path.basename(STATS.publicPath)))
 }
 
-app.get('*', handleRequest)
+app.get('*', createRethinkDBConnection, handleRequest)
 app.listen(PORT, () => log.info(`server listening on port ${PORT}`))
