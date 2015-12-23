@@ -1,5 +1,11 @@
 # want
 
+## security audit
+https://www.youtube.com/watch?v=a8zYmRmtss0
+
+## transform inline environment variables with babel instead of webpack
+http://babeljs.io/docs/plugins/transform-inline-environment-variables/
+
 ## uglify static css
 loader which uglifies static css
 
