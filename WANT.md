@@ -1,6 +1,12 @@
 # want
 
 
+## bcrypt for password
+
+store salted passwords
+https://github.com/ncb000gt/node.bcrypt.js#readme
+
+
 ## npm shrinkwrap
 
 Use npm shrinkwrap to pin down dependencies all the way.
