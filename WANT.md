@@ -1,7 +1,20 @@
 # want
 
+
+## npm shrinkwrap
+
+Use npm shrinkwrap to pin down dependencies all the way.
+
+## helmet for security
+
+https://github.com/helmetjs/helmet#readme
+
+
 ## uglify static css
-loader which uglifies static css
+
+loader which uglifies static css. This isn't necessary, because:
+Normal HTML uglifier can be used after generating static HTML&CSS and uglify both.
+
 
 ## service workers
 
