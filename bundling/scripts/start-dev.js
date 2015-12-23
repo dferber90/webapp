@@ -3,9 +3,9 @@
 var webpack = require('webpack')
 var path = require('path')
 var WebpackDevServer = require('webpack-dev-server')
-var clientConfig = require('./webpack.config.dev.client.js')
+var clientConfig = require('../webpack.config.dev.client.js')
 var nodemon = require('nodemon')
-var canContinue = require('./utils/canContinue.js')
+var canContinue = require('../utils/canContinue.js')
 var log = require('npmlog')
 log.level = 'warn'
 
@@ -32,7 +32,7 @@ function startServer() {
     execMap: {
       js: 'node',
     },
-    script: path.join(__dirname, '..', 'build', 'main', 'server.js'),
+    script: path.join(__dirname, '..', '..', 'build', 'main', 'server.js'),
     ignore: ['*'],
     watch: ['nothing/'],
     ext: 'noop',
@@ -47,7 +47,7 @@ function startServer() {
 }
 
 function bundleServer() {
-  var serverConfig = require('./webpack.config.dev.server.js')
+  var serverConfig = require('../webpack.config.dev.server.js')
   var serverCompiler = webpack(serverConfig)
   var bundleStart
 
