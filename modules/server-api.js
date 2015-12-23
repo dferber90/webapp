@@ -39,6 +39,7 @@ router.route('/profile')
 router.route('/profile/:id')
   .get(profile.get)
 
+app.disable('x-powered-by')
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())

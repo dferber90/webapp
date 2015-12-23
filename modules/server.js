@@ -10,6 +10,7 @@ require('static!./images/favicon.ico?output=../public/favicon.ico')
 const PORT = process.env.PORT || 3000
 
 const app = express()
+app.disable('x-powered-by')
 app.use(compress()) // should be first middleware
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(cookieParser())
