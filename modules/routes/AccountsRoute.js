@@ -6,7 +6,16 @@ module.exports = () => ({
       getComponent(location, cb) {
         require.ensure(
           [],
-          (require) => cb(null, require('../containers/Login.js'))
+          (require) => cb(null, require('../containers/accounts/Login.js'))
+        )
+      },
+    },
+    {
+      path: 'signup',
+      getComponent(location, cb) {
+        require.ensure(
+          [],
+          (require) => cb(null, require('../containers/accounts/Signup.js'))
         )
       },
     },

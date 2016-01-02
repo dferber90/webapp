@@ -6,7 +6,6 @@ const TodosForm = require('../components/TodosForm')
 const todoActionCreators = require('../action-creators/todos')
 const reduceWithDefault = require('../utils/reduceWithDefault')
 const todosReducer = require('../reducers/todos')
-// const { checkHttpStatus, parseJSON } = require('../utils/fetch-utils')
 const { setTodos } = require('../action-creators/todos')
 
 const Dashboard = React.createClass({
@@ -63,7 +62,7 @@ const Dashboard = React.createClass({
       return dispatch({
         type: 'GRAPHQL',
         payload: {
-          query: '{ todos { text, _id } }',
+          query: '{ todos { text, id } }',
           variables: {},
         },
         meta: {

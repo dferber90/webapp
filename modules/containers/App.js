@@ -1,8 +1,7 @@
 const React = require('react')
-const Layout = require('../components/Layout')
 const SplitReducer = require('../components/SplitReducer')
 const defaultReducer = require('../reducers/default')
-const { connect } = require('react-redux')
+const appStyles = require('./App.css')
 
 const App = React.createClass({
   propTypes: {
@@ -15,14 +14,14 @@ const App = React.createClass({
   render() {
     return (
       <SplitReducer {...this.props}>
-        <Layout>
-          {this.props.children}
-          <p>Pending counter: {this.props.pending}</p>
-        </Layout>
+        {this.props.children}
       </SplitReducer>
     )
   },
 })
 
-const mapStateToProps = state => ({ pending: state.pending })
-module.exports = connect(mapStateToProps)(App)
+if (SERVER) {
+  App.styles = [appStyles.source]
+}
+
+module.exports = App

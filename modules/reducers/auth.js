@@ -56,6 +56,7 @@ function auth(state = defaultState, action) {
         ...state,
         token: false,
         userId: false,
+        role: 'anonymous',
         isAuthenticated: false,
         isAuthenticating: false,
         failReason: '',

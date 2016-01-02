@@ -1,20 +1,25 @@
 class BaseAdapter {/* TODO handle caching!?  */}
 let Adapter
 if (CLIENT) {
-  // us something that uses fetch at localhost:30001/graphql/v1
+  // us something that uses fetch at localhost:3001/graphql/v1
   Adapter = class clientAdapter extends BaseAdapter {
     constructor({ endpoint }) {
       super()
       this.endpoint = endpoint
     }
     execute(query, variables) {
+      // TODO use token from store instead!?
+      // otherwise it could lead to unexpected results (having token, but not being logged in etc)
+      const token = localStorage.getItem('token')
+      const authorizationHeader = token ? { 'Authorization': 'Bearer ' + localStorage.getItem('token') } : {}
       return fetch(this.endpoint, {
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
+          ...authorizationHeader,
         },
         body: JSON.stringify({
-          query: query,
+          query,
           ...(variables ? { variables } : {}),
         }),
       })

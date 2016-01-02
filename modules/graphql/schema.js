@@ -1,10 +1,10 @@
-const mongo = require('promised-mongo')
-const { ObjectId } = mongo
-/* eslint-disable new-cap */
-
-const db = mongo('mongodb://localhost:27017/app')
-// const authorsCollection = db.collection('authors')
-const todosCollection = db.collection('todos')
+const r = require('rethinkdb')
+const { ObjectId: objectId } = require('promised-mongo')
+const { todosCollection, usersCollection } = require('../db/mongo')
+const normalizeId = doc => {
+  doc.id = doc._id
+  return doc
+}
 
 /* eslint-disable no-unused-vars */
 const {
@@ -23,6 +23,7 @@ const {
   // This is the class we need to create the schema
   GraphQLSchema,
 } = require('graphql')
+const CustomGraphQLDateType = require('graphql-custom-datetype')
 /* eslint-enable no-unused-vars */
 
 
@@ -30,25 +31,69 @@ const {
 // Types
 // ----------------------------------------------------------------------------
 
+const roleType = new GraphQLEnumType({
+  name: 'ROLE',
+  values: {
+    USER: { value: 'user' },
+    ADMIN: { value: 'admin' },
+  },
+})
+
+const User = new GraphQLObjectType({
+  name: 'User',
+  description: 'The account of a user',
+  fields: () => ({
+    id: { type: new GraphQLNonNull(GraphQLString) },
+    userName: { type: new GraphQLNonNull(GraphQLString) },
+    firstName: { type: GraphQLString },
+    lastName: { type: GraphQLString },
+    photo: { type: GraphQLString },
+    role: { type: roleType },
+    createdAt: { type: CustomGraphQLDateType },
+    emailAddress: { type: new GraphQLNonNull(GraphQLString) },
+    emailVerified: { type: new GraphQLNonNull(GraphQLBoolean) },
+  }),
+})
+
+const Post = new GraphQLObjectType({
+  name: 'Post',
+  description: 'Single entry submitted by an user',
+  fields: () => ({
+    id: { type: new GraphQLNonNull(GraphQLString) },
+    url: { type: GraphQLString },
+    submittedAt: { type: new GraphQLNonNull(CustomGraphQLDateType) },
+    text: { type: GraphQLString },
+    author: { type: new GraphQLNonNull(User) },
+    upvoters: { type: new GraphQLList(User) },
+    upvotes: { type: new GraphQLNonNull(GraphQLInt) },
+  }),
+})
+
+const Comment = new GraphQLObjectType({
+  name: 'Comment',
+  description: 'A comment submitted by an user',
+  fields: () => ({
+    id: { type: new GraphQLNonNull(GraphQLString) },
+    postId: { type: new GraphQLNonNull(GraphQLString) },
+    author: { type: new GraphQLNonNull(User) },
+    text: { type: new GraphQLNonNull(GraphQLString) },
+    createdAt: { type: new GraphQLNonNull(CustomGraphQLDateType) },
+    upvoters: { type: new GraphQLNonNull(new GraphQLList(User)) },
+    upvotes: { type: new GraphQLNonNull(GraphQLInt) },
+    replyOf: { type: GraphQLString },
+  }),
+})
+
 const Todo = new GraphQLObjectType({
   name: 'Todo',
   description: 'A todo list item',
   fields: () => ({
-    _id: { type: new GraphQLNonNull(GraphQLString) },
+    id: { type: new GraphQLNonNull(GraphQLString) },
     text: { type: new GraphQLNonNull(GraphQLString) },
     checked: { type: new GraphQLNonNull(GraphQLBoolean) },
   }),
 })
 
-
-// const Author = new GraphQLObjectType({
-//   name: 'Author',
-//   description: 'Author of a Post (or a comment)',
-//   fields: () => ({
-//     _id: { type: new GraphQLNonNull(GraphQLString) },
-//     name: { type: GraphQLString },
-//   }),
-// })
 //
 // const Post = new GraphQLObjectType({
 //   name: 'Post',
@@ -111,7 +156,26 @@ const Mutation = new GraphQLObjectType({
       },
       resolve: (rootValues, args) => {
         const todo = { text: args.text, checked: false }
-        return todosCollection.insert(todo)
+        return todosCollection.insert(todo).then(normalizeId)
+      },
+    },
+    createUser: {
+      type: User,
+      args: {
+        userName: { type: new GraphQLNonNull(GraphQLString) },
+        emailAddress: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      resolve: (rootValues, args) => {
+        if (args.emailAddress.indexOf('@') === -1) {
+          throw new Error('invalid-mail')
+        }
+
+        return usersCollection.insert({
+          userName: args.userName,
+          emailAddress: args.emailAddress,
+          emailVerified: false,
+          createdAt: new Date(),
+        }).then(normalizeId)
       },
     },
   }),
@@ -143,42 +207,69 @@ const Query = new GraphQLObjectType({
     todos: {
       type: new GraphQLList(Todo),
       resolve: () => {
-        return todosCollection.find({}).toArray()
+        return todosCollection
+          .find({})
+          .toArray()
+          .then(res => res.map(normalizeId))
       },
     },
     todo: {
       type: Todo,
       args: {
-        _id: { type: new GraphQLNonNull(GraphQLString) },
+        id: { type: new GraphQLNonNull(GraphQLString) },
       },
       resolve: (_, args) => {
-        return todosCollection.findOne({ _id: ObjectId(args._id) })
+        return todosCollection.findOne({ _id: objectId(args.id) }).then(normalizeId)
       },
     },
-    // posts: {
-    //   type: new GraphQLList(Post),
-    //   resolve: () => PostsList, // dummy data
-    // },
-    // post: {
-    //   type: Post,
-    //   args: {
-    //     id: { type: new GraphQLNonNull(GraphQLString) },
-    //   },
-    //   resolve: (post, args) => {
-    //     return PostsList.find((p) => p._id === args.id)
-    //   },
-    // },
-    // authors: {
-    //   type: new GraphQLList(Author),
-    //   resolve: (rootValue, args, info) => {
-    //     const fields = {}
-    //     const fieldASTs = info.fieldASTs
-    //     fieldASTs[0].selectionSet.selections.map(selection => {
-    //       fields[selection.name.value] = 1
-    //     })
-    //     return authorsCollection.find({}, fields).toArray()
-    //   },
-    // },
+    users: {
+      type: new GraphQLList(User),
+      resolve: () => {
+        // TODO omit some fields
+        return usersCollection
+          .find({})
+          .toArray()
+          .then(res => res.map(normalizeId))
+      },
+    },
+    user: {
+      type: User,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      resolve: (_, args) => {
+        // TODO omit some fields
+        return usersCollection
+          .findOne({ _id: objectId(args.id) })
+          .then(normalizeId)
+      },
+    },
+    me: {
+      type: User,
+      args: {},
+      resolve: (source, args, { rootValue: { auth: { userId, isAuthenticated }, rdb } }) => {
+        if (!isAuthenticated) {
+          throw new Error('not-authenticated')
+        }
+        return r.table('users').get(userId).run(rdb)
+      },
+    },
+    posts: {
+      type: new GraphQLList(Post),
+      resolve: () => {},
+    },
+    post: {
+      type: Post,
+      resolve: () => {},
+    },
+    comments: {
+      type: new GraphQLList(Comment),
+      resolve: () => {},
+    },
+    comment: {
+      type: Comment,
+      resolve: () => {},
+    },
   }),
 })
 

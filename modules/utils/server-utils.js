@@ -1,8 +1,5 @@
 const zlib = require('zlib')
-
-// const API_URL = 'http://localhost:3001/api/v1'
-// const fetch = require('isomorphic-fetch')
-// const { checkHttpStatus, parseJSON } = require('./fetch-utils.js')
+const normalizeCSSUrl = 'https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css'
 
 module.exports = {
   writeError(msg, res) {
@@ -36,42 +33,23 @@ module.exports = {
 
   createPage(html, state, styles) {
     const devServer = DEVELOPMENT ? '<script src="http://localhost:8080/webpack-dev-server.js"></script>' : ''
-    return `
-    <!doctype html>
-    <html>
-      <head>
-        <meta charset="utf-8"/>
-        <title>My Universal App!</title>
-      <style type="text/css" id="fast-css">${styles}</style>
-        <script>APP_STATE=${JSON.stringify(state)}</script>
-      </head>
-      <body>
-        <div id="app">${html}</div>
-        <script src="/assets/vendor.js"></script>
-        <script src="/assets/react.js"></script>
-        <script src="/assets/app.js"></script>
-        ${devServer}
-      </body>
-    </html>
-    `
+    return `<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>My Universal App!</title>
+    <link rel="stylesheet" href="${normalizeCSSUrl}">
+    <style type="text/css" id="fast-css">${styles}</style>
+  </head>
+  <body>
+    <div id="app">${html}</div>
+    <script>APP_STATE=${JSON.stringify(state)}</script>
+    <script src="/assets/vendor.js"></script>
+    <script src="/assets/react.js"></script>
+    <script src="/assets/app.js"></script>
+    ${devServer}
+  </body>
+</html>
+`
   },
-
-  // unused, decoding directly on server to speed things up
-  /*
-  verifyToken(token) {
-    return (
-      fetch(`${API_URL}/accounts/login/token`, {
-        method: 'post',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-      })
-      .then(checkHttpStatus)
-      .then(parseJSON)
-      .then(response => response.status === 'success' && response.payload.tokenValid)
-    )
-  },
-  */
 }

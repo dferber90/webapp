@@ -1,5 +1,27 @@
 # want
 
+
+## bcrypt for password
+
+store salted passwords
+https://github.com/ncb000gt/node.bcrypt.js#readme
+
+
+## npm shrinkwrap
+
+Use npm shrinkwrap to pin down dependencies all the way.
+
+## helmet for security
+
+https://github.com/helmetjs/helmet#readme
+
+
+## uglify static css
+
+loader which uglifies static css. This isn't necessary, because:
+Normal HTML uglifier can be used after generating static HTML&CSS and uglify both.
+
+
 ## service workers
 
 https://www.youtube.com/watch?v=jCKZDTtUA2A

@@ -1,11 +1,10 @@
 const jwt = require('jsonwebtoken')
 const { serialize } = require('cookie')
 const moment = require('moment')
-const fetch = require('isomorphic-fetch')
-const { checkHttpStatus, parseJSON } = require('../utils/fetch-utils.js')
 const { pushPath } = require('redux-simple-router')
 
-const API_URL = 'http://localhost:3001/api/v1'
+const apiClient = require('../api-client')
+
 const localStorageTokenKey = 'token'
 const defaultCookieOptions = {
   path: '/',
@@ -24,7 +23,7 @@ const loginSuccess = (token, redirectLocation) => dispatch => {
   const successfullLoginAction = {
     type: 'AUTH_LOGIN_SUCCESS',
     payload: {
-      token: token,
+      token,
       tokenContents: jwt.decode(token),
     },
   }
@@ -41,7 +40,7 @@ const loginStoreToken = (token, redirectLocation = false) => dispatch => {
     localStorage.setItem(localStorageTokenKey, token)
     document.cookie = serialize('token', token, {
       ...defaultCookieOptions,
-      expires: moment().add(1, 'day').toDate(),
+      expires: moment().add(1, 'month').toDate(),
     })
   }
   return dispatch(loginSuccess(token, redirectLocation))
@@ -63,28 +62,29 @@ const logout = () => {
 // ----------------------------------------------------------------------------
 // Action Creators: Async
 // ----------------------------------------------------------------------------
-const login = (emailOrUsername, hashedPassword, redirectLocation) => dispatch => {
+const login = (emailAddress, hashedPassword, redirectLocation) => dispatch => {
   dispatch({ type: 'AUTH_LOGIN_ATTEMPT' })
 
-  dispatch(
-    fetch(`${API_URL}/accounts/login/password`, {
-      method: 'post',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ emailOrUsername, hashedPassword }),
-    })
-    .then(checkHttpStatus)
-    .then(parseJSON)
-    .then(response => dispatch(loginSuccess(response.token, redirectLocation)))
-    .catch(error => dispatch(loginError(error)))
-  )
+  return apiClient({
+    endpoint: 'accounts/login/password',
+    body: { emailAddress, hashedPassword },
+  })
+  .then(response => dispatch(loginStoreToken(response.token, redirectLocation)))
+  .catch(error => {
+    dispatch(loginError(error))
+    if (error && error.reason === 'bad-credentials') {
+      throw {
+        _error: 'Login failed!',
+        password: 'Looks like you had the wrong password',
+      }
+    }
+  })
 }
 
 
 module.exports = {
   loginStoreToken,
+  loginSuccess,
   login,
   logout,
   setRedirectLocation,
