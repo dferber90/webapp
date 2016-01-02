@@ -1,25 +1,8 @@
 const React = require('react')
 const { reduxForm } = require('redux-form')
-const styles = require('./SignupForm.css')
 const emailValidator = require('../../validation/email')
 const passwordValidator = require('../../validation/password')
-const apiClient = require('../../api-client')
-
-const asyncValidate = values => {
-  if (!values.emailAddress) {
-    return {}
-  }
-
-  return (
-    apiClient({
-      endpoint: 'accounts/exists',
-      body: { emailAddress: values.emailAddress },
-      onSuccess: response => response.taken ? { emailAddress: 'That email address is already taken' } : {},
-      onError: () => ({ emailAddress: 'API unavailable.' }),
-    })
-  )
-}
-
+const styles = require('./LoginForm.css')
 
 const validate = values => {
   const errors = {}
@@ -36,46 +19,45 @@ const validate = values => {
   return errors
 }
 
-const SignupForm = React.createClass({
+const LoginForm = React.createClass({
   propTypes: {
     fields: React.PropTypes.object.isRequired,
+    error: React.PropTypes.string,
     handleSubmit: React.PropTypes.func.isRequired,
-    onSubmit: React.PropTypes.func, // passed in from reduxForm, can't be marked as `isRequired`
     submitting: React.PropTypes.bool.isRequired,
     asyncValidating: React.PropTypes.bool.isRequired,
   },
   render() {
     const {
       fields: { emailAddress, password },
+      error,
       submitting,
       asyncValidating,
+      handleSubmit,
     } = this.props
     return (
-      <form onSubmit={this.props.handleSubmit} className={styles.form}>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <label htmlFor="emailAddress">Email Address</label><br/>
-        <input id="emailAddress" type="text" {...emailAddress}/>
+        <input id="emailAddress" type="text" {...emailAddress}/><br/>
         {emailAddress.touched && emailAddress.error && <div>{emailAddress.error}</div>}
-        <br/>
-        <br/>
+        <br/><br/>
         <label htmlFor="password">Password</label><br/>
-        <input id="password" type="password" {...password}/>
+        <input id="password" type="password" {...password}/><br/>
         {password.touched && password.error && <div>{password.error}</div>}
-        <br/>
-        <br/>
-        <input type="submit" value="Register" disabled={submitting || asyncValidating}/>
+        <p>{error || ' '}</p>
+        <input type="submit" value="login" disabled={submitting || asyncValidating}/>
       </form>
     )
   },
 })
 
 if (SERVER) {
-  SignupForm.styles = [styles.source]
+  LoginForm.styles = [styles.source]
 }
 
 module.exports = reduxForm({
   form: 'signup',
   fields: ['emailAddress', 'password'],
   validate,
-  asyncValidate,
   asyncBlurFields: ['emailAddress'],
-})(SignupForm)
+})(LoginForm)

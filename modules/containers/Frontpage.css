@@ -3,9 +3,15 @@
     src: url("../fonts/Calligraffiti-webfont.woff") format('woff');
 }*/
 
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
 .header {
   display: flex;
   flex: 0 0 50px;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }

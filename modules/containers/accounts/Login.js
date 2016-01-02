@@ -1,10 +1,8 @@
 const React = require('react')
 const { connect } = require('react-redux')
-const { bindActionCreators } = require('redux')
-const LoginForm = require('../../components/LoginForm')
+const LoginForm = require('../../components/accounts/LoginForm')
 const authActionCreators = require('../../action-creators/auth')
 const defaultReducer = require('../../reducers/default')
-const Layout = require('../../components/Layout')
 const hashPassword = require('../../utils/hashPassword')
 
 const Login = React.createClass({
@@ -17,9 +15,9 @@ const Login = React.createClass({
   statics: {
     reducer: defaultReducer,
   },
-  handleSubmit(emailAddress, password) {
+  handleSubmit({ emailAddress, password }) {
     const hashedPassword = hashPassword(password)
-    this.props.login(emailAddress, hashedPassword, this.props.auth.redirectLocation)
+    return this.props.login(emailAddress, hashedPassword, this.props.auth.redirectLocation)
   },
   renderLoggedIn() {
     const { userId } = this.props.auth
@@ -33,28 +31,24 @@ const Login = React.createClass({
   renderLoginForm() {
     return (
       <LoginForm
-        handleSubmit={this.handleSubmit}
+        onSubmit={this.handleSubmit}
         isAuthenticating={this.props.auth.isAuthenticating}
       />
     )
   },
   render() {
     const { userId } = this.props.auth
-    return (
-      <Layout>
-        {userId ? this.renderLoggedIn() : this.renderLoginForm()}
-      </Layout>
-    )
+    return userId ? this.renderLoggedIn() : this.renderLoginForm()
   },
 })
 
 if (SERVER) {
-  Login.styles = [...Layout.styles]
+  Login.styles = [...LoginForm.styles]
 }
 
 module.exports = connect(
   state => ({ auth: state.auth }),
 
   // binds addTodo to dispatch and adds it to props
-  dispatch => bindActionCreators(authActionCreators, dispatch)
+  authActionCreators // passing object directly binds action creators automatically
 )(Login)

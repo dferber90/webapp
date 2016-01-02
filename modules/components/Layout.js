@@ -17,5 +17,6 @@ if (SERVER) {
   Layout.styles = [styles.source, ...Navbar.styles, ...Footer.styles]
 }
 Layout.fetchData = [Navbar.fetchData, Footer.fetchData]
+Layout.graphQuery = Navbar.graphQuery
 
 module.exports = Layout
