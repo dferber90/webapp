@@ -1,6 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
-var stats = require('./stats.js')
+var stats = require('./plugins/stats.js')
 var getNodeModules = require('./utils/getNodeModules.js')
 var nodeModules = getNodeModules()
 

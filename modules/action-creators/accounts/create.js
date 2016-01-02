@@ -11,15 +11,15 @@ const createAccount = (emailAddress, password) => dispatch => {
     apiClient({
       endpoint: 'accounts/create',
       body: { emailAddress, hashedPassword },
-      onSuccess: response => {
-        if (response.reason) {
-          dispatch(createAccountFailure(response.reason))
-        } else if (response.token) {
-          dispatch(createAccountSuccess(response.token))
-        }
-      },
-      onError: error => dispatch(createAccountFailure(error)),
     })
+    .then(response => {
+      if (response.reason) {
+        dispatch(createAccountFailure(response.reason))
+      } else if (response.token) {
+        dispatch(createAccountSuccess(response.token))
+      }
+    })
+    .catch(error => dispatch(createAccountFailure(error)))
   )
 }
 

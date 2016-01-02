@@ -11,6 +11,7 @@ const { tokenToAuth } = require('./token')
 const { syncReduxAndRouter } = require('redux-simple-router')
 const { createMemoryHistory } = require('history')
 const { serialize } = require('cookie')
+const { loginSuccess } = require('../action-creators/auth')
 const renderApp = require('./renderApp')
 const PrettyError = require('pretty-error')
 const pretty = new PrettyError()
@@ -18,12 +19,17 @@ const pretty = new PrettyError()
 function handleRequest(req, res) {
   const token = req.cookies.token
   const auth = tokenToAuth(token)
-  const rootValue = { auth }
+  const rootValue = { auth, rdb: req.rdb }
   const createAppStore = getCreateAppStore(rootValue)
   const store = createAppStore({ counter: 3 })
   const history = createMemoryHistory()
   syncReduxAndRouter(history, store)
   const routes = getRootRoute(store)
+
+  // log user in
+  if (auth.isAuthenticated) {
+    store.dispatch(loginSuccess(token))
+  }
   match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
     if (error) {
       console.error(error, pretty.render(error)) // eslint-disable-line no-console
@@ -45,7 +51,7 @@ function handleRequest(req, res) {
         }))
         store.dispatch(setRedirectLocation(req.cookies.redirectLocation))
       }
-      renderApp(store, auth, renderProps, token, res)
+      renderApp(store, renderProps, token, res)
     } else {
       writeNotFound(res)
     }

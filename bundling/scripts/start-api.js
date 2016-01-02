@@ -1,8 +1,8 @@
 var path = require('path')
 var webpack = require('webpack')
-var apiConfig = require('./webpack.config.dev.server-api.js')
+var apiConfig = require('../webpack.config.dev.server-api.js')
 var nodemon = require('nodemon')
-var canContinue = require('./utils/canContinue.js')
+var canContinue = require('../utils/canContinue.js')
 var log = require('npmlog')
 log.level = 'warn'
 
@@ -25,7 +25,7 @@ apiCompiler.plugin('done', function (stats) {
       execMap: {
         js: 'node',
       },
-      script: path.join(__dirname, '..', 'build', 'api', 'server-api.js'),
+      script: path.join(__dirname, '..', '..', 'build', 'api', 'server-api.js'),
       ignore: ['*'],
       watch: ['nothing/'],
       ext: 'noop',

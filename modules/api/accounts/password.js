@@ -25,7 +25,7 @@ module.exports = {
       if (e.name === 'ReqlNonExistenceError') {
         return res.json({ reason: 'bad-credentials' })
       }
-      return res.json({ reason: 'server-unavailable' })
+      return res.status(500).json({ reason: 'server-unavailable' })
     }
 
     // return information to user through token

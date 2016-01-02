@@ -1,6 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
-var stats = require('./stats.js')
+var stats = require('./plugins/stats.js')
 
 var buildFolder = path.join('build', 'main')
 

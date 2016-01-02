@@ -5,6 +5,7 @@ plugins:
 
 rules:
   semi: [2, 'never']
+  no-throw-literal: 0
 
 globals:
   STATS: false
