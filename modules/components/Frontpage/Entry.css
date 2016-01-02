@@ -1,0 +1,51 @@
+.entry {
+  width: 600px;
+  border-bottom: solid 1px #eee;
+  display: flex;
+  height: 75px;
+  background: #fff;
+}
+
+.centered {
+  align-self: center;
+}
+
+.centeredContainer {
+  justify-content: center;
+  align-content: center;
+  display: flex;
+}
+
+.up {
+  composes: centeredContainer;
+  flex: 0 0 50px;
+}
+
+.roundedTop {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.roundedBottom {
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.upIcon {
+  composes: centered;
+  background: none;
+  border: 0;
+}
+
+.comment {
+  composes: centeredContainer;
+  flex: 0 0 50px;
+}
+
+.commentIcon {
+  composes: centered;
+}
+
+.info {
+  flex: auto;
+}

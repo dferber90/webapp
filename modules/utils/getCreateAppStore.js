@@ -14,7 +14,7 @@ module.exports = rootValue => initialState => {
 
   const graphqlMiddleware = createGraphQLMiddleware({
     endpoint: 'http://localhost:3001/graphql/v1',
-    rootValue: rootValue,
+    rootValue,
   })
   middleware.unshift(graphqlMiddleware)
 
@@ -25,7 +25,9 @@ module.exports = rootValue => initialState => {
 
   if (CLIENT) {
     const createLogger = require('redux-logger')
-    middleware.push(createLogger())
+    middleware.push(createLogger({
+      collapsed: () => true,
+    }))
   }
 
   if (SERVER) {
@@ -39,8 +41,6 @@ module.exports = rootValue => initialState => {
   const storeEnhancers = [applyMiddleware(...middleware)]
   if (CLIENT) {
     if (DEVELOPMENT) {
-      // const { createDevTools } = require('redux-devtools')
-      // storeEnhancers.push(createDevTools(React))
       if (window.devToolsExtension) {
         storeEnhancers.push(window.devToolsExtension())
       }

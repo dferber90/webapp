@@ -29,7 +29,7 @@ const SplitReducer = React.createClass({
   },
 
   render() {
-    return this.props.children
+    return React.Children.only(this.props.children)
   },
 })
 

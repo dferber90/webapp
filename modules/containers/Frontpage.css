@@ -1,0 +1,30 @@
+/*@font-face {
+    font-family: "calligraffiti";
+    src: url("../fonts/Calligraffiti-webfont.woff") format('woff');
+}*/
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  flex: 0 0 50px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.innerHeader {
+  width: 600px;
+  height: 35px;
+  background: rgba(255,255,255,0.6);
+  padding: 3px 10px;
+  border-radius: 5px;
+  align-self: center;
+}
+
+.entries {
+  align-self: center;
+}
