@@ -73,7 +73,7 @@
     "hoist-non-react-statics": "1.0.3",
     "isomorphic-fetch": "2.2.0",
     "js-sha256": "0.3.0",
-    "jsonwebtoken": "5.5.0",
+    "jsonwebtoken": "5.5.1",
     "kerberos": "0.0.17",
     "moment": "2.11.0",
     "mongoose": "4.3.4",
