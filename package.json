@@ -71,7 +71,7 @@
     "graphql-custom-datetype": "0.2.1",
     "history": "1.17.0",
     "hoist-non-react-statics": "1.0.3",
-    "isomorphic-fetch": "2.2.0",
+    "isomorphic-fetch": "2.2.1",
     "js-sha256": "0.3.0",
     "jsonwebtoken": "5.5.4",
     "kerberos": "0.0.17",
