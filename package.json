@@ -74,7 +74,7 @@
     "isomorphic-fetch": "2.2.0",
     "js-sha256": "0.3.0",
     "jsonwebtoken": "5.5.4",
-    "kerberos": "0.0.17",
+    "kerberos": "0.0.18",
     "moment": "2.11.0",
     "mongoose": "4.3.4",
     "normalize.css": "3.0.3",
