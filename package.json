@@ -79,7 +79,7 @@
     "mongoose": "4.3.4",
     "normalize.css": "3.0.3",
     "normalizr": "1.4.0",
-    "npmlog": "2.0.0",
+    "npmlog": "2.0.1",
     "pretty-error": "2.0.0",
     "promised-mongo": "1.2.0",
     "react": "0.14.5",
