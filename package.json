@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "babel-core": "6.3.26",
-    "babel-eslint": "4.1.5",
+    "babel-eslint": "4.1.8",
     "babel-loader": "6.2.1",
     "babel-plugin-react-transform": "2.0.0",
     "babel-plugin-transform-object-rest-spread": "6.1.18",
