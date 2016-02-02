@@ -44,7 +44,7 @@
     "nodemon": "1.8.1",
     "plop": "1.4.1",
     "react-transform-catch-errors": "1.0.1",
-    "react-transform-hmr": "1.0.1",
+    "react-transform-hmr": "1.0.2",
     "redbox-react": "1.2.0",
     "redux-devtools": "3.0.0",
     "rimraf": "2.5.1",
