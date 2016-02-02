@@ -86,7 +86,7 @@
     "react-dom": "0.14.6",
     "react-redux": "4.0.6",
     "react-router": "1.0.3",
-    "redux": "3.0.5",
+    "redux": "3.2.1",
     "redux-form": "4.1.0",
     "redux-logger": "2.3.1",
     "redux-node-logger": "0.0.3",
